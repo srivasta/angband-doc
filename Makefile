@@ -4,9 +4,9 @@
 ## Created On       : Thu Feb 19 11:47:01 2004
 ## Created On Node  : glaurung.internal.golden-gryphon.com
 ## Last Modified By : Manoj Srivastava
-## Last Modified On : Thu Feb 19 12:27:03 2004
+## Last Modified On : Thu Feb 19 16:19:08 2004
 ## Last Machine Used: glaurung.internal.golden-gryphon.com
-## Update Count     : 6
+## Update Count     : 7
 ## Status           : Unknown, Use with caution!
 ## HISTORY          : 
 ## Description      : 
@@ -32,9 +32,6 @@ install:
 	test -d $(LIBLOC) || $(make_directory)  $(LIBLOC)
 	(cd Help-Info;    tar cf - *) | (cd $(LIBLOC); umask 000; tar xpf -)
 	find $(LIBLOC)    -type d -name .arch-ids -print0 | xargs -0r rm -rf
-	$(install_file)   debian/changelog             $(DOCDIR)/changelog
-	gzip -9fqr        $(DOCDIR)
-	$(install_file)   debian/copyright  	 $(DOCDIR)/copyright
 	(cd Help-Page;    tar cf - *) | (cd $(DOCDIR); umask 000; tar xpf -)
 	find $(DOCDIR)    -type d -name .arch-ids -print0 | xargs -0r rm -rf
 	gzip -9fq         $(DOCDIR)/angfaq*.txt
