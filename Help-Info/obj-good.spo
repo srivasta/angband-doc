@@ -1,0 +1,906 @@
+OBJ-GOOD.SPO, version 3.0.2, for Angband 3.0.3 (all systems)
+Release Date     : December 11, 2003
+Author           : Hugo Kornelis (angband@hugo.isdit.com)
+
+Based on OBJ-GOOD.SPO, version 2.30, for Angband 2.7.9v6 (all systems)
+Release Date     : September 2, 1996
+Authors          : Stephen S. Lee (lee9@fas.harvard.edu) (2.7.8 spoilers)
+                   Leonard Dickens (leonard@alw.nih.gov) (2.7.9. update)
+
+
+This spoiler describes how Angband generates good items, great items and
+artifacts.  It also describes all properties of all ego items.  Artifacts
+are described in a seperate spoiler file ARTIFACT.SPO.  Information on normal
+items can be found in OBJ-DESC.SPO or OBJ-LONG.SPO.
+
+Please notify the author of any errors (however minor) that you find.
+Also, it is my intention to provide complete information rather than
+easy-to-understand information, so this spoiler is necessarily verbose.
+Suggestions to improve the format of this spoiler are welcome (especially
+if they help make this spoiler easier to read).
+
+This spoiler was written for Angband 3.0.3.  If you want only the most
+accurate information for another version of Angband, you may wish to acquire
+another version of this spoiler.
+
+
+(0) NOTES ON NOTATION
+    -----------------
+
+The notation "XdY" indicates a number obtained by rolling an Y-sided
+die X times.  (Thus 4d6 indicates a number from 4 to 24.)
+
+The notation MB(M) indicates an integer between 0 and M inclusive that is
+dependent on dungeon depth and has a normal distribution that is centered
+about M*(Object Generation Level/127), and a standard deviation of M/4
+(subject to the range constraints).
+
+
+(1) THE GENERATION OF GOOD AND GREAT ITEMS, EGO ITEMS, AND ARTIFACTS
+    ----------------------------------------------------------------
+
+(1.0) Definitions
+
+The "object generation level" (ObGenLev) is generally equal to the current
+dungeon level (if the object is generated during the generation of a new
+dungeon level) or the average of the current dungeon level and the level of
+the monster (if the object is part of the treasure carried by a monster your
+character has slain).  Exceptions to this rule include objects in chests and
+in vaults; chests have their ObGenLev set at the time of the creation of the
+chest, and objects generated in vaults get bonuses to their ObGenLev.  For
+more details see OBJ-LONG.SPO and DUNGEON.SPO respectively.
+
+A "good" item is a weapon or armor item with a small magical boost to its
+primary function, a high level book, a Ring of Speed, or one of the better
+amulets.  A good weapon has from +1 to +10 to hit and +1 to +10 to damage
+above the base enchantment level for its type, which is almost always (+0,+0).
+Good armor has +1 to +10 to AC above its base enchantment level, which again
+is almost always +0.
+
+A "great" item is a weapon or armor item with special properties in addition
+to magical enhancements to its base function.  Great items are also referred
+to in this document as "excellent", and you may also see them called "ego
+items" in various other places.
+
+
+(1.1) The normal creation sequence
+
+When a normal object is created, the game first attempts to create one of
+the special artifacts 0.1% of the time.  Note that this attempt will often
+fail (see below for more details).  If no special artifact is created, the
+game will randomly generate an object (see OBJ-LONG.SPO for details).
+
+When a weapon, a digger, or a piece of armor is generated, it may pass a
+"goodness roll" to become a good item.  This is a percentage roll with the
+percent chance of success being equal to 10+ObGenLev, with a maximum of 75.
+
+If an object passes its goodness roll, it may then attempt a "greatness
+roll" to become a great item.  This is a second percentage roll with the
+percent chance of success being equal to the goodness chance divided by 2,
+with a maximum of 20.
+
+If an object does not pass its goodness roll, it may become a cursed item.
+The chance of being cursed is the same as the chance of being good.
+
+If an object is indeed cursed, a second roll will be made to see if it is
+dreadful.  This is a second percentage roll with the percent chance of
+success being equal to the greatness roll.
+
+Here is a table showing the probability of an object being normal, good,
+great, cursed, or dreadful, at various object generation levels.
+
+ObGenLev   Normal     Good    Great   Cursed   Dreadful
+     0     81,00%    9,50%    0,50%    8,55%    0,45%
+     5     72,25%   13,88%    1,13%   11,79%    0,96%
+    10     64,00%   18,00%    2,00%   14,40%    1,60%
+    15     56,25%   21,88%    3,13%   16,41%    2,34%
+    20     49,00%   25,50%    4,50%   17,85%    3,15%
+    25     42,25%   28,88%    6,13%   18,77%    3,98%
+    30     36,00%   32,00%    8,00%   19,20%    4,80%
+    35     30,25%   36,00%    9,00%   19,80%    4,95%
+    40     25,00%   40,00%   10,00%   20,00%    5,00%
+    45     20,25%   44,00%   11,00%   19,80%    4,95%
+    50     16,00%   48,00%   12,00%   19,20%    4,80%
+    55     12,25%   52,00%   13,00%   18,20%    4,55%
+    60      9,00%   56,00%   14,00%   16,80%    4,20%
+    65+     6,25%   60,00%   15,00%   15,00%    3,75%
+
+
+(1.1.1) When is a normal item changed into an artifact?
+
+If a weapon, a digger, or a piece of armor passes the greatness roll, and it
+is not being generated in the town, the object might be converted into an
+artifact.  The artifact list is checked for artifacts that match the type of
+object being generated and that do not yet exist.  If an artifact is found
+that meets this condition, it must pass the artifact rarity roll, which
+succeeds 1 time in the artifact's rarity rating.  Each artifact also has a
+minimum level for creation; if the current dungeon level is less than this
+value, then to become an artifact the object also must pass the depth roll
+with a success rate of 1 in two times the difference between the current
+dungeon level and the artifact's minimum level.  If the artifact passes both
+tests, the object becomes the chosen artifact; else the game will continue
+checking the artifact list until all artifacts have been tried once.  Note
+that the artifact list is always checked in a fixed order, thus slightly
+increasing the chance that the artifacts will be created in the order in
+which they are listed.  Also note that even though artifact creation is
+only attempted when the greatness roll is passed, the artifact chosen might
+well be a cursed artifact.
+(For more information on artifacts, including the rarity and minimum level
+for each individual artifact, see ARTIFACT.SPO.)
+
+
+(1.1.2) When is a normal item changed into an ego item?
+
+Each weapon, digger, or piece of armor that passes its greatness roll but is
+not changed into an artifact and each weapon, digger, or piece of armor that
+passes its dreadful roll, gets a chance to become an ego item.  First, the
+list of ego types is scanned for ego types that can apply to the kind of
+object being generated.  Only ego types whose depth does not exceed the ego
+generation level are selected.  The ego generation level is normally equal
+to ObGenLev, but there is a 1 in 20 chance that the ego level is boosted to:
+  boosted ego level = (ObGenLev * 128 / 1d128) + 1.
+
+This formula insures that the boosted ego level is always at least 1 more
+than ObGenLev while at the same time making it possible to get a boosted ego
+level of more than 100 even as shallow as 50'.
+
+If no ego type meets the above criteria (matching type and maximum level),
+the object will be generated as a normal object.  Otherwise, one random ego
+type is selected from the list and the object is converted to an ego item of
+that ego type.  The selected ego type may or may not be a cursed ego item,
+regardless of the outcome of the greatness and dreadful roll.
+
+The rarity of different ego-types is reflected in the number of times each
+ego type is added to the list.  Ego types with a rarity of 1 are added 100
+times to the list, other ego types are added only (100 / rarity) times.
+
+NOTE: Some ego types have a rarity that is not a perfect divider of 100.  I
+      suspect that this stems from changes to the ego item generation code
+      not being reflected in the rarity of ego types.
+
+NOTE: All ego types are listed below, along with their properties, value
+      and rarity.
+
+
+(1.1.3) A touch of magic
+
+All weapons (including melee weapons, shooting weapons, ammunition, and
+diggers) have a chance to get a bonus or penalty to their to-hit, to-dam,
+and (for diggers only) tunneling capability.  All pieces of armor have a
+chance to get a bonus or penalty to their AC.  The appropriate bonuses are
+determined by consulting the following table:
+
+
+NORMAL ITEMS (Both goodness roll and cursed roll are failed)
+Only the bonuses or penalties that normally apply to the type of object
+being generated apply.  See OBJ-LONG.SPO for details.
+
+
+GOOD ITEMS (Goodness roll is passed, but greatness roll is failed)
+All good armor receives a bonus of 1d5+MB(5) to AC, in addition to the
+normal bonus or penalty for the type of armor being generated.
+
+All good weapons receive a bonus of 1d5+MB(5) to-hit and 1d5+MB(5) to-dam,
+in addition to the normal bonuses or penalties to-hit and to-dam for the
+type of weapon being generated.
+
+
+GREAT ITEMS (Greatness roll is passed, but not an ego item or an artifact)
+All great armor receives a bonus of 1d5+MB(5)+MB(10) to AC, in addition to
+the normal bonus or penalty for the type of armor being generated.
+
+All great weapons receive a bonus of 1d5+MB(5)+MB(10) to-hit and a bonus of
+1d5+MB(5)+MB(10) to-dam, in addition to the normal bonuses or penalties
+to-hit and to-dam for the type of weapon being generated.
+
+In addition, great melee weapons and ammunition have a small chance to get
+boosted damage dice.  For a weapon with a damage roll (NdM), the chance of
+getting improved dice is 1 in 10*N*M, with each success adding one extra
+damage die, and then the process repeating until the item fails an attempt.
+The damage dice for all weapons is capped at 9 dice.
+
+Example: some Seeker Bolts (4d5) are generated; they pass the greatness roll
+but they are not changed into an artifact or ego item.  There is a 1 in 200
+(10*4*5) chance for these bolts to get another damage die.  Assume the bolts
+are lucky, and succeed.  Now they are (5d5).  Then they can try again, with
+a 1 in 250 chance to become (6d5).  If this succeeds, the bolts can try for
+7d5, then 8d5, etc.
+
+
+EGO ITEMS (not cursed)
+Consult the list below to find the bonuses that apply for the appropriate
+ego item type.  Add this to the normal bonuses or penalties for the type of
+object being generated to get the base bonuses.
+
+All non-cursed ego armor receives an extra bonus of 1d5+MB(5)+MB(10) to AC.
+This extra bonus is in addition to the base bonus to AC.
+
+All non-cursed ego weapons receive an extra bonus of 1d5+MB(5)+MB(10) to-hit
+and 1d5+MB(5)+MB(10) to-dam.  These extra bonuses are in addition to the
+base bonuses to-hit and to-dam.
+
+In addition, non-cursed ego melee weapons and ammunition have a small chance
+to get boosted damage dice.  For a weapon with a damage roll (NdM), the
+chance of getting improved dice is 1 in 10*N*M, with each success adding one
+extra damage die, and then the process repeating until the item fails an
+attempt.  The damage dice for all weapons is capped at 9 dice.
+
+Example: a Dagger of Acid (1d4) is generated.  There is a 1 in 40 (10*1*4)
+chance for it to get another damage die.  Assume this dagger is lucky, and
+succeeds.  Now it is (2d4).  Then it can try again, with a 1 in 80 chance to
+become (3d4).  If this succeeds, the dagger can try for 4d4, then 5d4, etc.
+
+
+EGO ITEMS (cursed)
+Consult the list below to find the penalties that apply for the appropriate
+cursed ego item type.  Add this to the normal bonuses or penalties for the
+type of object being generated to get the base penalties.
+
+All cursed ego armor receives an extra penalty of 1d5+MB(5)+MB(10) to AC.
+This extra penalty is in addition to the base penalty to AC.
+
+All cursed ego weapons receive an extra penalty of 1d5+MB(5)+MB(10) to-hit
+and 1d5+MB(5)+MB(10) to-dam.  These extra penalties are in addition to the
+base penalties to-hit and to-dam.  If the weapon is a digger, it receives a
+digging penalty equal to 5+1d5.
+
+
+ARTIFACTS
+All artifacts have fixed bonuses and penalties.  See artifact.spo for
+details.
+
+
+CURSED ITEMS (Cursed roll is passed, but dreadful roll is failed)
+All cursed armor receives a penalty of 1d5+MB(5) to AC, in addition to the
+normal bonus or penalty for the type of armor being generated.
+
+All cursed weapons receive a penalty of 1d5+MB(5) to-hit and 1d5+MB(5)
+to-dam, in addition to the normal bonuses or penalties to-hit and to-dam for
+the type of weapon being generated.  If the weapon is a digger, the normal
+digging bonus is changed to a penalty (i.e. a cursed Orcish Pick would get
+a -2 digging penalty).
+
+
+DREADFUL ITEMS (Dreadful roll is passed)
+All dreadful armor receives a penalty of 1d5+MB(5)+MB(10) to AC, in addition
+to the normal bonus or penalty for the type of armor being generated.
+
+All dreadful weapons receive a penalty of 1d5+MB(5)+MB(10) to-hit and a
+penalty of 1d5+MB(5)+MB(10) to-dam, in addition to the normal bonuses or
+penalties to-hit and to-dam for the type of weapon being generated.  If the
+weapon is a digger, it receives a digging penalty equal to 5+1d5.
+
+
+(1.2) Generation of guaranteed good objects
+
+Sometimes the game generates an object that is guaranteed to be good.  This
+is true of the treasure of most uniques and some powerful monsters, and also
+some objects created in greater vaults.  Good object creation is the same as
+normal object creation, with the following exceptions:
+
+(1) The chance to attempt creation of a special artifact is boosted from the
+normal 0.1% to 10%.  Note that the attempt itself still has a high failure
+chance (see below for more details).
+
+(2) If no special artifact is created, the game will randomly generate an
+object (see OBJ-LONG.SPO for details).  However, the object generation will
+not use ObGenLev for maximum object level, but ObGenLev+10.  Further, only
+good objects will be created.  Good objects include only weapons, ammunition
+and armor (excluding sling ammunition, rusty chain mail, filthy rags, and
+broken daggers/swords), the ten advanced spellbooks, rings of speed, and
+amulets of the magi, devotion, weaponmastery, or trickery.
+
+(3) If a guaranteed good object turns out to be a weapon, a digger, or a
+piece of armor, the goodness roll is automatically passed.  The chance of
+success on the greatness roll is the same as for normal items.  Since the
+goodness roll is always passed, the cursed and dreadful rolls do not apply.
+
+Here is a table showing the probability of a guaranteed good object being
+good or great at various object generation levels.
+
+ObGenLev     Good    Great
+     0     95,00%    5,00%
+     5     92,50%    7,50%
+    10     90,00%   10,00%
+    15     87,50%   12,50%
+    20     85,00%   15,00%
+    25     82,50%   17,50%
+    30+    80,00%   20,00%
+
+(4) The chance of being changed into an artifact is the same for a
+guaranteed good object as for a normal object.  However, a guaranteed good
+object will never be changed into a cursed artifact.
+
+(5) If a guaranteed good object is not an artifact, it has the same chance
+of becoming an ego item as a normal object.  However, a guaranteed good
+object will never become a cursed ego item.
+
+
+(1.3) Generation of guaranteed great objects
+
+Additionally, sometimes an object will be created that will automatically be
+either a great item or an artifact.  This occurs for the treasure drops of
+the uniques Smeagol, Wormtongue, Mim, Ar-Pharazon, Saruman, Glaurung,
+Feagwath, The Witch-King of Angmar, Maeglin, Cantoras, Ancalagon, Vecna,
+Gothmog, Sauron, and Morgoth; for objects created by a Scroll of Acquirement
+or *Acquirement*; and for some objects created in greater vaults.  Good
+object creation is the same as normal object creation, with the following
+exceptions:
+
+(1) If a guaranteed great object turns out to be a weapon, a digger, or a
+piece of armor, it will automatically pass the greatness roll as well as the
+goodness roll.
+
+(2) If the attempt to change the object into an artifact fails, the attempt
+is immediately repeated, up to a maximum of four times.  This will greatly
+improve the chance of the guaranteed great object being converted into an
+artifact if there still exists a non-cursed artifact of matching type;
+otherwise the repeated attempts will have no effect.
+
+
+(1.4) Generation of the special artifacts
+
+The special artifacts comprise the artifact light sources, rings, and
+amulets.  When the game attempts to create a special artifact, it runs
+through a list of all the special artifacts that do not yet exist.  Each
+item in the list undergoes a rarity check and a minimum depth check similar
+to that of the normal weapon and armor artifacts.  However, for the special
+artifacts the minimum depth check is made *twice*.  If these checks succeed
+then that special artifact is created; otherwise the game then goes to the
+next artifact in the list.  When the list is exhausted, no special artifact
+is created.
+
+Example:
+Let's suppose that the Phial of Galadriel (the first special artifact in the
+list) has already been created.  The character is on dungeon level 6 and has
+just defeated Wormtongue (normally found on dungeon level 8), who will drop
+1 or 2 guaranteed great objects.  What is the chance of getting the second
+special artifact in the list, the Star of Elendil (rarity 25, miminum
+creation level 30)?
+
+The first object created is guaranteed great, so there's a 1 in 10 chance
+that the game will attempt to create a special artifact.  If this succeeds,
+the Star of Elendil will be the first special artifact attempted.  The
+rarity check will be 1 in 25.  The minimum depth check calls for 1 in twice
+the difference in dungeon levels (2 x (30-6) = 48); this 1 in 48 chance will
+have to be made twice.  The Star of Elendil will only be created if *all*
+checks are made; the chance of generating this artifact is therefor equal to
+1 in 10 x 25 x 48 x 48, or 1 in 576,000 (about 0.00017%).
+
+Since Wormtongue has a drop of 1 or 2 objects, there is a 50% chance that
+the game will decide to make a second object.  This second object will then
+have the same chance to become the Star of Elendil.  This boosts the total
+chance of getting Elendil to a whopping 0.00026%.
+
+
+(2) A LISTING OF ALL EGO ITEMS
+    --------------------------
+
+(2.0) Notes and definitions
+
+In the listing for ego items which follows, keep in mind that if a bonus or
+penalty to-hit, to-dam or to AC is given for an ego item, that bonus is in
+addition to the "normal" ego item bonus or penalty listed above.
+
+All artifacts, all ego items, and certain other items can affect the rating
+of a level.  This may improve the feeling a character gets upon entering a
+new level.  The ratings for all ego items and for all other non-artifact
+items that increase a dungeon level's rating are given below.  How these
+ratings affect level feeling is discussed at length in the DUNGEON.SPO
+spoiler file.
+
+All non-cursed ego items get a bonus to their base price, as listed below.
+Note that this price bonus is applied after calculating the object's base
+price and after applying all price modifications for any bonuses the item
+has, as explained in the OBJ-LONG.SPO spoiler file.
+
+
+A "Random Sustain" is one of the following: Sustain Strength, Intelligence,
+Wisdom, Dexterity, Constitution, or Charisma; all with equal probability.
+
+A "Random Resist" is one of the following: Resist Poison, Fear, Light, Dark,
+Blindness, Confusion, Sound, Shards, Nexus, Nether, Chaos, or Disenchantment;
+all with equal probability.
+
+A "Random Ability" is one of the following: Resist Life Draining, Slow
+Digestion, Feather Fall, Permanent Light(1), Regeneration, Free Action,
+Telepathy, or See Invisible; all with equal probability.
+
+
+An item that has Resist Fire, Cold, Acid, or Lightning always has Ignore
+Fire, Cold, Acid, or Lightning as well.  An item with "Ignore X" cannot be
+affected by X attacks, but offers no extra protection to the user.
+
+
+(2.1) WEAPONS
+      -------
+
+(2.1.0) General
+
+The weapons of Angband fall into four subcategories: melee weapons (used for
+close combat), missile weapons (used to combat enemies from a distance),
+ammunition (which has to be fired by the appropriate shooting weapon), and
+diggers (generally only used for digging, unless you forget to swap weapons
+after completing the tunnel).  Each of these weapon types has its own list
+of ego types to choose from.
+
+
+(2.1.1) Melee Weapons
+
+The following ego types can apply to all melee weapons, unless stated
+otherwise.
+
+NOTE: Unlike most cursed ego items, a Weapon of Morgul does have a price
+bonus.  The weapon will still be worthless as long as it has a penalty
+to-hit or to-dam, but after removing those penalties, the +1 price bonus
+reflects the balance of "good" and "bad" effects.
+
+                           Rating  To-Hit To-Dam  To AC  Level  Rar.   Price
+Melee Weapon of Morgul          0      -0     -0     -0      0     5      +1
+  Slay Undead; Poison Brand; Resist Life Draining; See Invisible;
+  Aggravate; Drain Experience; Heavily Cursed
+Melee Weapon of Slay Orc      +10      +0     +0     +0      0     6   +2500
+  Slay Orc
+Melee Weapon of Slay Troll    +10      +0     +0     +0      0     6   +2500
+  Slay Troll
+Melee Weapon of Slay Giant    +14      +0     +0     +0      0     6   +2500
+  Slay Giant
+Melee Weapon of Frost         +15      +0     +0     +0      0     8   +3000
+  Frost Brand; Resist Cold
+Melee Weapon of Slay Animal   +18      +0     +0     +0      0     6   +3000
+  Slay Animal
+Melee Weapon of Slay Evil     +18      +0     +0     +0      0     6   +3000
+  Slay Evil
+Melee Weapon of Slay Demon    +14      +0     +0     +0      0     6   +3500
+  Slay Demon
+Melee Weapon of Flame         +15      +0     +0     +0      0     8   +3500
+  Fire Brand; Resist Fire
+Melee Weapon of Slay Dragon   +18      +0     +0     +0      0     6   +3500
+  Slay Dragon
+Melee Weapon of Slay Undead   +18      +0     +0     +0      0     6   +3500
+  *** Does not apply to Mace of Disruption! ***
+  Slay Undead
+Melee Weapon of *Slay Orc*    +14      +0     +0     +0      0    20   +4000
+  +1d2 to Dexterity;
+  Slay Orc; Sustain Dexterity
+Melee Weapon of *Slay Troll*  +14      +0     +0     +0      0    20   +4000
+  +1d2 to Strength;
+  Slay Troll; Regeneration
+Melee Weapon of Venom         +15      +0     +0     +0      0     8   +4000
+  Poison Brand
+Melee Weapon of *Slay Giant*  +16      +0     +0     +0      0    20   +4000
+  +1d2 to Strength;
+  Slay Giant; Sustain Strength
+Melee Weapon of Lightning     +20      +0     +0     +0      0    10   +4500
+  Electricity Brand; Resist Lightning
+Melee Weapon (Blessed)        +20      +0     +0     +0      0    10   +5000
+  +1d3 to Wisdom;
+  Blessed; One Random Ability
+Melee Weapon of Acid          +20      +0     +0     +0      0    10   +5000
+  Acid Brand; Resist Acid
+Melee Weapon of *Slay Evil*   +20      +0     +0     +0      0    20   +5000
+  +1d2 to Wisdom;
+  Slay Evil; Blessed; One Random Ability
+Melee Weapon of *Slay Animal* +20      +0     +0     +0      0    20   +6000
+  +1d2 to Intelligence;
+  Slay Animal; Slow Digestion
+Melee Weapon of *Slay Demon*  +16      +0     +0     +0      0    20   +8000
+  +1d2 to Intelligence;
+  Execute Demon; Resist Fire
+Melee Weapon of *Slay Dragon* +24      +0     +0     +0      0    20   +8000
+  +1d2 to Constitution;
+  Execute Dragon; Resist Fear
+Melee Weapon of *Slay Undead* +24      +0     +0     +0      0    20   +8000
+  *** Does not apply to Mace of Disruption! ***
+  +1d2 to Wisdom;
+  Execute Undead; See Invisible
+Melee Weapon of Extra Attacks +20      +0     +0     +0      0    10  +10000
+  +1d2 to Attack Speed
+Melee Weapon (Defender)       +25    +1d4   +1d4   +1d8      0    12  +15000
+  +1d4 to Stealth;
+  Resist Acid, Lightning, Fire, Cold; One Random Sustain;
+  Feather Fall; Regeneration; Free Action; See Invisible
+Melee Weapon of Westernesse   +20    +1d5   +1d5     +0      0    10  +20000
+  +1d2 to Strength, Dexterity, Constitution;
+  Slay Orc, Troll, Giant;
+  Free Action; See Invisible
+Melee Weapon (Holy Avenger)   +30    +1d6   +1d6   +1d4      0    12  +20000
+  +1d4 to Wisdom;
+  Slay Demon, Undead, Evil; Resist Fear;
+  One Random Sustain; Blessed; See Invisible
+Melee Weapon of Fury          +30   +1d10  +1d10     +0     40    20  +20000
+  *** Applies only to weapons with unmodified damage 12 or more  ***
+  ***    and to edged weapons with unmodified damage 10 or more! ***
+  +1d2 to Strength, Attack Speed;
+  Resist Fear; Aggravates; Ignore Acid, Fire
+Melee Weapon of Gondolin      +30    +1d7   +1d7     +0     30    20  +25000
+  Slay Orc, Troll, Dragon, Demon; Resist Dark;
+  Permanent Light(1); Free Action; See Invisible;
+  One Random Ability; Ignore Acid, Fire
+
+
+(2.1.2) Missile Weapons
+
+The following ego types can apply to all missile weapons, unless stated
+otherwise.
+
+                           Rating  To-Hit To-Dam  To AC  Level  Rar.   Price
+Missile Weapon of the Nazgul    0   -1d10  -1d10     -0      0     2       0
+  See Invisible; Drain Experience; Cursed
+Missile Weapon of Accuracy    +10   +1d15   +1d5     +0      0     1   +1000
+Missile Weapon of Power       +10    +1d5  +1d15     +0      0     1   +1000
+Missile Weapon of Extra Might +20    +1d5  +1d10     +0      0     2  +10000
+  +1 to Shooting Power
+Missile Weapon of Extra Shots +20   +1d10   +1d5     +0      0     2  +10000
+  +1 to Shooting Speed
+Sling of Buckland             +25    +1d8   +1d8     +0     40     4  +20000
+  *** Applies only to slings! ***
+  +1 to Dexterity, Shooting Speed, Shooting Power;
+  Ignore Acid, Fire
+Bow of Lothlorien             +30   +1d10  +1d10     +0     50     4  +20000
+  *** Applies only to (short or long) bows! ***
+  +1d2 to Dexterity, Shooting Power;
+  Free Action; One Random Ability;
+  Ignore Acid, Fire
+Crossbow of the Haradrim      +30    +1d5  +1d15     +0     50     4  +20000
+  *** Applies only to (light or heavy) crossbows! ***
+  +1 to Shooting Speed, Shooting Power;
+  Ignore Acid, Fire
+
+
+(2.1.3) Ammunition
+
+The following ego types can apply to each type of ammunition, unless stated
+otherwise.
+
+                           Rating  To-Hit To-Dam  To AC  Level  Rar.   Price
+Ammunition of Backbiting        0   -1d50  -1d50     +0      0     1       0
+  Cursed
+Ammunition of Wounding         +5    +1d5   +1d5     +0      0     4     +20
+Ammunition of Slay Animal     +10      +0     +0     +0      0     6     +20
+  Slay Animal
+Ammunition of Slay Evil       +10      +0     +0     +0      0     6     +20
+  *** Does not apply to Mithril Arrows or Mithril Bolts! ***
+  Slay Evil
+Ammunition of Slay Demon      +10      +0     +0     +0      0     8     +25
+  Slay Demon
+Ammunition of Slay Giant      +10      +0     +0     +0      0     8     +25
+  Slay Giant
+Ammunition of Slay Undead     +10      +0     +0     +0      0     8     +25
+  Slay Undead
+Ammunition of Frost           +10      +0     +0     +0      0     6     +30
+  Frost Brand; Resist Cold
+Ammunition of Flame           +10      +0     +0     +0      0     6     +35
+  Fire Brand; Resist Fire
+Ammunition of Venom           +10      +0     +0     +0      0     6     +40
+  *** Does not apply to Mithril Arrows or Mithril Bolts! ***
+  Poison Brand
+Ammunition of Slay Dragon     +10      +0     +0     +0      0     8     +40
+  Slay Dragon
+Ammunition of Lightning       +10      +0     +0     +0      0     9     +45
+  Electricity Brand; Resist Lightning
+Ammunition of Acid            +10      +0     +0     +0      0     9     +50
+  Acid Brand; Resist Acid
+Ammunition of Holy Might      +20   +1d10  +1d10     +0     40    15     +60
+  *** Applies only to Mithril Arrows or Mithril Bolts! ***
+  Slay Demon, Undead, Evil; Fire Brand; Blessed;
+  Ignore Acid, Fire
+
+
+(2.1.4) Diggers
+
+                           Rating  To-Hit To-Dam  To AC  Level  Rar.   Price
+Digger of Digging              +4      +0     +0     +0      0     1    +500
+  +1d4 to Tunneling; Acid Brand
+Digger of Earthquakes          +8   +1d10  +1d10     +0     20     4   +3000
+  +1d6 to Strength, Tunneling; Acid Brand;
+  Cause Earthquake
+
+
+(2.2) ARMOR
+      -----
+
+(2.2.0) General
+
+A character can wear up to six pieces of armor on different body parts: on
+body (body armor, dragon scale mail or a robe), about body (a cloak), on arm
+(a shield), on head (a cap, helmet or crown), on hands (gloves, gauntlets or
+cesti) and on feet (boots).  Each of these types of armor has it's own list
+of ego types.
+
+
+(2.2.1) On body
+
+The ego types listed as "Armor of ..." can apply to body armor (excluding
+Dragon Scale Mail) and robes as well.  The ego type listed as "Robe of ..."
+applies to robes only.
+
+                           Rating  To-Hit To-Dam  To AC  Level  Rar.   Price
+Armor of Vulnerability          0      -0     -0  -1d50      0     2       0
+  Aggravates; Cursed
+Armor of Resist Lightning     +10      +0     +0     +0      0     1    +400
+  Resist Lightning
+Armor of Resist Cold          +12      +0     +0     +0      0     1    +600
+  Resist Cold
+Armor of Resist Fire          +14      +0     +0     +0      0     1    +800
+  Resist Fire
+Armor of Resist Acid          +16      +0     +0     +0      0     1   +1000
+  Resist Acid
+Armor (Dwarven)               +18      +0     +0  +1d15      0     2   +5000
+  *** Applies only to heavy metal armor, rusty armor excluded! ***
+  +1d2 to Strength, Constitution, Infravision;
+  One Random Resist; Free Action; Ignore Fire
+Armor of Resistance           +20      +0     +0  +1d10      0     2  +12500
+  Resist Acid, Lightning, Fire, Cold
+Armor of Elvenkind            +25      +0     +0  +1d10      0     4  +15000
+  +1d3 to Stealth;
+  Resist Acid, Lightning, Fire, Cold; One Random Resist
+Robe of Permanence            +30      +0     +0  +1d20      0     4  +30000
+  Resist Acid, Lightning, Fire, Cold, Life Draining;
+  One Random Resist; Sustain All Stats
+
+
+(2.2.2) About body
+
+These ego types can apply to normal cloaks as well as shadow cloaks.  Note
+that shadow cloaks already have a base enchantment of +4 to AC.  They will
+receive the normal bonus for ego objects the extra bonus for the specific
+ego type in addition to this base enchantment.  This means that a Swadow
+Cloak of Stealth has a maximum AC of [6,+24] and a Shadow Cloak of Aman may
+even be enchanted up to [6,+44]!
+
+                           Rating  To-Hit To-Dam  To AC  Level  Rar.   Price
+Cloak of Enveloping             0   -1d10  -1d10     -0      0     1       0
+  Cursed
+Cloak of Irritation             0   -1d15  -1d15     -0      0     1       0
+  Aggravates; Cursed
+Cloak of Vulnerability          0      -0     -0  -1d50      0     1       0
+  Aggravates; Cursed
+Cloak of Stealth              +10      +0     +0     +0      0     1    +500
+  +1d3 to Stealth
+Cloak of Protection           +10      +0     +0  +1d10      0     2   +1500
+  Resist Shards; Ignore Acid, Lightning, Fire, Cold
+Cloak of the Magi             +15      +0     +0   +1d4     30     3   +2000
+  +1d2 to Intelligence, Stealth; Sustain Intelligence;
+  One Random Ability; Ignore Acid
+Cloak of Aman                 +20      +0     +0  +1d20      0     6   +4000
+  +1d3 to Stealth; One Random Resist;
+  Ignore Acid, Lightning, Fire, Cold
+
+
+(2.2.3) On arm
+
+The following ego types can apply to all shields, unless stated otherwise.
+This means that a Shield of Deflection may become an ego item as well,
+resulting in something like a Shield of Deflection of Preservation with a
+maximum AC of [10,+50].
+
+                           Rating  To-Hit To-Dam  To AC  Level  Rar.   Price
+Shield of Vulerability          0      -0     -0  -1d50      0     2       0
+  Aggravates; Cursed
+Shield of Resist Lightning    +10      +0     +0     +0      0     1    +400
+  Resist Lightning
+Shield of Resist Cold         +12      +0     +0     +0      0     1    +600
+  Resist Cold
+Shield of Resist Fire         +14      +0     +0     +0      0     1    +800
+  Resist Fire
+Shield of Resist Acid         +16      +0     +0     +0      0     1   +1000
+  Resist Acid
+Shield of Resistance          +20      +0     +0  +1d10      0     2  +12500
+  Resist Acid, Lightning, Fire, Cold
+Shield of Elvenkind           +25      +0     +0  +1d10      0     4  +18000
+  +1d3 to Stealth;
+  Resist Acid, Lightning, Fire, Cold; One Random Resist
+Shield of Preservation        +25      +0     +0  +1d20     60     4  +24000
+  Resist Disenchantment, Life Draining; One Random Resist;
+  Sustain Strength, Constitution, Dexterity;
+  Ignore Acid, Lightning, Fire, Cold
+
+
+(2.2.4) On head
+
+The following ego types can apply to helms and caps if they are listed as
+"Helmet of ...", to crowns if they are listed as "Crown of ...", and to all
+types of headwear if they are listed as "Headwear of ...".
+
+                           Rating  To-Hit To-Dam  To AC  Level  Rar.   Price
+Crown of Sickliness             0      -0     -0     -0      0     2       0
+  -1d5 to Strength, Dexterity, Constitution; Cursed
+Headwear of Dullness            0      -0     -0     -0      0     2       0
+  -1d5 to Intelligence, Wisdom, Charisma; Cursed
+Helmet of Teleportation         0      -0     -0     -0      0     2       0
+  Teleportation; Cursed
+Helmet of Infravision         +11      +0     +0     +0      0     2    +500
+  +1d5 to Infravision
+Helmet of Intelligence        +13      +0     +0     +0      0     2    +500
+  +1d2 to Intelligence; Sustain Intelligence
+Helmet of Wisdom              +13      +0     +0     +0      0     2    +500
+  +1d2 to Wisdom; Sustain Wisdom
+Helmet of Light                +6      +0     +0     +0      0     2   +1000
+  Resist Light; Permanent Light(1)
+Helmet of Beauty               +8      +0     +0     +0      0     2   +1000
+  +1d4 to Charisma; Sustain Charisma
+Headwear of Regeneration      +10      +0     +0     +0      0     4   +1500
+  Regeneration
+Headwear of Seeing             +8      +0     +0     +0      0     2   +2000
+  +1d5 to Searching;
+  Resist Blindness; See Invisible
+Crown of Night and Day        +18      +0     +0     +0     35     6   +4000
+  Resist Light, Dark, Blindness; Permanent Light(1);
+  See Invisible; Ignore Acid
+Crown of Serenity             +20      +0     +0     +0      0     6   +4000
+  Resist Fear, Confusion, Sound
+Crown of the Magi             +15      +0     +0     +0      0     4   +7500
+  +1d3 to Intelligence;
+  Resist Acid, Lightning, Fire, Cold;
+  Sustain Intelligence; One Random Ability
+Crown of Lordliness           +17      +0     +0     +0      0     2   +7500
+  +1d3 to Wisdom, Charisma; Resist Fear;
+  Sustain Wisdom, Charisma; One Random Ability;
+  Ignore Acid, Lightning, Fire, Cold
+Crown of Might                +19      +0     +0     +0      0     4   +7500
+  +1d3 to Strength, Dexterity, Constitution;
+  Sustain Strength, Dexterity, Constitution; Free Action;
+  Ignore Acid, Lightning, Fire, Cold
+Headwear of Telepathy         +20      +0     +0     +0      0     6  +50000
+  Telepathy
+
+
+(2.2.5) On hands
+
+All ego types that are listed as "Handwear of ..." can apply to gloves,
+gauntlets, of cesti, unless stated otherwise.
+
+                           Rating  To-Hit To-Dam  To AC  Level  Rar.   Price
+Handwear of Clumsiness          0      -0     -0     -0      0     2       0
+  -1d10 to Dexterity; Cursed
+Handwear of Weakness            0      -0     -0     -0      0     2       0
+  -1d10 to Strength; Cursed
+Handwear of Free Action       +11      +0     +0     +0      0     4   +1000
+  Free Action
+Handwear of Agility           +14      +0     +0     +0      0     6   +1000
+  +1d5 to Dexterity
+Handwear of Slaying           +17    +1d5   +1d5     +0      0     4   +1500
+Handwear of Power             +22    +1d5   +1d5     +0      0     6   +2500
+  +1d5 to Strength
+Gloves of Thievery            +22    +1d8   +1d3     +0     40    12   +5000
+  +1d5 to Dexterity, Searching;
+  Feather Fall; Free Action
+Handwear of Combat            +22    +1d3   +1d8     +0     50    12   +7000
+  *** Does not apply to gloves! ***
+  +1d2 to Strength, Constitution; Aggravates
+
+
+(2.2.6) On feet
+
+                           Rating  To-Hit To-Dam  To AC  Level  Rar.   Price
+Boots of Slowness               0      -0     -0     -0      0     5       0
+  -1d5 to Speed; Cursed
+Boots of Annoyance              0      -0     -0     -0      0    10       0
+  -1d10 to Stealth, Speed; Aggravates; Cursed
+Boots of Slow Descent          +7      +0     +0     +0      0     5    +250
+  Feather Fall
+Boots of Stealth              +16      +0     +0     +0      0     6    +500
+  +1d3 to Stealth
+Boots of Free Action          +15      +0     +0     +0      0     8   +1000
+  Free Action
+Boots of Stability            +20      +0     +0     +0      0    10   +5000
+  Resist Nexus; Feather Fall
+Boots of Speed                +25      +0     +0     +0      0    24 +100000
+  +1d10 to Speed
+Boots of Elvenkind            +30      +0     +0     +0     60    30 +200000
+  *** Aplies only to (soft or hard) leather boots! ***
+  +1d5 to Stealth, Speed; Feather Fall;
+  Ignore Acid, Fire
+
+
+(3) OTHER ITEMS WHICH CAUSE FEELINGS
+    --------------------------------
+
+This sections deals with a few objects that are not considered ego-items,
+yet are special enough to warrant an addition to the level's rating, thus
+affecting the level's feeling.  All of these objects are described in detail
+in the spoiler file for "normal" objects, OBJ-LONG.SPO.  They are repeated
+here only to complete the list of objects affecting a level's rating.
+
+
+(3.1) DRAGON SCALE MAIL
+      -----------------
+
+Dragon Scale Mail (DSM) has a base enchantment of +10 to AC (or +15 if the
+armor is Power DSM).  Good and great DSM add to this normally, so that a
+great Power DSM could theoretically be found with +35 to AC.  Each suit of
+DSM will provide the wearer with one or more resistances and give the bearer
+the possibility to activate for a breath weapon (detailed in OBJ-LONG.SPO).
+
+This makes most DSM far superior to most ego armor, but in gameplay terms it
+is still considered "normal" armor.  In theory, DSM could be found that has
+an ego enchantment as well.  In reality this won't happen, as there are no
+ego types defined in Angband 3.0.3 that can apply to DSM - so you might as
+well scratch that Power Dragon Scale Mail of Permanence(-3)[40,+55] from
+your Christmas wish list.
+
+                           Rating  To-Hit To-Dam  To AC  Level  Rar.   Price
+Black Dragon Scale Mail       +30      +0     -2    +10     50     8   40000
+  Resist Acid;
+  Activate for Acid Breath (130)
+Blue Dragon Scale Mail        +30      +0     -2    +10     50     8   40000
+  Resist Lightning;
+  Activate for Lightning Breath (100)
+Bronze Dragon Scale Mail      +30      +0     -2    +10     50     8   40000
+  Resist Confusion;
+  Activate for Confusion Breath (120)
+Gold Dragon Scale Mail        +30      +0     -2    +10     50     8   40000
+  Resist Sound;
+  Activate for Sound Breath (130)
+Red Dragon Scale Mail         +30      +0     -2    +10     50     8   40000
+  Resist Fire;
+  Activate for Fire Breath (200)
+White Dragon Scale Mail       +30      +0     -2    +10     50     8   40000
+  Resist Cold;
+  Activate for Frost Breath (110)
+Green Dragon Scale Mail       +30      +0     -2    +10     60     8   60000
+  Resist Poison;
+  Activate for Poison Breath (150)
+Pseudo-Dragon Scale Mail      +30      +0     -2    +10     65    16   60000
+  Resist Light, Dark;
+  Activate for Light or Darkness Breath (200)
+Chaos Dragon Scale Mail       +30      +0     -2    +10     80    16   80000
+  Resist Chaos, Disenchantment;
+  Activate for Chaos or Disenchantment Breath (220)
+Law Dragon Scale Mail         +30      +0     -2    +10     80    16   80000
+  Resist Sound, Shards;
+  Activate for Sound or Shards Breath (230)
+Balance Dragon Scale Mail     +30      +0     -2    +10     95    32  100000
+  Resist Sound, Shards, Chaos, Disenchantment;
+  Activate for Sound, Shards, Chaos, or Disenchantment Breath (250)
+Multi-Hued Dragon Scale Mail  +30      +0     -2    +10     90    32  150000
+  Resist Acid, Lightning, Fire, Cold, Poison;
+  Activate for Acid, Lightning, Fire, Cold, or Poison Breath (250)
+Power Dragon Scale Mail       +30      +0     -3    +15    100    64  300000
+  Resist Acid, Lightning, Fire, Cold, Poison, Poison, Light, Dark, Blindness,
+         Confusion, Sound, Shards, Nexus, Nether, Chaos, Disenchantment;
+  Activate for Elemental Breath (300)
+  (note: there is no resistance for elemental breath. All monsters in the
+         range of the breath take full damage)
+
+
+(3.2) RINGS AND AMULETS
+      -----------------
+
+                           Rating  To-Hit To-Dam  To AC  Level  Rar.   Price
+Amulet of Devotion            +25      +0     +0     +0     70     8   30000
+  +1+MB(3) to Wisdom, Charisma;
+  Resist Fire, Light, Dark, Life Draining;
+  Sustain Wisdom, Charisma; Permanent Light(1)
+Amulet of the Magi            +25      +0     +0    ***     70     8   30000
+  +1d5+MB(5) to AC; +1+MB(3) to Intelligence, Searching;
+  Resist Confusion, Life Draining; Sustain Intelligence;
+  See Invisible; Ignore Acid, Lightning, Fire, Cold
+Amulet of Trickery            +25      +0     +0     +0     70     8   30000
+  +1+MB(3) to Dexterity, Stealth, Searching, Infravision, Speed;
+  Resist Poison, Nexus; Sustain Dexterity
+Amulet of Weaponmastery       +25     ***    ***     +0     70     8   30000
+  +1+MB(4) to-hit; +1+MB(4) to-dam; +1+MB(2) to Strength;
+  Resist Fear, Disenchantment, Life Draining;
+  Sustain Strength, Constitution
+Ring of Speed                 +25      +0     +0     +0     75     1  100000
+  +1 or more (see below) to Speed
+
+The speed bonus of a Ring of Speed is determined in a special way.  The base
+speed bonus is 1d5+MB(5).  Then, there is a chance for an extra speed boost,
+as follows:
+      Chance   Boost            Chance     Boost
+      50%         +0            0,78125%      +6
+      25%         +1            0,390625%     +7
+      12,5%       +2            0,1953125%    +8
+       6,25%      +3            0,09765625%   +9
+       3,125%     +4            0,048828125% +10
+       1,5625%    +5               (etcetera)
+There is no limit, so theoretically it is possible to get maxint, but don't
+count on it :-).
+
+A Ring of Speed may also be cursed.  A cursed Ring of Speed has it's speed
+bonus converted to a speed penalty (ie a Ring of Speed(+7) would become a
+Ring of Speed(-7) {cursed}).  A cursed Ring of Speed does not affect the
+level's rating and can't be sold for money.

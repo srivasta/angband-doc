@@ -1,0 +1,1508 @@
+				 The Angband Strategy Guide - Second Edition
+
+		  Originally written by Frank Wang (fwang@sbcs.sunysb.edu?)
+
+   Revised and Mostly Rewritten by neko (bmroot@nematic.ieo.nctu.edu.tw)
+
+                  Revision 0: (In)Completed May 15, 1997
+
+
+
+						 <Table of Contents>
+
+						  =================
+
+
+
+0. Introduction
+
+	0.1 Disclaimer
+
+1. Character Generation
+
+	1.1 General Tips
+
+	1.2. Starting Statistics
+
+	1.3. The Autoroller
+
+	1.4. Character Suggestions by Class
+
+		1.4.1. The Warrior
+
+		1.4.2. The Mage
+
+		1.4.3. The Priest
+
+		1.4.4. The Rogue
+
+		1.4.5. The Ranger
+
+		1.4.6. The Paladin
+
+2. Shopping
+
+	2.1. Starting Shopping
+
+	2.2. Starting Shopping by Class
+
+		2.2.1. Warriors
+
+		2.2.2. Mages
+
+		2.2.3. Other Classes
+
+	2.3. Long Term Shopping Goals
+
+	2.4. Items Of Note
+
+3. Early Levels: 50 to 1500 feet
+
+	3.1. Tips for Everyone
+
+	3.2. Item Wish List, by Class
+
+4. The Later Levels
+
+5. General Tips
+
+	5.1. How Fast Should I Dive?
+
+	5.2. Basic Pointers
+
+	
+
+	
+
+
+
+						  <0. Introduction>
+
+                           ===============
+
+ 
+
+	Three years ago, Frank Wang wrote the First Edition of the Angband Strategy Guide, which has since become a standard repository for tips and tricks for new (and not-so-new) Angband dungeoneers. However, since then, a zillion new features have come about, such as the autoscummer,  preserve and maximize modes, and the bow slot. Hard numbers have changed as well. So, I set about revising it, including tactics culled since then, as well as a few (well) of tricks of my own.
+
+
+
+	While I consider this a revision of Mr. Wang's Strategy Guide, nearly all of this text was written by me, combining information by him, other spoilers, r.g.r.a., and my own experience. If you have a major problem  with something in this, blame me, not Mr. Wang; I have not as yet even been able to inform him of this revision (though if you're out there, I'd appreciate your dropping me a line). I have taken liberally from the first edition, being eager to incorporate all the still-pertinent information from that document; if a passage looks like I blatantly plagiarized it from the First Edition, odds are pretty good that it's because I blatantly plagiarized it from the First Edition. I would *love* comments about this guide; my email address is given above. (Yes, it's in Taiwan; no, I'm not Taiwanese; yes, it's a _long_ story.)
+
+
+
+	Note that this is a pre-release of this guide. It is thoroughly incomplete, but since I don't know when I'm going to be able to work on it again, I figured I'd like to release at least _something_.  I do plan on revising and completing it someday, but I'm going to be very busy in the coming months, so I don't know when it will be completed.
+
+
+
+
+
+	-- neko (bmroot@nematic.ieo.nctu.edu.tw)
+
+	   January 6, 1997
+
+
+
+							<0.1. Disclaimer>
+
+							 ---------------
+
+
+
+	All the opinions in this document are just that: opinions. I don't claim that the opinions I give will work for you, or that you'll like them. Moreover, I don't claim that the information in this document are valid for your version, or any version (although I have tried to verify what I can). In short, if the section titled "Shopping Tips" contains my recipe for Tole House Cookies, tough. And yes, I _do_ discuss Angband's "dirty" areas such as savefile backups and stair/store scumming. I believe that, while controversial, these 'cheats' are a part of Angband until Ben codes otherwise. If you feel uncomfortable using something, don't.
+
+
+
+	Note also that this version covers Angband 2.8.1.  It does not cover the variants like GW-Angband or CatH Angband, which will have slightly different strategies.  Moreover, earlier versions of Angband (pre-2.7.9 in particular) have greatly differing game mechanics, so the spoilers and other hints will be less appropriate for your version; I recommend upgrading.
+
+
+
+							<0.2 Glossary of Terms>
+
+
+
+AMHD	Ancient Multi-Hued Dragon
+
+CCW		Cure Critical Wounds
+
+CLW		Cure Light Wounds
+
+CSW		Cure Serious Wounds
+
+DSM		Dragon Scale Mail
+
+GWo*	Great Wyrm of Whatever
+
+HA		Holy Avenger
+
+MHD		Multi-Hued Dragon
+
+RoD		Ring of Damage
+
+RoS		Ring of Speed
+
+						<1. Character Generation>
+
+						 =======================
+
+						 
+
+						   <1.1. General Tips>
+
+						    -----------------
+
+
+
+	In a nutshell, the eight classes in Angband may be seen as lying on a "spectrum" of sorts, with fighting on one side and magic ability on the other side. Warriors, of course, lie directly on the edge of the fighting side, having great fighting ability, but no magic whatsoever. Mages lie near the edge of the magic side but not quite on the edge, for while they have the best magical abilities, they can still do a bit of fighting in a pinch -- quite a bit of fighting towards the end (say after they get Globe of Invulnerability). Other classes lie in between a bit (except perhaps for rogues, who have their stealth as well).
+
+
+
+	Since magic becomes so much more important in the later portions of Angband, the Golden Rule of Angband (and Moria) rings true: warriors are the best class at the beginning, but worst at the end; while mages are worst at the start but become the best class by the end. 
+
+
+
+                       <1.2. Starting statistics>
+
+                        ------------------------
+
+
+
+	More recent versions of Angband have seen the introduction of "Maximize Mode." Use it. While your stats may be much lower in the beginning than otherwise, this is a small price to pay to allow your stats to rise above 18/100. How much better, you ask? Well, for level 50 mages, this makes a 225 mana point difference. You can completely keep from being robbed with a 18/*** Dexterity; with 18/100, you can only prevent it 65% of the time. Just about all plusses for 18/*** are _triple_ those for 18/100. Still need convincing?
+
+
+
+	If you're just starting out, however, playing in non-maximize mode can increase a player's chance of getting through the early levels by quite a bit. Also, Equipment bonuses *can* raise your stats above 18/100 in maximize mode, but critical stats will still be lower.
+
+
+
+	Also, a big exception to the maximize rule is Half-Troll mage. They cannot get more than 18/100 for any stat when in maximize, so to use it for them makes no since.
+
+
+
+                          <1.3. The Autoroller>
+
+                           -------------------
+
+
+
+	First off, don't bother trying to maximize all six stats, thinking that eventually you'll get lucky. It won't happen. Here's why:
+
+
+
+	Angband first generates your stats by rolling a three, four and five sided die and adding five to the result. Then, if the sum of the stats comes to less than 73 or greater than 83, _it_throws_the_scores_out_. Since 6*17=102, you'll never be able to maximize all your stats. In fact, you won't even get close. Even figuring out what your stats will be and setting your maximums so these "raw" values add to exactly 83 will probably just waste time. Also, to stave off possible overflow errors (and probably to keep just this sort of thing from working), the auto roller makes "only" one million rolls, so setting the autoroller just before leaving for your flight to Mars won't work.
+
+
+
+	If you're patient enough to wait about half an hour (say you're typing up Angband guides (:B ), a good compromise is to maximize your two primary stats, and set a lower limit on a third stat of about two points below its maximum. Leave the other three categories blank. You should get a character in about 60,000 to 100,000 rolls. If you don't like the other three stats, you can always reroll. This makes the wait for getting a character almost bearable.
+
+
+
+	Well, almost bearable. If you can make backup save files, you may want to make copies of prerolled characters you can just "call up" when you want to play that particular class-race combination. Just roll a character, quit before moving, and rename the character something like "mage, high-elf" if your system can support long file names, or maybe like "MAGE.HIE" (class.race) if not. Then, stick these in a directory in your "save" directory and you're all set to clone it at will! This makes life *much* more pleasant than spending an hour generating a great mage only to go down to 50', take one step, and die by falling into a pit with poisoned spikes. Note, however, that savefile backups are generally considered to be cheating, so you may not want to back up characters that you've already played. See my blurb elsewhere about this.
+
+
+
+	Another consideration is the fact that for some stats, the actual number doesn't matter as much as the "bracket" it falls in. For example, there is no difference between a dexterity of 10 and a dexterity of 11. For constitution, the whole range from 7 to 13 is solid--no bonus or penalty to hit points or regeneration. On the other hand, every point of Strength you gain gives you extra carrying capacity, even if it doesn't necessarily increase your to-hit or damage; this is critical for mages, where every pound counts. See the spoiler file "stats.spo" for more information.
+
+
+
+				    <1.4. Character suggestions by class>
+
+				     -----------------------------------
+
+
+
+(Note: With Angband 2.8.1 came the removal of all restrictions of race-class combinations, making choices such as Dwarven Paladins available where previously they were not. I have yet to explore all the possibilities added by this, so you may have to explore some of these on your own.)
+
+
+
+						    <1.4.1. The Warrior>
+
+
+
+	As you probably guessed, high strength is the warrior's best ally. However, a high dexterity is very nearly as important. This is because you can get multiple hits with light weapons if you have a high dexterity and strength. For a warrior, this is vital: every time you hit, your damage bonus is added in, and that is what really kills monsters. With an 18/40 Strength and a 18/10 Dexterity (the maximum obtainable by a human warrior) and a Whip (1d6) (+8,+8), you get _four_ attacks per round. If all those blows were to hit (although unlikely), you will have done _44_ points of damage even before adding in the 4d6 for the regular whip damage! And on top of that, you can slip on a pair of RoDs (+15), and you're looking at 164 damage per round.
+
+
+
+	See Appendix A for the maximum attacks you can achieve with a particular race/class combination.
+
+
+
+Suggestion 1: Human Warrior. They gain levels  _quick_, and that translates into quick hit points.
+
+
+
+Suggestion 2: High Elven or Dunadan Warrior. They get bonuses to Strength, Dexterity and Constitution, all of which are good for Warriors. Their slow advancement heavily compromises one of the warrior's main advantages, however.
+
+
+
+	In any case, you want a high constitution (at least 15 for bonus HP from the start), and not too low for other stats, particularly Intelligence, which factors into magic devices and your pseudo-id.
+
+
+
+						    <1.4.2 The Mage>
+
+
+
+	The holy grail for a young apprentice is an Intelligence of 18/50. This allows you to get three spells per two levels. Unfortunately, only High-Elves may obtain this score in Maximize mode. For other classes, you want the highest obtainable Intelligence for your race (of course), but it's not as vital; by the time you can buy/find a good enough Ring of Intelligence to put you over 18/50, you will probably have all the early spells you need (although that 50% extra mana comes in awfully nice). Also, try to take the highest strength you can; spell books are heavy, and you want to be able to wield a decent weapon (forget about multiple hits), carrying capacity is also a major issue.
+
+
+
+Suggestion 1: High-Elf Mage. Possibly the best class/race combination of them all. High-Elves are the _only_ mages that can get an 18/40 Intelligence from the start, for three spells per two levels and a nice bonus to mana. Take 18/50 Intelligence (of course), OK Strength (for carrying capacity), and Dexterity (for the AC bonus).
+
+
+
+Suggestion 2: Gnome Mage. They get free action, and Intelligence but 10 percentiles below the High-Elves (but not high enough for the bonus spells).
+
+
+
+	Dunedain make okay mages as well, but Gnomes have much the same vital bonuses (except strength), and Dunedain lack both free action and infravision, and they need 55% more experience per level than Gnomes. Finally, Half-Troll mages have really bad Intelligence (which translates into high fail rates on spells at the start), but their hit points tend to be very high; just remember you're still a mage and not a fighter!
+
+
+
+						<1.4.3. The Priest>
+
+
+
+	While using magic quite a bit, the Priest uses fighting much more than mages, mainly due to the lack of low-level attack spells (their first offensive prayer is Orb of Draining at level 9). As such, a high strength is important for priests, as well as Wisdom.
+
+
+
+Suggestion 1: Dwarven Priest. They have good Strength and Wisdom, and that's just what you need. There are a few players that won't play anything else.
+
+
+
+Suggestion 2: Half-Troll Priest. No, you didn't read that wrong; this is actually a fairly good combination, with little wisdom penalty and good strength.
+
+
+
+						<1.4.4. The Rogue>
+
+
+
+	Rogues are usually played quite a bit differently than the other classes, preferring to sneak into a room and kill the monsters while they're sleeping rather than to just plow into them. This requires Dexterity (for stealth), and Strength (to keep monsters from waking up). Rogues also get a small (_small!_) amount of spellcasting ability, like teleportation and detection spells -- that requires Intelligence. Add in the high Constitution for good hit points, and you have _four_ stats that are rather important. This makes rogues quite difficult to autoroll. Rolling a good rogue may take a while. A good compromise is to maximize your Strength and Dexterity, get an OK Intelligence, and whatever Constitution you can get. Intelligence doesn't make a big difference for a rogue anyway, since the only thing they really use spells for is detection, and the failure rates are almost always astronomical. However, I consider Rogues to be the most fun class to play, because that sneaking about requires a fair bit of planning and strategy.
+
+
+
+	Rogues come in two flavors: the sneak and the thug. Most rogues are sneaks who rely on their stealth to just walk right up to a sleeping enemy and wake them up in a pretty rude fashion. With lots of stealth items (not too hard to find), sneak rogues can be wonderful. Thugs, on the other hand, rely less on stealth and more on fighting.
+
+
+
+Suggestion 1: Hobbit Rogue. The standard sneak rogue, Hobbits and Rogues were made for each other. They also have their Dexterity sustained, which helps alot since there are a bunch of nasties that can reduce Dexterity. The -2 strength penalty can be a problem, as it kills any chance of getting multiple hits at the start; get a Ring of Strength ASAP if you want multiple hits.
+
+
+
+Suggestion 2: Half-Orc Rogue. This is the usual thug rogue. With 18/20 Strength and Dexterity, you get two hits with a whip, which means double your strength bonuses.
+
+
+
+							<1.4.5. The Ranger>
+
+
+
+	Rangers are quite similar to Rogues in that they combine fighting with spellcasting. However, Rangers are better than Rogues than both, at the expense of stealth and lots more experience required to level up. Rangers also get some wonderful bow skill (use that instead of magic). The useful stats work about the same as rogues. Your stealth still isn't all that bad, either. On the other hand, their pseudo-id is _pathetic_, and this combined with how late they get Identify as a spell makes them almost unbearable.
+
+
+
+Suggestion 1: High-Elf Ranger. This is one of the slowest characters of them all to advance, needing a full 180% more experience than a human warrior to advance to any level. However, they can start out with +3 bonuses in both Intelligence and Dexterity, two of the three prime stats for a Ranger. This translates into 18/20 Strength, 18/30 Intelligence, and 18/50 Dexterity, Which means good mana and two hits with a whip. Worth the wait if you have the patience for the autoroller, although you may want to go for an 18/10 or 20 Intelligence if you don't want to go nuts waiting.
+
+
+
+Just about any other race will do nicely as well, even humans.
+
+
+
+							<1.4.6. The Paladin>
+
+
+
+	The holy complement of the ranger, the paladin combines some really good fighting ability with the priestly magic. However, the paladin is better at both than the ranger; the paladin being able to get all priest spells eventually, and one can fight nearly as well as well as a warrior.
+
+
+
+	The race for a paladin doesn't really matter much: There isn't much difference between Humans and Half-Elves in terms of stats, and the infravision of the Half-Elf is really low, albeit useful. A Dunadan paladin is better than both, of course, but they crawl up levels, and still don't get infravision. Symmetrically with the ranger, maximize your Strength and Dexterity, and aim for a Wisdom of 18 or so.
+
+
+
+							<2. Shopping>
+
+							 ===========
+
+
+
+						<2.1. Starting Shopping>
+
+						 ----------------------
+
+
+
+	First and foremost, you need a shovel. About 50-75% of the treasure you find in the early dungeons is stuck in the walls, and for that you need a shovel. Picks are a total waste of money, however: it's only marginally better than a shovel for digging, and its extra weight and cost really isn't worth it. You may want a lantern as well, since it's lighter and easier to deal with than torches. It's not necessary, however, and since the Phial of Galadriel isn't too hard to find, it may actually be a less than wise use of money. If you spend a fairly long time in the dungeon, however (Warriors may go as far as 250' their first time down), you may not want to buy that many torches, and the lantern is much lighter in the long run. The oil may also be used as a missile weapon, but it really doesn't do that much damage (1d6), and is more expensive in the long run than conventional missile weapons.
+
+
+
+	If carrying capacity is a big issue (mages in particular), and you have a bit of money to burn, sell your food and buy about 20 strips of beef jerky. I usually carry about 7 rations of food, and buying an equivalent amount of jerky (10 strips per 3 rations) shaves about 20% from the weight of your food. However, it is pretty expensive, and mages get Satisfy Hunger fairly quick. It's your choice.
+
+
+
+	Armor is probably a must for all classes, including mages. Soft leather armor is probably best because it's cheap, as well as cloaks, gloves (for non-spell casters), and leather caps. If you have at least an 18 strength and 18/10 dexterity, you want a whip as well for multiple hits.
+
+
+
+					<2.2. Starting Shopping by Class>
+
+					 -------------------------------
+
+
+
+							  <2.2.1 Warriors>
+
+
+
+	*IMPORTANT*: Want some more money when just starting out? Try this:
+
+
+
+	First, go to the armor shop, and sell your Chain Mail. You should get about 375 gold for this.
+
+
+
+Then, buy the following:
+
+
+
+ Item__________________AC______Weight__________Cost
+
+ Soft Leather Armor 	4		8.0				24
+
+ Hard Leather Boots 	3		4.0				16
+
+ Metal Cap				3		1.5				16
+
+ Gauntlets				2		2.5				53
+
+ Cloak					1		1.0				 5
+
+ Small Metal Shield		4		6.5				75
+
+ ---------------------------------------------------
+
+ Total					17		23.5			189
+
+ 
+
+	(Costs are almost total guesses. YMMV.) You have now (a) got yourself three more armor points, (b) earned yourself an extra 200 gold or so, and (c) have eliminated the -2 to hit penalty from the heavy armor. Joy! You have tacked on an extra pound and a half to your encumbrance, but that shouldn't matter for warriors.
+
+
+
+	Next, sell your broadsword and buy a whip. Even two hits with a 1d6 whip is better than one with a 2d5 broadsword - and you're not putting all your eggs in one basket damagewise, as it were. All warriors with maximum Strength and Dexterity will get at least three hits with a whip. This nets you an extra 100 gold or so (as well as the extra attacks). You may want to reconsider, however, if you can get two hits with the broadsword but only three with the whip. See Appendix A for more information.
+
+
+
+	Now what to do with all that extra money? Well, a couple scrolls of identify wouldn't hurt; even at 250' you may encounter some ego-weapons or even an artifact. You also want to be able to identify the Phial when you get it so you can light up rooms. If you want to start jetting down levels immediately (you're the only class that can really safely do this), you may want a Scroll of Recall or two.
+
+
+
+								<2.2.2: Mages>
+
+
+
+	For mages, your best bet is probably to buy a cloak, a shovel, and maybe a lantern and some oil. Go to the armory and buy some hard shoes, a metal cap, and soft leather armor if you can afford it. If you still have change, buy a couple scrolls of treasure detection and extra food. (I feel most comfortable with  about 6 rations of food and 5 flasks of lantern oil; with that I've never even come close to running out.) If you feel bold enough, you can scour the town for money-carrying miscreants, but it's _risky_ at level one, especially since you don't have stinking cloud to take out street urchins. (Do _NOT_ attack battle-scarred veterans from the get-go. The first character I ever played found that out the hard way.) Drunks are an easy kill, of course, but magic missile anything that can actually fight back, then flee. If things get bad, you can go down into the dungeon then immediately back up again.
+
+
+
+	If your strength is about 12 or above, buy an extra book of Beginners Magic, since salamanders can burn them if you're not careful. If you plan on spending quite a bit of time down there, buy Conjurings and Tricks so you can get Lightning Bolt and Teleport Self.
+
+
+
+						   <2.2.3. Other Classes>
+
+
+
+	Rangers start out with a long bow, but no arrows. Guess what they should buy? Get about 30 to start; carry about 50 to 70 after 200' feet to help with orc pits.
+
+
+
+	Rangers and paladins both start with a broadsword. As with the warrior, sell it and buy a whip if you can get multiple hits. Rogues too if you can get multiple hits; see the hit table in Appendix A.
+
+
+
+						<2.3. Mid-Term Shopping Goals>
+
+						 -----------------------------
+
+
+
+	When you have the cash, you'll probably be unable to resist buying gain stat potions. Go ahead for most of them; however, I recommend holding back on Potions of Charisma; each one will only make a percent or two difference in store prices, and probably not worth it (One percent from a Stat Gain potion works out to about 300 gold.). They become common at about 1000 feet, so just wait until then and find them there.
+
+
+
+	Free Action is a must after 1000 feet. It is available in three flavors: rings, weapons, and armor. There are a good number of weapons and armor that give this; try to get it from armor if you can, however, because you might get better weapons; but Gloves of Free Action are about the best non-artifact gloves out there. Try _real_ hard to not have to waste one of your precious ring slots on a RoFA.
+
+
+
+	Warriors: A Weapon of Extra Attacks is a nice weapon to wield, since the more attacks, the more your damage bonuses will apply. They're deservedly pricey, however; you may well find one in the dungeon before gathering the money to buy one, and they're not all that common in the shops anyway. Also look for RoD (a must). Interestingly enough, Rings of Strength are probably not as useful as Rings of Damage for warriors, since you probably won't get an extra attack from a Ring of Strength, and the extra to-hit bonus given by even a +5 to Strength isn't that great unless you can get an extra couple hits in with it. Rings of Dexterity probably won't help much if you already get four hits with your whip, either; 5 attacks aren't possible until you reach at least 18/100 Dexterity, and you're not likely to get that for a while.
+
+
+
+	Mages: A Rod of Teleport Other. See below for my rant on this item. Also, everyone but High-Elves will want a Ring of Intelligence good enough to bring them up to at least 18/40, where they can pick up extra mana (yay) and half again as many spells (big yay). (High elves would need a Ring of Intelligence (+5) to bring them to the next key point of 18/90, and that's not likely. Buy it if you can find it, otherwise don't worry about it.)
+
+
+
+	Priests: Look for stuff to raise your Armor Class, since your fighting skills kind of stink and you tend to be in hand-to-hand alot. Enchant your armor a bunch (as well as your weapon). Amulets of Wisdom are very nice for priests (of course), and are readily available in the Magic Shop. Other than that, there's not that much Priests need that others don't.
+
+
+
+	Rogues: Anything that will increase your stealth. Cloaks of Stealth are surprisingly common in the General Store, and every +1 to stealth reduces the amount of noise you make per turn _in_half_, because the 'noise function' is exponential, not linear. Thus a Cloak of Stealth (+3 to stealth) makes you eight times stealthier, regardless of what it was previously. A rogue with really high stealth can easily sneak up on even Wormtongue with ease. Also, look for Picks or Shovels of Digging (occasionally sold in the General Store); a +3 one can allow you to tunnel _much_ faster than even mages with Stone to Mud, who have to rest to restore mana often. (don't bother with your Stone to Mud for quite a while; it uses up too much precious mana). This will compliment your Detect Treasure spell nicely and allows you to burrow into vaults fairly quickly.
+
+
+
+	Rangers: Scrolls of Enchant Weapon, and lots of 'em. Enchant your melee weapon and your bow to (+9,+9). Look for range weapons of Accuracy or (better) Velocity when you can find them at the black market (they have _incredible_ plusses...(+14,+17), for instance). Since you should be getting two hits with your whip (or similar light weapon), look for nice Rings of Damage.
+
+
+
+	Paladins: Being a mixture of Priest and Warrior, you'll want what both of them want. Your Dexterity isn't as great as a Warriors, though; you may want a Ring of Dexterity if it's 18/10 to (possibly) get an extra hit with your weapon, then get a Ring of Damage. See 'attack.spo' for information, and work out the numbers before buying.
+
+
+
+						     <2.4. Items of Note>
+
+						      ------------------
+
+
+
+	Rod of Teleport Other:  At about 5500 gold from the Black Market, I feel that these are the most underpriced items in the game. They in effect give you almost complete control of a battle; uniques with escorts can be de-escorted quickly and easily, making them much easier since you'll be up to full hit points when you find them again. Checkerboard vaults become a total joke ("Tiamat at 1500'. How nice. *zap*"). (Remember to rest until the rod recharges before doing this, however!) Be aware that they're not much good if you're in the middle of a room when surrounded by 20 hill orcs brought on by a summoning rune or some such (it's happened to me), and tporting away fire or water hounds is probably a bad idea since having 15 of them scattered about the dungeon greatly increases the risk of getting ambushed by one in the middle of a really long hall and watching it breathe all over your scrolls/staves/armour/self.
+
+
+
+	Restore Ability: OK, your Hobbit Rogue has a Constitution of 13, but had a bad time disarming that dart trap and it got reduced to 11. Time to run back to the town to buy a Potion of Restore Constitution? Not really.
+
+
+
+	As stated earlier, for some stats, only certain ranges of scores factor into any plusses. For constitution, the entire range from 7 to 13 has the same effect. So having it reduced from 13 to 12 will not do a spit of difference. So, why bother bringing it up when it won't matter anyway. Besides, if you find a Potion of Constitution, it will restore your Constitution first, then raise it.
+
+
+
+	Now, if your Constitution dropped down to 7 or 8, you may want to go ahead and chug a restore potion, just to be sure it doesn't drop down to 6 and make you lose a few hit points. But other than that, it would just be a waste, even if the reduced stat makes your character sheet look bad.
+
+
+
+	Constitution is not the only stat with this property. Intelligence and Wisdom have a similar range from 8 to 14 with a similar lack of effect (assuming you're not a spellcaster needing that stat, of course). On the other hand, each point of Strength gives you an extra five pounds you can carry before being slowed, so you'll want to keep that up. Dexterity and Charisma are similarly 'chaotic' (Just about every point counts).
+
+
+
+						<2.5. Other Shopping Tips>
+
+						 ------------------------
+
+	Angband 2.8.0 has seen the 'Shuffle Store Owners' option to become no longer an option, but 'always on', for lack of a better term. This means that once in a (long) while, the owner of a particular store will change, and that owner will put everything in the store on sale. Any 'rapport' -- built up reputation as a good haggler with the previous shoppkeeper -- will also be erased. More over, the rate of turnover is four times what it was in previous versions. In my opinion, this makes haggling hardly worth it, so I now leave the auto haggling off. The extra 10% I pay is well worth saving a heck of alot of time, in my opinion.
+
+
+
+					<3. Early Levels: 50 to 1500 feet>
+
+					 ================================
+
+
+
+								  <Warriors>
+
+
+
+	Some things never change: go in and kill. You can tackle almost anything the first 150' can throw at you even at level 1 (except perhaps Fang and Grip), and human warriors go up levels so fast that they'll be at level 5 before they know it. Going down at a rate of one level per dungeon level would be real easy, assuming you can actually find the down staircases that quickly. Just know when to stop; at this rate, the unique orcs are a *real* challenge.
+
+
+
+	Look for Rods of Anything and loads of scrolls of Phase Door. Check the Magic Stores and Black Market often and look for teleportation items quick. You may want to consider finding and uncursing an amulet of teleportation, then carrying it around for emergencies, but they often don't work too switftly.
+
+
+
+	Get a bow as soon as you can -- you'll want a range weapon when wounded things keep running away from you. You'll need it for Wormtongue as well -- my first experience against him was as a warrior, and he must have swiped 15000 gold before I finally whopped him. (He did leave Taratol though, so I would have been overjoyed if I knew then how nice it was.)
+
+
+
+	Other than that, the first thousand feet are pretty safe ground for warriors, although I should reiterate that some of the unique orcs are a challenge. Use this time to stock up on magic items and stuff, and prepare for a decent that will likely turn unpleasant rather quick.
+
+
+
+								<Mage>
+
+
+
+	Caution is the name of the game here. Don't bother fighting hand-to-hand untill you can get a reasonably enchanted weapon (say from Farmer Maggot), or what you're going up against is *really* weak (jackals, for example). I once lost a 6th level mage to a group of cave spiders, *after* casting a few stinking clouds. I recommend being at least level 3 before going to 100', and level 7 before tackling 150'. I've never taken a mage down to 1000' before being level 25. The first edition of this guide stated that there was someone who would take mages down at a rate of 50' per level plus 100'. This assuredly is a big fat lie.
+
+
+
+	A level 3 mage should be able to take on Fang and Grip (not both at once, though) without too much trouble, unless you get ambushed around a corner or something (easily preventable w/ detect monsters). Also at level 3 you have the opportunity to get Cure Light Wounds as a spell. Don't bother. It doesn't heal as much as even a CSW potion, and you need the mana for other things.
+
+
+
+	Novice warriors can do up to 13 points of damage in one round. A 3rd level mage may have about 20 hp max. Try *real* hard not to fight them head on until you're about level 7 or so, and even then think about it very hard. It's best to take them down in a room where you can phase door around if they get near you. This is true of all the novice types (except for the archer and ranger, who will just shoot holes in you anyway).
+
+
+
+	Take out salamanders from a distance if you can. Watching them roast your spell book is no fun, and they can't do that if you fire a missile from afar.
+
+
+
+	For uniques, use a hit and run technique. Lure it into a room, then cast Magic Missiles at it until it gets near, then Phase Door, back into a corner, and repeat. If you Phase Door out of the room into a corridor accidentally, take the opportunity to rest, then go back and go again. You regain HP and Mana much quicker than uniques, so you're still at an advantage. Most uniques below 1000' have no distance attacks, so they can't get at you, just run like sheep towards you. Wormtongue can be a breeze this way (sometimes).
+
+
+
+	When possible, use Magic Missle instead of other magic attacks. It does more damage per mana than other magic attacks, and the fail rate is lower. Reserve higher bolt attacks for really nasty things that are rushing towards you (stopping that 2-headed Hydra, for instance).
+
+
+
+	Don't be stupid with your magic. In other words, don't try to be cute and roast that floating eye you found at 950' with a Fire Bolt when a Magic Missile would do just nice, because you'll be sorry when Nar comes up behind you and you've got 10 less mana to spare...
+
+
+
+	If you run into a room with an immobile mana draining creature as well as something even moderately nasty, *LEAVE*. Those things can suck mana very fast, and without mana you're toast. Phase door out of the room, rest, then lure the beast into the corridor, where you can fry it with style. Finally, go back into the room and teach the mana drainer some manners. If you have a bit of trouble with the mobile creature, just phase door back into the room, take your frustration out on that stupid mana drainer, then rest and lure the nasty back into the room. If the mobile nasty drops lots of treasure (an Ancient Dragon, say), beat it in the corridor until it's almost dead, then phase door, kill the mana sucker, then do a stone to mud to bring the nasty back into the room, where it can drop some proper treasure. (Beware if the monster can summon or something similarly nasty, though.)
+
+
+
+	Mages are the only class that can get by effectively without a bow. Regardless, don't forget you have that extra bow slot! If you've run out of inventory space and have an enchanted range weapon you plan to sell, equip it. Quite a bit later on, the mage's attack spells tend to lack a bit in power. You may want to consider using the first ego-item bow you find, if you can carry it.
+
+
+
+	By about 800' or so, you'll have had a good chance of finding a nice ego-item (say, Holy Avenger or thereabouts). With something like that, you may want to start taking a chance at melee, particularly against groups like hill orcs. Open fights with a flurry of MM's until you've used up all but say 14 mana (so you can bail when necessary), then start whaling on the nastys. When your hp get somewhat low (like maybe to about a third), loose off MM's with the mana you regained while meleeing. If that's not enough, flee.
+
+
+
+								<The Priest>
+
+	The first eight levels for a priest stink. They have no attack spells, which means no distance attacks except for a bow which they're not to good with. Their fighting ability, while better than mages, isn't exactly what legends are made of, either. Finally, the only class which can get multiple hits with a whip from the start are Half-Trolls.
+
+
+
+	Fortunately, their fighting ability is (barely) enough to get by, if they're cautious enough.***
+
+
+
+								 <The Rogue>
+
+
+
+	A rogue is a fighter with a few detection spells. Play that way. _NEVER_ rely on escape spells until at least ten levels after you get them, or whenever their failure rates drop to acceptable values.
+
+
+
+	For example, when you get to level 7, go ahead and gain Phase Door. Now look at its failure rate: 49% for a Hobbit with 18 Intelligence. Do you *really* want to rely on this when you're in a jam?
+
+
+
+	This spell is probably a real disservice for new players in that it may give one a false sense of security. Even at level twelve, you still have about a 35% failure rate. Buy some Phase Door scrolls as soon as you can and use those until the failure rate is tolerable (about 15% or so for me). You'll also want at least two scrolls of teleportation on hand from the black market. And _never_ give yourself 'just one shot'.
+
+
+
+	Finally, on the Macintosh port of Angband 2.8.0, I have noticed a probable oversight on the part of whomever wrote the macros. Pressing option and a direction triggers a macro to fire a Magic Missile in the specified direction. Trouble is, rogues don't have the Magic Missile spell, so all you'll get is a 'You may not cast that spell.' message. To fix this, do the following: open up the 'rogue.prf' file in the 'lib:user' direcory with any text editor, such as BBEdit. Then, find/replace all instances of 'A:\e\emaa' with 'A:\e\ef1'. This will instead fire whatever is inscribed {@f1} in the direction you specify. Now, just grab your crossbow, inscribe your bolts with {@f1}, and your range weapon is alot easier to use! Rangers, whose bow is much better than their magic missle, may want to do this too.
+
+
+
+								<The Ranger>
+
+
+
+	You have quite a bit in common with Rogues: you have the same advantages (good stealth, bow, and some magic), although you're better at all of these except stealth. However, don't underestimate your stealth: it can be quite handy for loosing off an arrow at that Novice Warrior before he knows what happened.
+
+
+
+	On the subject of bows, this should be your distance as opposed to magic. I usually don't get Magic Missile untill I'm about level 8 or so (and even then I just get it because I've run out of spells to get). The failure rate isn't all that tolerable for a while, and enchanted bows can do quite a bit more damage anyway. By about level 10, however, its failure rate is OK, so you can use it on weak fleeing creatures you don't want to waste ammo on.
+
+
+
+	Rangers have one _serious_ drawback: they have the worst idenifying ability off all the classes. And I mean *pathetic*: their pseudo-ID is only marginally better than mages, and they don't get Identify as a spell until level 23. Even at level 22 Rangers require an average of over 4000 turns before getting their inventory Pseudo-ID'd. (See Appendix D for details) ID'ing weapons and armor might not even be profitable until about 700' or so. I usually ID just "suspicious" items and items dropped by uniques. I end up selling a fair amount of good items and maybe even an ego-item or two, but there's not much I can do about it.
+
+
+
+	Instead, make your money off of selling staves and wands, which you know will make money. ID them, then try to make them stack as best as possible: if you have two wands of Magic Missile, with 11 and 10 charges respectively, use a charge off the 11-charge one, let them stack, and stick another wand into the freed slot. Charges amount to about 10 to 20 gold on average for low-level wands and staves, as opposed to another 300 gold for that extra Wand of Wonder. You'll still probably make less money than other classes, though; which is a shame since those Enchant scrolls are so vital for you and are so costly.
+
+
+
+	Remember that you are _not_ as sturdy as a Warrior. You'll have to run away quite a bit more, and you just can't plow into groups the way warriors can.
+
+
+
+							   <The Paladin>
+
+
+
+	Paladins are just like warriors at the start. Their main advantage is their ability to smash, rather than the prayers they get soooo slowly. You do tend to be a bit better in the magic category than the ranger in hers, however; so you needn't be as careful (but never be uncareful!).
+
+
+
+							<4. General Hints>
+
+							 ================
+
+							 
+
+					   <4.1. How fast is too fast?>
+
+						--------------------------
+
+	The first edition stated this about diving:
+
+
+
+	The fastest reported player plays at 50 feet per level + 100 feet,
+
+	which can be safely done for the first 1000 feet with mages - with
+
+	proper care, of course.  
+
+
+
+	This, almost assuredly, is a Big Fat Lie.
+
+
+
+	4 out of 5 deaths in the early levels can probably be attributed to diving too fast too early.
+
+
+
+						   <4.2. Basic Pointers>
+
+							-------------------
+
+
+
+Okay, let's start with basics.
+
+
+
+(1)		Don't even so much as sneeze unless you have full hit points and full mana.  There's just no reason to explore without full health.
+
+
+
+(2)		Don't invite trouble.  That is, when in a room with two sleeping monsters attack one, kill it, then the other.  Sounds stupid, but there is a very close scenario:  When fighting groups of monsters, fight them -one- at a time.  don't run in the room and invite group beatings.
+
+
+
+	An elaboration on this: if you are being attacked by a group, get into a hallway and fight from there.  That way, you -can- only be attacked by one at a time:
+
+                                    #.....CCC..........#
+
+                                    #....CCCC..........#
+
+                                    #######C############
+
+                                          #@#
+
+                                          # #
+
+
+
+	In fact, you should almost never be beat on by more than one monster at once.  you can always run into a tunnel, or attack from around a corner if the monsters you are fighting have breath weapons.
+
+
+
+(3)  If you see a monster you're not sure if you can beat,then -don't-  attack it.  Why take the chance?  Also, put your ego aside, and run away if you start losing a fight.  Try not to run away at the very last minute, in case your teleport spell happens to pick a bad time to fail.  Also, be ready to run if you attack a fire type monster - and don't have any fire resistances.  Same for many others.
+
+
+
+(4)  Probably the quickest way to die can be summarized in one thought. "All right, I've been hitting this guy a few times, he should be almost dead... OH NO!  I have no more (hit points/mana)! *dies about 5 turns later*.
+
+
+
+	Don't run out of mana.  Don't run out of hit points.  If  you start
+
+running pretty low, then leave.  Don't say 'Well, I'll just save my last 6 mana points to teleport away' cuz if you roll badly, and are stuck in a fight with no mana, you die.  (Mages, anyway).
+
+
+
+	Note, though, that panic spell casting can save your hide.  You have nothing to lose if you're gong to die anyway.  See section 4.e.
+
+
+
+(5)  It is wise to kill all the easy monsters you can before taking on the harder monsters, i.e. kill any monster you see.  If you clear out lots of area, then if you have to run from a fight, you will have more clear areas to run to.  (and teleport to.  A troll may be no big deal when you are at full strength, but if some unique is beating on you, and you teleport to a room with a troll in it,  odds are you'll have to run from the troll in this case).
+
+
+
+(6)  Check stores often.  Check all stores everytime you are on the town level.  You never know when something will be on sale. It pays to keep valuables in your home rather than selling them right off - you never know when a 'bargain' could turn up. (Has anyone seen a ring of speed (+10) {on sale}?  How much was it?)
+
+
+
+(7)  When you're going to attack something, you can always get first blow if you are careful. If your opponent is also moving (and at the same speed), then if there is a single space between you, don't move into it. Wait on the spot for one turn (if you search rather than do  nothing you may pick up an adjacent trap at the same time). Your  opponent will move next to you, giving you the first blow.
+
+
+
+         @.R    <-- wait!
+
+         @R     <-- hit!  (:B
+
+
+
+	If your opponent moves quickly (like a cave spider), you would move away from it if there was only one square between you, and stay still if there were two squares. 
+
+
+
+        Using Fang as the example : 
+
+        @..C   <-- wait!   
+
+        @C..   <-- Hit!              
+
+
+
+        @.C    <---if you wait, Fang moves and bites. So, take a step back,
+
+        @C..   <--- hit!  
+
+
+
+	Of course, if you are using a spell or missile weapon, you can shoot at any time.  But you can always know whether or not your opponent will be able to hit you on the next turn and act appropriately.
+
+
+
+(8)  When you find a chest, don't open it in a corridor. If it isn't in one already, take it to a big room. Make sure the floor isn't all cluttered with rubbish. Always search chests for traps. If you don't find any, search some more. Disarm the trap before opening the chest. (Note: if you just cast disarm trap, you don't need to even search for the trap in the first place.)
+
+
+
+	If you are just about ready to go down another level when you are thinking of opening a chest, wait, and take it downstairs with you. You will improve your chances of getting good stuff, since the value of the stuff in the chest is related to the depth of the level that you open the chest on.  Don't open a chest in the town. (Note: In recent versions of Angband this no longer applies, since chests have their object creation level set upon the creation of the chest, not when it is opened.)
+
+
+
+(9)  Common locations of secret doors.
+
+
+
+When you see either of these two patterns, search for secret doors at
+
+the place marked ".":
+
+
+
+ ##########            ############
+
+    '.'                         '.#  (in any orientation, of course)
+
+ ##########            ##########'#
+
+                                # #
+
+
+
+Also, almost all 'dead' ends have secret doors.  In general, there are 
+
+usually doors near doors when in corridors.
+
+
+
+
+
+Common dead ends which are a waste of time to search:
+
+
+
+        # #
+
+        # #
+
+        # #                                  ####
+
+        # #              ###                    ###
+
+        # #              # #                    # #
+
+  ####### ###   ########## ###########       r  #'########
+
+            #                                o  '
+
+  ###########   ########## ###########       o  #'########
+
+                         # #                 m  # #
+
+                         # #                    # #
+
+                         # #                    # #
+
+                         # #                 #### #
+
+                         ###                    ###
+
+
+
+
+
+                Some quick short tips from rec.games.moria
+
+                ------------------------------------------
+
+
+
+(10)  Summon Monster/ Polymorph Other will eventually pull up something you can't handle unless you can handle anything.
+
+ 
+
+(11) Your Glyph of Warding / Rune of Protection will break.
+
+ 
+
+(12) Just 'cause you teleported away does not mean you're out of danger.
+
+ 
+
+(13) It is better not to be breathed upon.  (Most all the time.)
+
+ 
+
+(14) Your Detect Monsters/Evil spell does not pick up all your opponents.
+
+ 
+
+(15) It is better not to be touched.
+
+
+
+(16) Always have some form of healing.
+
+
+
+(17) Good players have a way out. Excellent players have several.
+
+
+
+(18) Give yourself some form of long range attack.
+
+
+
+                        --- end of moria list ---
+
+
+
+(19)  Look at creatures A LOT, since you get "strength" information that tells you how close the critter is to death.  This is ESSENTIAL for Priests/Mages as well---since if you're running low on mana, you need to know if it's about to die, or you are. (with the 'monster health bar' option, this isn't as necessary anymore.)
+
+
+
+
+
+(20)	The Anti-<summoning|hound> corridor: Sick of Tiamat summoning billions of Great Wyrms of Whatever, or about to be assailed by book-burning Fire Hounds? If you can tunnel _fast_ (ie, stone-to-mud), build a corridor like this:
+
+
+
+							#################.#
+
+							#@#Z#Z#Z#Z#.#Z#.#.#
+
+							##Z#Z#Z#Z#.#Z#.#..#
+
+							#################.#
+
+
+
+		Since the only hound that can see you is the one you're face-to-face with, none of the others will breathe on you. Summoners can only create monsters on adjacent spaces to you, and if you're meleeing them, there will be no place to put them; thus their summoning power is useless. Note that the tunnel needn't actually be this long; three spaces deep will suffice.
+
+
+
+	Note that the following setup does *not* work:
+
+
+
+							#@##################
+
+							#.ZZZZZZZZZZZZZZZZZZ
+
+							####################
+
+	The two or three leftmost hounds can see you, and any of them can breath if they want to. If there's 20 Earth Hounds running at you, however, this setup is better than just standing in front of all of them, if you can't set up the anti-hound.
+
+
+
+	These corridors can be usefull if you're going against a powerful unique as well. Consider this setup:
+
+
+
+					#########################
+
+					#.#.#.#.#.#.#.#.##.#.#.##
+
+					#.................#.#.#.#
+
+				#####.............###########
+
+				........p...........#.#.#.#.##
+
+				##.##.............##.#.#.#.#@#
+
+				 #.##...............###########
+
+				 #.###.#...#.#.#.#.##
+
+					##.##.##.###.####
+
+                    ###.##.##.#.##
+
+                    ##.##.##.###.#
+
+                    ###.##.##.#.##
+
+                    ##.##.##.###.#
+
+                    ###.##.##.#.##
+
+                    ##############
+
+
+
+	Where p is Sauron and @ is a well-prepared Rogue who filled a room with anti-summoning corridors before letting Sauron 'in'. Appart from the negation of Sauron's summoning capabilities, the player has a *whole* bunch of escape corridors to Phase Door into when things go sour. Just Phase Door, bolt for a corridor, then rest up while Sauron tries in vain to go through the wall towards the player. As a bonus, Sauron won't cast a bunch of spells while you're waiting for him to get within melee range. (This is my preffered method for dealing with the Necromancer.)
+
+
+
+(21)	If you can spare it, rest for a hundred turns as soon as you go up/down a level. This way, if you run into trouble early and have to bail or hit a trap door, you at least won't lose the level feeling for the next level.
+
+
+
+(22)	Wands of Haste and Heal Monsters are more common than most others. Rather than waste an Identify scroll on one, fire a charge at some stationary creature. If it doesn't identify it, then it's something good; go ahead and ID it. If it was a haste monster wand/staff, then you're stuck with a creature that can go nowhere twice as fast. Yes, you use a charge; but heal/haste/darkness are likely as not the first wands/staffs you'll encounter, so it shouldn't matter. Anyway, a charge from a wand of Magic Missiles is cheaper than an ID scroll (ID it before you sell it, though, to get money for the charges.). I wouldn't try this with staves, however, until you know which is the staff of Summoning and maybe Darkness (They can ruin your day rather quick).
+
+
+
+(23)	There are no bad rods. Again, just zap something that can't fight back, or something that's fairly far away. If that doesn't ID it, it's a detection rod; just zap it again whenever the map panel changes until it self-ID's.
+
+
+
+(24)	I know this is going to sound silly, but dust your screen before playing. I've often mistaken specks of dust for mushrooms and such.
+
+
+
+(25)	Clear out all the rubble you find. I once found a Scroll of Aquirement and other nice things stuck under the stuff before. Remember, items under cleared rubble do _not_ add to the level feeling, as the item is generated when the rubble is cleared, not when the level is created. (BTW, rubble hides an object 10% of the time, regardless of dungeon level.)
+
+
+
+(26)	If you have access to newsgroups, check out rec.games.roguelike.angband. There are boatloads of experienced Angband addicts who will be happy to give you advice. Just post a character dump and watch them tips flood in.
+
+
+
+(27)	Don't ignore stealth! Being able to sneak up on a group of sleeping trolls (or a AMHD) makes them much easier, since you can likely rest between trolls and prepare well for thad dragon. I generally like having a stealth either wonderfully high or pitifully low, since average or good stealth tends to make the monsters wake up just as you're sneaking up on them, which is bad.
+
+
+
+(28)	Spellcasters: don't necessarily cast Identify every time you pick up an object unless your inventory is full. Remember that the game creates monsters within the dungeon while you rest to restore that mana. Try to wait until you're in the town or just before you head up/downstairs.
+
+
+
+						  <Item Wish List, by Class>
+
+
+
+All Classes: Everyone is probably going to want some potions of Cure Serious, not so much for the HP gain but because they can cure blindness and confusion (but not fear). Get a dozen.
+
+
+
+									<Warrior>
+
+
+
+	Standard Items: Since you can't use any spells, you're going to have to rely on scrolls and potions. Try to have at least a half dozen Phase Door scrols handy for quick getaway, and a Staff of Teleportation as well. By the way, before you start complaining about how much room all these scrolls and rods and things are taking, remember that all other classes have up to _nine_ spellbooks to lug around, as well as Restore Mana potions. (And even mages keep quite a few rods around...)
+
+
+
+	Black Market: Rings of Damage. Good ones. Remember, with multiple attacks, those damage plusses are added to each time you hit. Rings of slaying are nice too, but they're not as common, and their bonuses tend to pale next to the damage ring's boni.
+
+
+
+	Artifact: Sting. An extra two attacks per round is just wonderful. With a high enough Dexterity and Strength, a warrior can get up to *eight* attacks per round with Bilbo's standard issue. (Yes, Ringil's better, but it's _rare_.) Incidentally, you *can* enchant Sting, but the odds of doing so are half that of non-artifact weapons. This works out to 25% to get to +8, and 15% to get to +9. (See item.spo for more info.) It's not the best artifact for really deep levels, but it's great for the middle depths.
+
+
+
+								   <Rogue>
+
+
+
+	Standard Items: Until you are *very* high level, forget your teleportation spells -- your failure rate is just pathetic. Buy magic items about the same as a warrior would. A bow is *essential*: you're almost as skilled as a ranger with bows, so go ahead and use it.
+
+
+
+	Black Market Items: Boots and Cloaks of Stealth. A hobbit with +5 to stealth (easily achievable with both boots and cloaks) can go just about anywhere he/she wants to without waking up hardly *anything*, and that's a heck of a plus, especially around pits. Also, look for Picks or Shovels of Digging; with a +3 PoD, you can go throgh granite in less than a hundred turns, and with your Treasure Detection spell it can easily make up for the 1700 gold this often costs. (Actually, the Cloak and the Pick of Digging items are fairly common in the General Store, while the Boots are less commonly found in the Armoury but still perhaps worth the wait.).
+
+
+
+						<Touring the Dungeon and Living>
+
+
+
+									<Pits>
+
+									 ----
+
+
+
+	First of all, leave jelly pits alone. They're not worth much experience, give very few items, and have lots of mobile acidic creatures. Gelatinous Cubes can bring a (3,+9) pair of boots to (3,-2) awfully quick, and their abundance of (crummy) items really isn't worth the money you're gonna be wasting buying more scrolls of Enchant Armor and new clothes. If I see a jelly pit on a level, I usually just ditch the whole level altogether and head straight for the nearest up staircases. (Then of course Murphy's Laws step in and place said stairs right next to the opening of the pit. Grr.)
+
+
+
+	I've lost a *whole* bunch of characters to orc pits. However, I've also gone into a orc pit fight with a level 11 rogue and come out at level 15. I don't recommend this unless you have a 'nice' pit: the one I took on had only snagas, hill orcs, orc shamans, and two black orcs. Use your range weapons liberally: my rogue lost 30 bolts in the fight, and recovered/reused as many more.
+
+
+
+	If you take proper care, most pits aren't little trouble, and worth some major experience. The items they give can be nice too, simply because of the sheer numbers of objects you'll be getting. (the first artifacts I get in a game are often gleamed from orc pits). If at all posible, attack the pit from the opposite side of the door if you can find it. Also have some form of teleportation ready, just in case. This *DOESN'T* mean Phase Door; it's very likely you'll blink into the pit itself, meaning almost certain death for a presumably already troubled character. If you get really lucky, you won't have let out too many orcs before being 'in position', and then almost any character can trash the whole lot of them (just let a few of them out at a time, of course.)
+
+
+
+	Troll and giant pits are about the same; indeed, they may even be easier, since the character by then will be better prepared for them. I don't recommend going against Greater Titans until you are very high level though, because they can do some massive damage. (Confusion resistance is necessary for them.)
+
+
+
+									<Bows>
+
+									 ----
+
+
+
+	Consider this: a twentysomething level mage can launch a 7d4 Magic Missile, for 4 to 28 damage. With a (+9,+9) Light Crossbow, *anyone* can do 30 to 42 damage with unenchanted bolts.
+
+
+
+	Everyone but mages should buy a range weapon. With the addition of the bow slot some time ago, no one has an excuse anymore: you all need one. Non-Rangers should purchase a crossbow if they can afford it; Rangers should buy a Long Bow, because they get extra shots with them later on. Then start enchanting the heck out of it. Those plusses to damage get multiplied in with the x3, for some jolly good damage. Don't neglect the to-hit portion, either: those plusses don't do any good if your arrow doesn't hit. Enchanting ammunition has the same effect; however, since ammunition gets depleted, and the chance of successful enchantment drops with the number of arrows/bolts you're trying to enchant, it may not be worth it until much later on.  Enenchanted ammo doesn't stack well like normal ones, either.
+
+
+
+	If your enemy is fleeing and you can spare the time, wait until the enemy is at least three squares away before firing at it. Missiles have twice the chance of breakage if it hits a creature within a three-square radius. Besides, it's rather amusing watching the little creatures flee for a bit before you cut them down. (Hey, who you calling sick and twisted? >:] ) You don't really need to be totally religeous about this though; if you need to kill it quick (breath weapon types, for instance), do it. I usually find ammo faster than I waste it. Also, if the monster you're shooting at drops a *whole* bunch of treasure (Hydras, Solars, etc.), you may want to shoot it within the three-square range, hoping that the ammo will break and leave an extra space free for dropped treasure.
+
+
+
+							<Miscellaneous Mischief>
+
+							 ======================
+
+
+
+							  <Famous Last Quotes>
+
+							   ------------------
+
+
+
+	Various players that escaped the Pits of Angband came back with stories of monsters discussing the other adventurers they killed. Here is a list of some common 'last quotes' of various players. Don't make their mistakes.
+
+
+
+"I just got Phase Door, I can use that. I don't need any Phase Door Scrolls." -- 7th level Rogue
+
+
+
+"Hrm, I'm deep enough so I don't need poison resistance anymore; the one point per turn drain ain't that great. I'll just swap that Ring of Pois. Res. for this here Ring of Damage...Oh look, a drolem!" -- 40th level priest
+
+
+
+"Well, _eventually_ Phase Door will get me out of this room into a corridor for safety." -- 26th level mage
+
+
+
+"I'll just zap these Cold Hounds with this Rod of Fire Balls I just found...hey, whaddya mean I failed to use it properly?!?" -- 13th level Warrior with 6 Intelligence
+
+
+
+"I've found most of the bad potions; I'll just quaff this Brown one I found real quick since I don't want to waste an ID scroll on it. Hrm, a feeling of dea--oops." -- 16th level Ranger
+
+
+
+					  <Mashing Morgy: Finishing Off Angband>
+
+
+
+	Well, you've worked your way down through one hundred levels of torture, gained fame, fortune, and Rings of Speed, and have just sent Sauron off to the afterlife. Ready for Morgoth, but scared shiftless? Here's some techniques for knocking of Mr. P-body.
+
+
+
+	First of all, don't even think of going to 5000' without _lots_ of healing power. I like having about a dozen Healing and a half dozen each of *Healing* and Life. Spellcasters will want a half dozen Restore Mana potions; priests will want more if they want to cast Holy Word for healing.
+
+
+
+	A single mana storm of Morgoth's can do up to six hundred points of damage, with no way to resist the damage. *ALWAYS* heal up when your HP goes below this, for otherwise you are playing a risky game of Russian Roulette.
+
+
+
+	Morgoth comes screaming towards you at speed +30. Be able to haste up to this speed before confronting him. Rings of Speed (+10) are fairly common down below 4000', and with similar Boots of Speed and some Haste Self potions/spells, you'll be a bit faster than him.
+
+
+
+	One of Morgoth's attacks is to summon unique monsters you haven't killed yet. To prevent this, kill all the really deep uniques before diving down to 5000'. If he can't summon uniques, he'll just (!) call up some greater undead. (Then again, maybe you can leave Smeagol alive and have fun as Morgoth summons the poor wretch up.)
+
+
+
+	There are a few class-specific methods of dealing with ol' Melkor. Here are the ones I know:
+
+
+
+***	GoI (mages): For mages, killing Morgoth is a cakewalk. Just cast Globe of Invulnerablility and he can't touch you. Then melee him as you like. There's not much Morgoth can do to prevent this, nor the billions of monsters he can summon up; you're invulnerable, remember? (For the record,  GoI is under some considerable scrutiny for this reason, and will probably be reworked in versions after 2.8.1.) Just remember to pay *close* attention to the messages that pop up, so you can recast GoI when it runs out!
+
+
+
+***	The Sea of Runes (Priests and Paladins): 
+
+
+
+***	The Hail of Death (Anyone, Rangers in particular): With a missile weapon of extra shots and some appropriate ammuntition, You can do some _massive_ damage to Morgoth. With two shots per round from a Heavy Crossbow of Extra Shots (x4) (+x,+20) and Seeker Bolts of Slay Evil (4d5) (+10,+10), you do
+
+
+
+Damage=[(base)+(BowDam)+(BoltDam)]*(Number of shots)*(slay bonus)*(bow bonus)
+
+      =[10 + 20 + 10] * 2 * 2 * 4
+
+      = 640 damage.
+
+
+
+	By level 50, Rangers get two extra shots per round with Long Bows. With similarly enchanted and named equipment, Rangers can get
+
+
+
+	[8 + 20 + 10] * 4 * 2 * 3 = 912 damage.
+
+
+
+	This adds up _fast_. Since Morgoth has 17100 hit points, Rangers can  theoretically kill him in 19 rounds, while others require 27. Note that this eats up arrows or bolts _fast_. Have about 3 slots of 99 Slay Evil Seeker bolts or Arrows (difficult, but possible).
+
+
+
+	(Note that these numbers are averages. Actual values range from 528 to 800 and from 816 to 1104 for the above cases respectively. Also, it is entirely possible to get even better enchantments for bows and crossbows.)
+
+
+
+					  <Angband Ethics: Cheating the System>
+
+					   ===================================
+
+
+
+In this document, I have alluded to a couple tatics that may be considered by some to be 'cheating'. I'll address these here.
+
+
+
+(1)		Savefile backups. As you know, when you die in Angband, it's over. Your savefile is reduced to just your name and the information about monsters you've gathered. However, probably the most common cheat in Angband is making a copy of your save file and 'bringing it back' when your character purchases the farm. (On some other systems, you can 'abort' the game before it marks up the record.) This, of course, defeats the purpose of the 'one life, one chance' nature of Roguelike Games. However, nearly everyone who plays does so, at least at the start. For the record, my first character to beat Angband used a _whole_ lot of savefile abuse, for which I'm not proud of. That said, most people, after doing so, 'clean up' afterwards, reducing or eliminating their use of savefiles.
+
+
+
+	Other methods of cheating death are available on various systems, from restarting the computer to killing the Angband application without letting it save. This all has the same effect.
+
+
+
+	If you are on a multiuser system, this is somewhat evil, because this screws up the scoreboard for everyone, and will brand you as Naughty by everyone on the system, not to mention stain your kharma.
+
+
+
+	If you do wish to use backups so you can 'cheat death,' consider just setting the 'cheat death' option. It's easier than dealing with backups, and you can have a cleaner concious as you learn the game. You also won't mess up the scoreboard, so that when you are ready to go without a net, your scores will have some merit.
+
+
+
+(2)		Stair and Store Scumming. This is another common way to cheat. Level feelings are generated if you were on the previous dungeon level for at least one hundred turns. A popular tatic is to go down a level, then if they get a feeling they don't like, they just wait and go back up, then repeat. In a similar manner, stores restock their wares every thousand turns if the player doesn't show up, so some players will wait at 50' for a while waiting for better items there. In fact, the First Edition to this guide gave at least a passing reference to stair scumming for starting characters to get a shovel if the General Store didn't stock one at first.
+
+
+
+	The advent of the autoscummer helped alleviate some of this problem. It also raised some more questions. During the short time that I had access to rec.games.roguelike.angband, there was a rather lengthy discussion about the use of the autoscummer. Note that in the beginning, the autoscummer can often make dungeon levels with a fairly out of depth item or two embedded within. In later levels, however, level feelngs are more and more caused by out of depth monsters, making for wildly difficult levels. Personally, I am in favor of making use of the autoscummer a 'startup' option, like preserve and maximize modes, so that if people use it to get nice weapons at the start, they'll have to pay for it with some really nasty stuff later on. Note also that autoscummed levels tend to have a _lower_ chance of containing artifacts, because artifacts don't add that much to the level feeling of a dungeon, so some levels containing just an artifact can be passed off by the autoscummer as boring. See 'dungeon.spo' for information, then decide for yourself.
+
+
+
+	Store scumming is another matter, however. Let's face it: when your warrior has no Scrolls of Recall and the Alchemy Shop's not stocking any, no one in their right mind is going to have the honesty to go down back to 4000 odd feet by using staircases. (Scumming for black market items, however, isn't that nice.)
+
+
+
+	Somewhat related to store scumming is town scumming, where a player goes around killing things in the town to build up money to buy some nice object. If you run out of townies, you take the down staircases and go right back up again.
+
+
+
+(3)		Changing the Display Features. On some systems (notably the Macintosh), hitting '&' puts you into a screen that allows you to change the colours and characters used to represent different characteristics of the game. For example, I have used this to change things such as potions, books, and scrolls to characters in the upper half of the Macontish's character set, making them look more like what they're supposed to. (email me if you'd like a copy of this set; it makes the screen quite a bit more interesting, although it confuses the borg.)
+
+
+
+	The problem comes in that this allows you to change, for instance, all the 'bad' rings so as to look different from the 'good' rings. Or, you can change the character for lurkers or creeping coins to make them distinct, which of course they shouldn't.
+
+
+
+	This cheat isn't nearly as powerful as the previous ones for two reasons: first, unidentified rings are still indistinguishable from others (although you can hack the lists to get around this). Second, the option "Extend the power of the 'look' command" allows you to look at items even when you can't actually 'see' them (it's great; set it). So, if you waltz up to a greater vault and cast Detect Objects, you can see where that Ring of Speed is *without* going into the vault, if you've previously ID'ed one. About the only use this cheat has, then, is distinguishing some monsters, and that's not too much of an advantage.
+
+
+
+(4)		Hacking the Lists. In the "edit" directory, there are several text files that contain all the information on the 'features' in the game. I'll list these real quick:
+
+
+
+	File		Contains
+
+	a_info.txt	Artifacts
+
+	e_info.txt	Ego-Items
+
+	f_info.txt	Terrain features (walls, doors, traps, etc)
+
+	k_info.txt	Normal Items (anything you can pick up)
+
+	r_info.txt	Monsters, including Uniques
+
+	v_info.txt	Maps for the vaults
+
+
+
+	Someone who doesn't get enough adventure (even _after_ playing Angband) can edit these files and throw away the corresponding .raw file in the 'data' directory (or trash all of them to be safe), and Angband will automatically make new data files with this new information. Somewhat related to this is to change the characters used to represent various objects to much the same effect as cheat #3 above.
+
+
+
+	As you might guess, this is *dangerous*. Old savefiles may not be compatible with this version, and you could end up crashing your computer. Be _sure_ to make a copy of the old info files; better yet, copy the whole Angband directory before doing this. Also note that there is NO documentation as to how the format of these files is supposed to be, and you'll have to figure it out from the lists themselves and the spoilers. Even the source doesn't give a real 'template'. On the Macintosh, opening save files by double-clicking can open either copy of Angband; I suggest making an alias of the Application and using Drag & Drop to open save files.
+
+
+
+	Now, the ethical considerations here should be obvious. First of all, as soon as you do this, you are no longer playing Angband, but some variant you made up. *PLEASE* don't try to pass it off as Angband. Edit the 'news.txt' file to reflect that you have changed that version of Angband, and perhaps add a section in the help files describing what you've done. But please, do NOT give a victory post saying you've just beaten the 'true' Angband without telling that you quietly made the One Ring a Level 1/Rarity 1 artifact with no curse or Experience draining! That said, these "variants" can be kind of fun. Changing the descriptions of some of the monsters is pretty safe, for example, so just changing 'Farmer Maggot' to 'College Councelor Smith' can be somewhat amusing. I myself am working up a variant involving folks from my college and community, although odds are the joke will be old well before I finish it.
+
+
+
+	Hacking the lists can be a rather complicated task, and if I get off my lazy butt I might write something on it later. Don't count on it though.
+
+
+
+								<Acknowledgements>
+
+	This document was not a solo project. There were quite a few who lent tips and tricks to this guide, inadvertantly or not.
+
+
+
+					<Appendix A: Blows Per Round Table>
+
+					 =================================
+
+
+
+	This table gives the number of hits per round a character of that race and class with maximum Strength and Dexterity can get with a three pound weapon (like a whip).
+
+
+
+	The first row gives the minimum weight by that class that will factor into the blow/round equation. For example, a mage weilding a weapon less then four pounds will be treated the same as if he/she were weilding a four pound weapon.
+
+
+
+	Note that these values are my calculations, and although I'm pretty sure these are right, a few might be in error. Lemme know if any are.
+
+
+
+	An X in the table means that the race/class combination is not allowed.
+
+
+
+                Warrior__Mage_____Priest____Rogue___Ranger___Paladin 
+
+  (Min. Weight) 3.0      4.0        3.5      3.0      3.5      3.0
+
+  Human          4        1          1        2        2        2
+
+  Half-Elf       3        1          1        2        2        2
+
+  Elf            3        1          1        2        2        X
+
+  Hobbit         3        1          X        1        X        X
+
+  Gnome          3        1          1        2        2        X
+
+  Dwarf          3        1          1        X        X        X
+
+  Half-Orc       4        1          1        2        X        X
+
+  Half-Troll     3        1          2        X        X        3
+
+  Dunadan        4        1          1        2        2        3
+
+  High-Elf       4        1          1        3        2        X
+
+
+
+     <Appendix B: Maximum Statistics by Class (Maximize Mode Only)>
+
+     ==============================================================
+
+
+
+	When maximize mode is not in use, all stats can reach a maximum of 18/100, not including equipment bonuses. When it is, the maximum of a particular stat is determined by the plusses to a stat by the race and class, _not_ by the initial stat rolled. These tables outline those stats here. (Pretend there's an '18/' in front of each stat.) Note that in both modes, magical bonuses from equipment can increase a character's stats beyond these limits, to an absolute maximum of 18/220 (represented by 18/***), after which further increases don't do squat. Also, the potential maximum stat of a character is independant of the starting stat of that character; a high elf warrior can get a 18/110 Intelligence whether his/her starting Int was 4 or 18.
+
+
+
+**Warrior** Str     Int     Wis     Dex     Con     Chr
+
+Human       150      80      80     120     120      90
+
+Half-Elf    140      90      80     130     110     100
+
+Elf         140     100      90     130     100     100
+
+Hobbit      130     100      90     150     140     100
+
+Gnome       140     100      80     140     130      80
+
+Dwarf       170      50     100     100     140      70
+
+Half-Orc    170      70      80     120     130      60
+
+Half-Troll  190      40      60      80     140      40
+
+Dunadan     160     100     100     140     150     110
+
+High-Elf    160     110      70     150     130     140
+
+
+
+**Mage**    Str     Int     Wis     Dex     Con     Chr
+
+Human        50     130     100     110      80     110
+
+Half-Elf     40     140     100     110      70     120
+
+Elf          40     150     110     120      60     120
+
+Hobbit       30     150     110     140     100     120
+
+Gnome        40     150     100     130      90      90
+
+Dunadan      60     150     120     130     110     130
+
+High-Elf     60     160      90     140      90     160
+
+
+
+**Priest**  Str     Int     Wis     Dex     Con     Chr
+
+Human        90      70     130      90     100     120
+
+Half-Elf     80      80     130     100      90     130
+
+Elf          80      90     140     100      80     130
+
+Gnome        80      90     130     110     110     100
+
+Dwarf       110      40     140      70     120      90
+
+Half-Orc    110      60     130      90     110      80
+
+Half-Troll  130      30     110      50     120      60
+
+Dunadan     100      90     150     110     130     140
+
+High-Elf    100     100     120     120     110     170
+
+
+
+**Rogue**   Str     Int     Wis     Dex     Con     Chr
+
+Human       120     110      80     130     110      90
+
+Half-Elf    110     120      80     140     100     100
+
+Elf         110     130      90     140      90     100
+
+Hobbit      100     130      90     160     130     100
+
+Gnome       110     130      80     150     120      70
+
+Half-Orc    140     100      60     130     120      50
+
+Dunadan     130     130     100     150     140     110
+
+High-Elf    130     140      70     160     120     140
+
+
+
+**Ranger**  Str     Int     Wis     Dex     Con     Chr
+
+Human       120     120     100     110     110     110
+
+Half-Elf    110     130     100     120      90     120
+
+Elf         110     140     110     120      80     120
+
+Dunadan     130     140     120     130     140     130
+
+High-Elf    130     150      90     140     120     160
+
+
+
+**Paladin** Str     Int     Wis     Dex     Con     Chr
+
+Human       130      70     110     100     120     120
+
+Half-Elf    120      80     110     100     110     130
+
+Dunadan     140      90     130     120     150     140
+
+
+
+Appendix C: Regeneration Rates
+
+Constitution	Bonus
+
+ 3-13			0
+
+14-17			1
+
+18-18/49		2
+
+18/50-18/99		3
+
+18/100-18/119	4
+
+18/120-18/129	5
+
+18/130-18/149	6
+
+18/150-18/169	7
+
+18/170-18/199	8
+
+18/200+			9
+
+
+
+Appendix D: Pseudo-ID Strengths
+
+	Occasionally, your character will get a "feeling" about a piece of armor or weapon. The item will also be inscribed with this feeling.
+
+
+
+  Feeling	Meaning
+
+  Special	Non-Cursed artifact
+
+Excellent	Non-Cursed Ego-Item (Ex: Robe of Permanance)
+
+     Good	Normal armor/weapon with small magical bonus (to +9)
+
+  Average	Normal armor/weapon with no bonus (+0,+0)
+
+   Cursed	Normal armor/weapon with small magical penalty (to -9)
+
+Worthless	Cursed Ego-Item (Ex: Weapon of Morgul)
+
+ Terrible	Cursed Artifact, usually bad (but not always!)
+
+ 
+
+ 	Note that only Warriors, Rogues and Paladins get all these feelings. Mages, Priests and Rangers get only two messages: "good" (for good, excellent and special) and "cursed" (for cursed, worthless and terrible). These classes will _never_ get a feeling from an average object.
+
+
+
+	The following table gives the probability per character turn that the character will trigger feelings for objects. For example,  A 20th level unhasted Paladin has about a 1 in 182 chance per turn of triggering feelings for objects he/she is carrying. This is also the average number of turns before the feelings are triggered. Observe that this will increase for characters who are hasted; pseudo-id is based on 'absolute' time, not on 'player' time.
+
+
+
+		When the feeling is triggered, all items in the player's equipment are given feelings, and items in his/her inventory have an 20% chance each of being pseudo-ID'd as well.
+
+
+
+Lvl    Warrior       Mage     Priest      Rogue     Ranger    Paladin
+
+ 1      219.51   40000.00     243.90     487.80   20000.00    1951.22
+
+ 5      138.46   24000.00     153.85     307.69   12000.00    1230.77
+
+10       64.28   16000.00      71.42     142.86    8000.00     571.43
+
+15       33.96   12000.00      37.74      75.47    6000.00     301.89
+
+20       20.45    9600.00      22.72      45.45    4800.00     181.82
+
+25       13.53    8000.00      15.04      30.08    4000.00     120.30
+
+30        9.57    6857.14      10.64      21.28    3428.57      85.11
+
+35        7.11    6000.00       7.91      15.81    3000.00      63.24
+
+40        5.49    5333.00       6.10      12.19    2666.67      48.78
+
+45        4.36    4800.00       4.84       9.69    2400.00      38.74
+
+50        3.54    4363.63       3.94       7.87    2181.82      31.50
+
