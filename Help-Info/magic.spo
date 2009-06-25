@@ -1,0 +1,1395 @@
+MAGIC.SPO, version 3.0.5, for Angband 3.0.5 (all systems)
+Release Date     : June 3, 2005
+Author           : Hugo Kornelis (angband@hugo.isdit.com)
+
+Based on previous versions of MAGIC.SPO, author and release date
+unknown.
+
+
+This spoiler describes in detail how spells (and prayers) are gained,
+used, and lost.  It also describes how intelligence or wisdom and
+level affect the number of spells available, the chance of failure,
+and the maximum number of mana points you have.
+
+This last section of this spoiler describes the effects of every spell
+and prayer.  It also discloses in what book the spell may be found,
+what classes are able to use the spell, minimum level needed to use
+the spell, mana cost, and base chance of spell failure.
+
+A brief summary of the last section, listing only the books and what
+spells they contain, can be found in BOOKS.SPO.
+
+Previous versions of this spoiler file also included the effects of
+every staff, wand, and rod.  These can now be found in OBJ-LONG.SPO
+and have therefore been removed from this spoiler file
+
+Please notify the author of any errors (however minor) that you find.
+Also, it is my intention to provide complete information rather than
+easy-to-understand information, so this spoiler is necessarily
+verbose.  Suggestions to improve the format of this spoiler are
+welcome (especially if they help make this spoiler easier to read).
+
+This spoiler was written for Angband 3.0.5.  If you want only the most
+accurate information for another version of Angband, you may wish to
+acquire another version of this spoiler.
+
+
+NOTES ON NOTATION
+-----------------
+
+The notation "XdY" indicates a number obtained by rolling an Y-sided
+die X times.  (Thus 4d6 indicates a number from 4 to 24).
+
+Unless stated otherwise, "level" always refers to the character level.
+In the descriptions of learning and using spells, the term "spell"
+applies to both magic spells and holy prayers.
+
+
+LEARNING SPELLS
+---------------
+
+Before a spell can be used, it must be learned.  The number of spells
+you can learn depends on your level and your intelligence (for mages,
+rangers, and rogues) or wisdom (for priests and paladins), as shown in
+table 1.
+
+Rangers start gaining spells at level 3, rogues at level 5.  Fractions
+are rounded to the nearest whole number.  Example: a 9th level ranger
+with 18/73 intelligence has a maximum of 12 spells (from 3 up to 9 is
+7 levels, multiplied by 1.7 = 11.9, rounded up to 12).
+
+The number of spells you can learn will never exceed the number of
+spells available to your class.  Some spells in the spellbooks are not
+available to all classes.  These are marked (illegible) when browsing
+the spellbook.
+
+When the number of spells you can learn increases, a message is shown
+("You can learn xxx more spell(s)/prayer(s)") and the word "Study" is
+shown on the status bar.  No message is given if the status "Study"
+was already activated.  You can use the "gain" command to learn a new
+spell, provided you are not blind or confused and some light is
+available.
+
+For mages, rangers, and rogues, the game lets you choose which magic
+spell to learn.  The chosen spell must meet the following criteria:
+1. The spell must be available to your class (ie not "illegible"),
+2. Your level must be equal to or higher than the minimum level of the
+   spell selected (ie not "difficult"), and
+3. You must not already know the spell.
+
+For priests and paladins, you can only choose a book to gain a prayer
+from.  The game will then randomly choose a holy prayer from that
+book, governed by the same criteria as for magic spell above.
+
+If your intelligence, wisdom, or level decreases, you may forget some
+of the spells you have learned earlier.  First, you will forget all
+spells with a minimum level higher than your new character level.
+Next, the number of spells you may know is determined from your new
+level and your new intelligence or wisdom; if you still know too many
+spells, you will forget as many spells as needed to lower the number
+of spells known to the new maximum.  The order in which spells will be
+forgotten is the reverse of the order in which they were learned.  A
+forgotten spell can not be used until it's remembered.
+
+If the number of spells you can learn increases after you have
+forgotten one or more spells, then you will start remembering those
+spells again.  Spells will come back to you in the same order in which
+they were originally learned.  You won't be able to learn new spells
+until there are no more previously forgotten spells to remember.
+(Note that there is one situation that allows you to learn new spells
+before all previously forgotten spells are remembered: if you lose a
+level, but increase your intelligence or wisdom, you won't be able to
+remember the spells that are still above your level, but you may learn
+other spells).
+
+
+MANA / SPELL POINTS
+-------------------
+
+Mana is the magical energy a spellcaster has.  The amounts of mana is
+measured in spell points (SP).  For spellcasters, both the maximum and
+the current number of spell points are shown below the maximum and
+current hit points.
+
+The maximum number of spell points you may have is determined by level
+and intelligence (for mages, rangers, and rogues) or wisdom (for
+priests and paladins), as shown in table 1.
+
+Rangers start gaining mana at level 3, rogues at level 5.  Fractions
+are rounded down.  If you have at least 0.5 spell point (before
+rounding), you get one spell point bonus.  Example: a 9th level ranger
+with 18/73 intelligence has a maximum of 18 spell points (from 3 up to
+9 is 7 levels, multiplied by 2.5 = 17.5, rounded down to 17 plus 1
+bonus = 18).
+
+Mages, rangers, and rogues may suffer a penalty to their maximum
+number of spell points when they wear gloves.  Unless the gloves give
+you Free Action or a bonus to dexterity, the maximum number of spell
+points is reduced by 25%.
+
+All spellcasters may suffer a penalty to their maximum number of spell
+points from heavy armor.  The maximal combined weight of all armor
+(equipment slots "g" through "l") for each class is given in table 2.
+Exceeding the limit results in a penalty of 1 spell point per pound of
+extra weight.
+
+Everytime you attempt to use a spell, whether successful or not, the
+mana required for that spell is subtracted from your current mana.  If
+your current mana is insufficient, you may still attempt to use the
+spell but the failure chance will increase and you risk damage to your
+constitution, as described below.  The mana required for each spell is
+given in the spell descriptions at the end of this spoiler.
+
+When your current number of spell points is below the maximum, it will
+slowly restore.  To determine the amount of spell points regenerated
+each turn, first determine the regeneration percentage.  This is
+usually 0.3%, but lack of food will lower this to 0.15% (weak), 0.05%
+(fainting) or even to 0% (starving).  If you have regeneration, the
+regeneration percentage is doubled.  The regeneration percentage is
+also doubled when you are resting or searching.
+
+After determining the regeneration percentage, the actual amount of
+spell points regenerated per turn follows from this calculation:
+
+ SP regenerated = (Max SP * regeneration%) + 0.008
+
+Note: Fractions of spell points are kept, but never shown.
+
+Example: a 9th level ranger with 18/73 intelligence has a maximum of
+18 spell points.  If she is resting while being well-fed and wearing
+an Amulet of Regeneration, the regeneration percentage is 1.2% (0.3%
+for being well-fed, doubled for regeneration and doubled again for
+resting).  She will restore (18 * 1.2%) + 0.008 or 0.224 spell points
+per turn.
+
+
+USING SPELLS
+------------
+
+In order to use a spell, issue either the "cast" or the "pray"
+command.  You may not be blind or confused and some light has to be
+available.
+
+You can only use spells from spellbooks that are available to you
+(either in your inventory or on the floor) and that you have already
+learned.  Spells that you have forgotten can't be used until they are
+remembered again.
+
+If you try to use a spell that requires more mana than you currently
+have, you are asked to confirm if you really want to try that spell.
+Note that any attempt to use a spell that costs more mana than you
+have can damage your constitution!  See below for details.
+
+Once you have selected which spell to use, the game will determine if
+the spell is succesful or not.  The base chance of failure for each
+spell is given in the spell descriptions at the end of this spoiler
+(marked %Fail).  This chance is reduced by 3 percent for each level
+above the minimum level required for your class to use that spell.
+The chance of failure is further reduced by an amount based on
+intelligence (for mages, rangers, and rogues) or wisdom (for priests
+and paladins), as shown in table 1.  If you have insufficient mana,
+the chance of failure increases by 5% for every spell point you are
+short of the amount needed.  Finally, if you are a priest wielding an
+edged weapon, another 25% is added to the chance of failure, unless
+the weapon is blessed.
+
+After correcting the chance of failure for level, intelligence or
+wisdom, lack of mana, and edged weapon use for priests, it is checked
+against the minimum chance of spell failure, which is dependant on
+intelligence (for mages, rangers, and rogues) or wisdom (for priests
+and paladins), as shown in table 1.
+
+After applying the minimum chance of spell failure, the stun condition
+is checked.  Attempting to use spells while stunned will boost the
+chance of failure by 15% when stunned or by 25% when heavily stunned.
+
+If, after all these calculations, the failure chance exceeds 95%, it
+is lowered to 95%.
+
+Example: a 9th level ranger with 18/73 intelligence tries to cast a
+Stinking Cloud.  For rangers, this spell has mimimum level 7, base
+chance of failure of 40% and the mana needed is 5 SP.  Unfortunately,
+the current mana of this ranger is a mere 3 SP.  Her chance of failure
+is determined as follows: base chance (40%) minus 3 times the number
+of levels above minimum level for the spell ((9-7) * 3 = 6%) minus
+adjustment for 18/73 INT (12%) plus 5 times the amount of SP she is
+short ((5-3) * 5 = 10%): 40 - 6 - 12 + 10 = 32%.  Since the minimum
+chance of failure for 18/73 INT is 5% (for rangers - the 4% chance
+applies to mages and priests only), the calculated value of 32% will
+be used to determine if the spell of Stinking Cloud succeeds.
+
+
+After calculating the chance of failure, Angband checks if you succeed
+in using the spell.  If the spell fails, a message is given to notify
+you of the failure.  If the spell succeeds, the effects described in
+the spell descriptions at the end of this spoiler take place.  If this
+is the first time you succeed in using the spell, you will gain an
+amount of experience equal to the experience points for the spell
+multiplied by the minimum level required for the spell.
+
+Regardless of success or failure, your mana will be reduced by the
+amount needed to cast the spell, but never below zero.  If a spell was
+cast with insufficient mana, you will always faint (even if you have
+Free Action) and be paralyzed for 1d(5*short+1) turns (where short is
+the number of spell points you were short.  There is also a 3 in 8
+chance that your current constitution is reduced and a 1 in 8 chance
+that both your current and maximum constitution are reduced.  In both
+cases, the amount of constitution lost is from 4 to 12.5%.
+
+
+TABLES
+------
+
+For easier reference, all modifiers used in the calculations above are
+gathered together in two tables.  The first table lists all effects of
+intelligence or wisdom: number of spells per level, amount of mana per
+level, adjustment to chance of spell failure, and minimum chance of
+spell failure.  The second table lists all class-dependent issues:
+minimum level for gaining and using spells, maximum armor weight,
+minimum chance of spell failure, and primary statistic (intelligence
+or wisdom).
+
+Table 1: Effect of intelligence or wisdom on spells and prayers.
+
+ INT or WIS     Spells/level  Mana/level  Fail% adj.  Minimum fail% *)
+ -------------  ------------  ----------  ----------  -------------
+  3    - 3      no spells     no mana     + 5%        99%
+  4    - 4      no spells     0.1         + 4%        99%
+  5    - 5      0.1           0.2         + 3%        99%
+  6    - 6      0.2           0.3         + 3%        99%
+  7    - 7      0.3           0.4         + 2%        99%
+  8    - 8      0.4           0.5         + 1%        50%
+  9    - 9      0.5           0.6           0%        30%
+ 10    -10      0.6           0.7           0%        20%
+ 11    -11      0.7           0.8           0%        15%
+ 12    -12      0.8           0.9           0%        12%
+ 13    -13      0.85          1             0%        11%
+ 14    -14      0.9           1.1         - 1%        10%
+ 15    -15      0.95          1.2         - 2%         9%
+ 16    -16      1             1.3         - 3%         8%
+ 17    -17      1.05          1.4         - 4%         7%
+ 18/00 -18/09   1.1           1.5         - 5%         6%
+ 18/10 -18/19   1.15          1.6         - 6%         6%
+ 18/20 -18/29   1.2           1.7         - 7%         5%
+ 18/30 -18/39   1.3           1.8         - 8%         5%
+ 18/40 -18/49   1.4           1.9         - 9%         5%
+ 18/50 -18/59   1.5           2           -10%         4% / 5%
+ 18/60 -18/69   1.6           2.25        -11%         4% / 5%
+ 18/70 -18/79   1.7           2.5         -12%         4% / 5%
+ 18/80 -18/89   1.8           3           -15%         4% / 5%
+ 18/90 -18/99   1.9           3.5         -18%         3% / 5%
+ 18/100-18/109  2             4           -21%         3% / 5%
+ 18/110-18/119  2.1           4.5         -24%         2% / 5%
+ 18/120-18/129  2.2           5           -27%         2% / 5%
+ 18/130-18/139  2.3           5.5         -30%         2% / 5%
+ 18/140-18/149  2.4           6           -33%         2% / 5%
+ 18/150-18/159  2.5           6.5         -36%         1% / 5%
+ 18/160-18/169  2.5           7           -39%         1% / 5%
+ 18/170-18/179  2.5           7.5         -42%         1% / 5%
+ 18/180-18/189  2.5           8           -45%         1% / 5%
+ 18/190-18/199  2.5           8           -48%         1% / 5%
+ 18/200-18/209  2.5           8           -51%         0% / 5%
+ 18/210-18/219  2.5           8           -54%         0% / 5%
+ 18/220+        2.5           8           -57%         0% / 5%
+ *) Note: For rangers, rogues, and paladins, the minimum fail% will
+          never be less than 5%.
+
+
+Table 2: Effect of class on spells and prayers
+
+ Class    Min. level  Max. armor weight  Minimum fail%  Primary stat
+ -------  ----------  -----------------  -------------  ------------
+ Mage     1           300 pounds          0%            Intelligence
+ Paladin  1           400 pounds          5%            Wisdom
+ Priest   1           350 pounds          0%            Wisdom
+ Ranger   3           400 pounds          5%            Intelligence
+ Rogue    5           350 pounds          5%            Intelligence
+
+
+STANDARD CHANCE TO RESIST
+-------------------------
+
+The more powerful monsters are less likely to be affected by many of
+the effects of spells.  The standard chance to resist an effect is
+based on the monster's monster level and your character level:
+
+* Monster levels up to and including 11 have no chance to resist;
+* Monster levels from 12 up to and including your character level
+  resist if 1d(character level -10) < monster level - 10;
+* Monster levels > your character level always resist.
+
+In the spell descriptions below, "standard chance to resist" is used
+to indicate that this chance applies to the particular effect.
+
+
+BOOKS OF MAGIC SPELLS
+---------------------
+
+This section of the spoiler describes the effects of every magic
+spell.  A brief summary of all magic spells with only level, mana and
+fail% may be found in BOOKS.SPO.
+
+Many spells will produce some kind of ball.  For all ball effects,
+damage is reduced by range.  The amount of damage at the center is
+listed in the descriptions.  This damage is reduced by 50% at range 1,
+by 66% at range 2, by 75% at range 3 (for large balls), and by 80% at
+range 4 (for giant balls).
+
+How monster resistances or sensitivities reduce or increase the damage
+of various spell effects will be described in the spoiler file
+MON-DAM.SPO.
+
+
+Book 1: Magic for Beginners
+
+(a) Magic Missile
+    Mage   : Level  1, Mana  1, %Fail 22, Exp   4
+    Ranger : Level  3, Mana  1, %Fail 30, Exp   1
+    Rogue  : n/a
+  Fires a magic missile that inflicts (3+(level-1)/5)d4 points of
+  damage, with a chance of getting a beam that inflicts the same
+  damage on each monster caught in it equal to (level-10)% for a mage,
+  or (level/2-10)% for a rogue or ranger.
+
+(b) Detect Monsters
+    Mage   : Level  1, Mana  1, %Fail 23, Exp   4
+    Ranger : Level  3, Mana  2, %Fail 35, Exp   2
+    Rogue  : Level  5, Mana  1, %Fail 50, Exp   1
+  Detects all non-invisible monsters on the current screen.
+  (The area of effect depends on your screen size).
+
+(c) Phase Door
+    Mage   : Level  1, Mana  2, %Fail 24, Exp   4
+    Ranger : Level  3, Mana  2, %Fail 35, Exp   2
+    Rogue  : Level  7, Mana  2, %Fail 55, Exp   1
+  Teleports you randomly up to 10 squares away.
+
+(d) Light Area
+    Mage   : Level  1, Mana  2, %Fail 26, Exp   4
+    Ranger : Level  5, Mana  3, %Fail 35, Exp   1
+    Rogue  : Level  9, Mana  3, %Fail 60, Exp   1
+  Lights up an area with a radius of level/10+1 squares around you and
+  inflicts 2d(level/2) points of damage on each light-sensitive
+  monster within the radius of the spell.  If you are in a room, it
+  lights up the entire room as well.
+
+(e) Detect Treasure
+    Mage   : n/a
+    Ranger : n/a
+    Rogue  : Level 10, Mana  3, %Fail 60, Exp   1
+  Detects all treasure on the current screen.
+  (The area of effect depends on your screen size).
+
+(f) Cure Light Wounds
+    Mage   : Level  3, Mana  3, %Fail 25, Exp   3
+    Ranger : Level  5, Mana  3, %Fail 40, Exp   1
+    Rogue  : Level 11, Mana  4, %Fail 65, Exp   1
+  Cures 2d8 points of damage and heals 15 points worth of cuts.
+
+(g) Detect Objects
+    Mage   : n/a
+    Ranger : n/a
+    Rogue  : Level 12, Mana  4, %Fail 65, Exp   1
+  Detects all objects on the current screen.
+  (The area of effect depends on your screen size).
+
+(h) Find Hidden Traps/Doors
+    Mage   : Level  3, Mana  3, %Fail 25, Exp   2
+    Ranger : Level  5, Mana  4, %Fail 45, Exp   2
+    Rogue  : Level  8, Mana  3, %Fail 50, Exp   1
+  Detects all doors, stairs, and traps on the current screen.
+  (The area of effect depends on your screen size).
+
+(i) Stinking Cloud
+    Mage   : Level  3, Mana  3, %Fail 27, Exp   3
+    Ranger : Level  7, Mana  5, %Fail 40, Exp   3
+    Rogue  : Level 21, Mana 12, %Fail 50, Exp  10
+  Shoots a radius-2 ball that inflicts 10+level/2 points of poison
+  damage at its center.
+
+
+Book 2: Conjurings and Tricks
+
+(a) Confuse Monster
+    Mage   : Level  5, Mana  4, %Fail 30, Exp   4
+    Ranger : Level  7, Mana  6, %Fail 40, Exp   2
+    Rogue  : Level 15, Mana  6, %Fail 75, Exp   1
+  Attempts to confuse a single monster for 1+3d(level/2) turns, or
+  half that amount if the monster is already confused.  Uniques and
+  monsters that resist confusion are never affected.  Other monsters
+  have the standard chance to resist.
+
+(b) Lightning Bolt
+    Mage   : Level  5, Mana  4, %Fail 30, Exp   4
+    Ranger : Level  9, Mana  7, %Fail 40, Exp   3
+    Rogue  : n/a
+  Fires a beam that inflicts (3+(level-5)/6)d6 points of lightning
+  damage on each monster caught in it.
+
+(c) Trap/Door Destruction
+    Mage   : Level  5, Mana  5, %Fail 30, Exp   6
+    Ranger : Level  9, Mana  8, %Fail 45, Exp   3
+    Rogue  : Level 14, Mana  7, %Fail 60, Exp   2
+  Destroys all traps and doors within a 1-square radius of you.
+
+(d) Cure Poison
+    Mage   : Level  5, Mana  5, %Fail 35, Exp   4
+    Ranger : Level 11, Mana  9, %Fail 45, Exp   3
+    Rogue  : Level 21, Mana  9, %Fail 90, Exp   1
+  Neutralizes poison.
+
+(e) Sleep Monster
+    Mage   : Level  7, Mana  5, %Fail 30, Exp   4
+    Ranger : Level 11, Mana  8, %Fail 40, Exp   3
+    Rogue  : Level 19, Mana  8, %Fail 85, Exp   1
+  Attempts to put to sleep a single monster.  Uniques and monsters
+  that resist sleep are not affected.  Other monsters have the
+  standard chance to resist.
+
+(f) Teleport Self
+    Mage   : Level  7, Mana  6, %Fail 35, Exp   5
+    Ranger : Level 13, Mana 10, %Fail 45, Exp   3
+    Rogue  : Level 22, Mana  9, %Fail 50, Exp   1
+  Teleports you randomly up to level*5 squares away.
+
+(g) Spear of Light
+    Mage   : Level  7, Mana  6, %Fail 30, Exp   5
+    Ranger : Level 13, Mana 11, %Fail 55, Exp   4
+    Rogue  : Level 23, Mana 10, %Fail 95, Exp   1
+  Produces a beam that lights up all squares caught in it and inflicts
+  6d8 points of damage on light-sensitive monsters on those squares.
+
+(h) Frost Bolt
+    Mage   : Level  7, Mana  6, %Fail 40, Exp   6
+    Ranger : Level 15, Mana 12, %Fail 50, Exp   4
+    Rogue  : n/a
+  Shoots a bolt that inflicts (5+(level-5)/4)d8 points of cold damage,
+  with a chance of getting a beam that inflicts the same damage on
+  each monster caught in it equal to (level-10)% for a mage, or
+  (level/2-10)% for a ranger.
+
+(i) Wonder
+    Mage   : Level  7, Mana 10, %Fail 50, Exp   5
+    Ranger : Level 15, Mana 18, %Fail 80, Exp  10
+    Rogue  : Level 20, Mana 10, %Fail 70, Exp  20
+  Invokes a random spell effect.  The effect is determined by looking
+  up the result of level/5+1d100 in the following table:
+    1-  7: Same effect as Wand of Clone Monster (see OBJ-LONG.SPO)
+    8- 13: Same effect as Wand of Haste Monster (see OBJ-LONG.SPO)
+   14- 25: Same effect as Wand of Heal Monster (see OBJ-LONG.SPO)
+   26- 30: Same effect as Wand of Polymorph (see OBJ-LONG.SPO)
+   31- 35: Magic missile inflicting (3+(level-1)/5)d4 points of
+           damage; chance of beam is (level-10)% for mage,
+           (level/2-10)% for ranger and rogue
+   36- 40: Same effect as magic spell Confuse Monster
+   41- 45: Radius-3 poison ball, inflicting 20+level/2 points of
+           poison damage at its center
+   46- 50: Same effect as magic spell Spear of Light
+   51- 55: Lightning beam inficting (3+(level-5)/6)d6 points of
+           lightning damage
+   56- 60: Frost bolt inflicting (5+(level-5)/4)d8 point of cold
+           damage; chance of beam is (level-10)% for mage,
+           (level/2-10)% for ranger and rogue
+   61- 65: Acid bolt inflicting (6+(level-5)/4)d8 points of acid
+           damage; chance of beam is level% for mage, (level/2)% for
+           ranger and rogue
+   66- 70: Fire bolt inflicting (8+(level-5)/4)d8 points of fire
+           damage; chance of beam is level% for mage, (level/2)% for
+           ranger and rogue
+   71- 75: Same effect as Wand of Drain Life (see OBJ-LONG.SPO), but
+           for 75 points of damage
+   76- 80: Radius-2 lightning ball, inflicting (30+level)/2 points of
+           lightning damage at its center
+   81- 85: Radius-2 acid ball, inflicting 40+level points of acid
+           damage at its center
+   86- 90: Radius-3 cold ball, inflicting 70+level points of cold
+           damage at its center
+   91- 95: Radius-3 fire ball, inflicting 80+level points of fire
+           damage at its center
+   96-100: Same effect as Wand of Drain Life (see OBJ-LONG.SPO), but
+           for 100+level points of damage
+  101-103: Same effect as magic spell Earthquake, but with a radius of
+           12 squares
+  104-105: Same effect as magic spell Word of Destruction
+  106-107: Same effect as magic spell Banishment
+  108-109: Same effect as Staff of Power (see OBJ-LONG.SPO)
+      110: Cures 300 points of damage, hits each monster within line
+           of sight for 150 points of damage, and then attempts to
+           slow and put to sleep each remaining monster within line of
+           sight (see Staff of Sleep Monsters and Staff of Slow
+           Monsters in OBJ-LONG.SPO).
+
+
+Book 3: Incantations and Illusions
+
+(a) Satisfy Hunger
+    Mage   : Level  9, Mana  7, %Fail 45, Exp   8
+    Ranger : Level 17, Mana 17, %Fail 55, Exp   3
+    Rogue  : Level 25, Mana 12, %Fail 95, Exp   1
+  Magically renders you well-fed (but not satiated).  This will also
+  cure a bloated stomach.
+
+(b) Lesser Recharging
+    Mage   : Level  9, Mana  7, %Fail 75, Exp  10
+    Ranger : Level 29, Mana 17, %Fail 90, Exp   4
+    Rogue  : Level 27, Mana 15, %Fail 99, Exp   1
+  Adds charges to a stack of wands or staves.  Failure occurs 1 time
+  in (102+level/5-level of wand or staff-10*(# of charges))/15, and
+  destroys all wands or staves in the stack.  If successful, the stack
+  gains 2+1d((2+level/5)/(2+level of wand or staff)+1) charges.
+
+(c) Turn Stone to Mud
+    Mage   : Level  9, Mana  7, %Fail 44, Exp   8
+    Ranger : Level 15, Mana 13, %Fail 50, Exp   4
+    Rogue  : Level 24, Mana 11, %Fail 70, Exp   1
+  Produces a beam that destroys the first section of wall it hits,
+  unless it is a permanent wall.  Each monster caught in the beam that
+  is susceptible to rock remover takes 20+1d30 points of damage.
+
+(d) Fire Bolt
+    Mage   : Level 10, Mana  7, %Fail 50, Exp   7
+    Ranger : Level 25, Mana 20, %Fail 60, Exp   3
+    Rogue  : n/a
+  Shoots a bolt that inflicts (6+(level-5)/4)d8 points of fire damage,
+  with a chance of getting a beam that inflicts the same damage on
+  each monster caught in it equal to level% for a mage, or (level/2)%
+  for a ranger.
+
+(e) Polymorph Other
+    Mage   : Level 11, Mana  7, %Fail 45, Exp   9
+    Ranger : Level 21, Mana 19, %Fail 60, Exp   3
+    Rogue  : n/a
+  Attempts to polymorph a single monster.  Uniques are not affected.
+  Other monsters have the standard chance to resist.  If a monster
+  fails this chance, it still gets a (monster level) in 90 chance to
+  avoid the effect.  If the monster fails this second chance as well,
+  the game attempts to generate a new, single, non-unique monster
+  (with monster generation level equal to the average of monster level
+  and dungeon level + 5) that is no more than 20 monster levels away
+  from the original monster; the original monster then transforms into
+  the new monster, at full health.
+
+(f) Identify
+    Mage   : Level 11, Mana  7, %Fail 25, Exp   6
+    Ranger : Level 23, Mana 25, %Fail 90, Exp   3
+    Rogue  : Level 18, Mana 18, %Fail 60, Exp   2
+  Reveals all normal (magical but non-hidden) powers of one object.
+
+(g) Detect Invisible
+    Mage   : Level 15, Mana  5, %Fail 40, Exp   6
+    Ranger : Level 25, Mana 15, %Fail 50, Exp   4
+    Rogue  : Level 20, Mana 10, %Fail 50, Exp   4
+  Detects all invisible monsters on the current screen, for one turn
+  only.
+  (The area of effect depends on your screen size).
+
+(h) Acid Bolt
+    Mage   : Level 15, Mana  9, %Fail 50, Exp   8
+    Ranger : Level 20, Mana 16, %Fail 50, Exp   6
+    Rogue  : n/a
+  Shoots a bolt that inflicts (8+(level-5)/4)d8 points of acid damage,
+  with a chance of getting a beam that inflicts the same damage on
+  each monster caught in it equal to level% for a mage, or (level/2)%
+  for a ranger.
+
+(i) Slow Monster
+    Mage   : Level 17, Mana  9, %Fail 50, Exp   7
+    Ranger : Level 25, Mana 21, %Fail 65, Exp   3
+    Rogue  : Level 28, Mana 20, %Fail 70, Exp   4
+  Attempts to slow down a single monster, decreasing it's speed by -10
+  unless it's speed is already -40 or worse.  This effect is
+  permanent, and stacks with other slowing effects.  Uniques are not
+  affected.  Other monsters have the standard chance to resist.
+
+
+Book 4: Sorcery and Evocations
+
+(a) Frost Ball
+    Mage   : Level 19, Mana 12, %Fail 55, Exp   8
+    Ranger : Level 27, Mana 21, %Fail 65, Exp   6
+    Rogue  : n/a
+  Shoots a radius-2 ball that inflicts 30+level points of cold damage
+  at its center.
+
+(b) Teleport Other
+    Mage   : Level 23, Mana 12, %Fail 60, Exp   8
+    Ranger : Level 31, Mana 25, %Fail 70, Exp   3
+    Rogue  : Level 31, Mana 25, %Fail 70, Exp   3
+  Produces a beam that teleports each monster caught in it up to 100
+  squares away.
+
+(c) Haste Self
+    Mage   : Level 25, Mana 12, %Fail 65, Exp  10
+    Ranger : Level 33, Mana 25, %Fail 75, Exp   4
+    Rogue  : Level 32, Mana 25, %Fail 70, Exp   6
+  Hastes you (+10 to speed) for level+1d20 turns, or 5 additional
+  turns if you already are temporarily hasted.
+
+(d) Mass Sleep
+    Mage   : Level 25, Mana  7, %Fail 50, Exp   6
+    Ranger : Level 23, Mana 20, %Fail 60, Exp   4
+    Rogue  : Level 24, Mana 15, %Fail 80, Exp  10
+  Attempts to put to sleep each monster within line of sight.  Uniques
+  and monsters that resist sleep are not affected.  Other monsters
+  have the standard chance to resist.
+
+(e) Fire Ball
+    Mage   : Level 26, Mana 18, %Fail 65, Exp  12
+    Ranger : Level 34, Mana 28, %Fail 80, Exp   9
+    Rogue  : n/a
+  Shoots a radius-2 ball that inflicts 55+level points of fire damage
+  at its center.
+
+(f) Detect Enchantment
+    Mage   : Level 30, Mana 10, %Fail 70, Exp  10
+    Ranger : Level 35, Mana 20, %Fail 70, Exp  10
+    Rogue  : Level 27, Mana 10, %Fail 50, Exp  10
+  Detects all enchanted objects on the current screen.  Enchanted
+  objects include artifacts, ego items, amulets, rings, staffs, wands,
+  rods, scrolls, potions, spellbooks, and all items that give a bonus
+  to-hit, to-dam, or to AC.
+  (The area of effect depends on your screen size).
+
+
+Book 5: Resistances of Scarabtarices
+
+(a) Resist Cold
+    Mage   : Level 10, Mana  5, %Fail 50, Exp  10
+    Ranger : Level  8, Mana 15, %Fail 50, Exp  30
+    Rogue  : Level 16, Mana 12, %Fail 50, Exp  40
+  Grants you resistance to cold for 20+1d20 turns.  The duration is
+  cumulative with any other temporary cold resistance.
+
+(b) Resist Fire
+    Mage   : Level 10, Mana  5, %Fail 50, Exp  10
+    Ranger : Level  8, Mana 15, %Fail 50, Exp  30
+    Rogue  : Level 19, Mana 12, %Fail 50, Exp  40
+  Grants you resistance to fire for 20+1d20 turns.  The duration is
+  cumulative with any other temporary temporary fire resistance.
+
+(c) Resist Poison
+    Mage   : Level 25, Mana 10, %Fail 45, Exp  20
+    Ranger : Level 26, Mana 25, %Fail 75, Exp  50
+    Rogue  : Level 30, Mana 25, %Fail 75, Exp  60
+  Grants you resistance to poison for 20+1d20 turns.  The duration is
+  cumulative with any other temporary temporary poison resistance.
+
+(d) Resistance
+    Mage   : Level 28, Mana 20, %Fail 65, Exp  30
+    Ranger : Level 31, Mana 40, %Fail 85, Exp  70
+    Rogue  : Level 31, Mana 30, %Fail 85, Exp  80
+  Grants you resistance to acid, cold, fire, lightning, and poison for
+  20+1d20 turns.  The duration is cumulative with any other temporary 
+  acid, cold, fire, lightning, or poison resistance.
+
+(e) Shield
+    Mage   : Level 32, Mana 24, %Fail 75, Exp  30
+    Ranger : Level 35, Mana 30, %Fail 75, Exp  80
+    Rogue  : Level 34, Mana 20, %Fail 75, Exp  80
+  Grants you +50 to AC for 30+1d20 turns.
+
+
+Book 6: Raal's Tome of Destruction
+
+(a) Shock Wave
+    Mage   : Level 16, Mana 10, %Fail 40, Exp   6
+    Ranger : n/a
+    Rogue  : Level 35, Mana 25, %Fail 80, Exp  50
+  Shoots a radius-2 ball that inflicts 10+level points of sound damage
+  at its center, and has a chance to stun surviving monsters in the
+  area of effect.
+
+(b) Explosion
+    Mage   : Level 20, Mana 20, %Fail 50, Exp  10
+    Ranger : n/a
+    Rogue  : n/a
+  Shoots a radius-2 ball that inflicts 20+level*2 points of shards
+  damage at its center.
+
+(c) Cloudkill
+    Mage   : Level 20, Mana  9, %Fail 50, Exp   8
+    Ranger : Level 22, Mana 19, %Fail 60, Exp   6
+    Rogue  : Level 25, Mana 20, %Fail 60, Exp  15
+  Shoots a radius-3 ball that inflicts 40+level/2 points of poison
+  damage at its center.
+
+(d) Acid Ball
+    Mage   : Level 20, Mana 15, %Fail 70, Exp  20
+    Ranger : Level 30, Mana 24, %Fail 70, Exp   6
+    Rogue  : n/a
+  Shoots a radius-2 ball that inflicts 40+level points of acid damage
+  at its center.
+
+(e) Ice Storm
+    Mage   : Level 27, Mana 22, %Fail 75, Exp  24
+    Ranger : Level 35, Mana 35, %Fail 70, Exp  10
+    Rogue  : n/a
+  Shoots a radius-3 ball that inflicts 50+level*2 points of cold
+  damage at its center.
+
+(f) Meteor Swarm
+    Mage   : Level 30, Mana 25, %Fail 85, Exp  34
+    Ranger : Level 36, Mana 45, %Fail 80, Exp  35
+    Rogue  : n/a
+  Shoots a swarm of 2+level/20 meteors.  Meteors will travel until
+  hitting a wall, a monster, or reaching the target location.  Meteors
+  will explode as a radius-1 ball, inflicting 30+level/2 points of
+  damage at its center.  If this kills the monster that blocked the
+  path to the target location, the next meteor may continue to find
+  another target.
+
+(g) Rift
+    Mage   : Level 35, Mana 30, %Fail 60, Exp  25
+    Ranger : n/a
+    Rogue  : n/a
+  Fires a beam that inflicts 40+(level)d7 points of gravity damage on
+  each monster caught in it, and has a chance to teleport surviving
+  monsters in the area of effect up to 10 squares away.
+
+
+Book 7: Mordenkainen's Escapes
+
+(a) Door Creation
+    Mage   : Level 13, Mana  9, %Fail 40, Exp  12
+    Ranger : Level 20, Mana 17, %Fail 20, Exp  25
+    Rogue  : Level 17, Mana  7, %Fail 30, Exp  15
+  A (closed) door is created on each empty floor space that is
+  directly adjacent to you.
+
+(b) Stair Creation
+    Mage   : Level 24, Mana 20, %Fail 50, Exp  20
+    Ranger : Level 32, Mana 32, %Fail 50, Exp  40
+    Rogue  : Level 25, Mana 12, %Fail 40, Exp  25
+  A stair (going up or down, chosen at random) is created on the space
+  where you are standing.  This will destroy any terrain feature that
+  was there before.  It will also destroy all items currently on the
+  floor where the spell is cast.  The stair will always be down from
+  town, and always be up from level 99 if Sauron has not been killed,
+  level 100 if Morgoth has not been killed, and level 127.
+  The spell will fail when used on a space already occupied by a stair
+  or by a shop door.  It will also fail if an artifact is lying on the
+  floor where the spell is cast.
+
+(c) Teleport Level
+    Mage   : Level 28, Mana 17, %Fail 65, Exp  20
+    Ranger : Level 34, Mana 27, %Fail 60, Exp  15
+    Rogue  : Level 25, Mana 20, %Fail 60, Exp  20
+  Teleports you 1 level up or 1 level down (chosen at random).  The
+  direction will always be down from the town, and always up from
+  level 99 if Sauron is still alive or level 100 if Morgoth is still
+  alive.
+  This spell has no effect when the option to restrict the use of
+  stairs and recall is set.
+
+(d) Word of Recall
+    Mage   : Level 30, Mana 25, %Fail 75, Exp  15
+    Ranger : Level 35, Mana 35, %Fail 75, Exp  16
+    Rogue  : Level 36, Mana 40, %Fail 80, Exp  18
+  Teleports you from the dungeon to the town or from the town to the
+  deepest level you have visited in the dungeon.  If you are in the
+  dungeon but above the deepest level you have visited, you are given
+  the option to reset the recall depth.  If you do so, future recalls
+  will take you to your current level, or to the deepest level you
+  have visited after resetting recall depth.
+  The recall effect is not immediate; it is delayed by 14+1d20 turns.
+  During that delay, the spell can be canceled by invoking the spell
+  of recall again.
+  This spell has no effect when the option to restrict the use of
+  stairs and recall is set, unless Morgoth is dead.
+
+(e) Rune of Protection
+    Mage   : Level 36, Mana 60, %Fail 70, Exp  40
+    Ranger : Level 40, Mana 75, %Fail 80, Exp  80
+    Rogue  : n/a
+  Inscribes a glyph of warding beneath you.  Summoned monsters can't
+  appear on the glyph.  If a monster attempts to move onto the glyph
+  or melee you while you are standing on the glyph, they must first
+  succeed in breaking the glyph.  Their chance to do so is (monster
+  level) in 550.  The glyph will remain where it is, until a monster
+  succeeds in breaking it.
+
+
+Book 8: Tenser's Transformations
+
+(a) Heroism
+    Mage   : n/a
+    Ranger : Level 18, Mana 15, %Fail 50, Exp  40
+    Rogue  : Level 26, Mana 15, %Fail 50, Exp  40
+  Cures 10 points of damage, removes fear and grants you heroism
+  (resistance to fear, and a bonus of +12 to-hit) for 25+1d25 turns.
+
+(b) Berserker
+    Mage   : n/a
+    Ranger : Level 23, Mana 30, %Fail 80, Exp  35
+    Rogue  : Level 28, Mana 20, %Fail 60, Exp  60
+  Cures 30 points of damage, removes fear, and grants you berserk
+  strength (resistance to fear, a bonus of +12 to-hit, and a penalty
+  of -10 to AC) for 25+1d25 turns.
+
+(c) Enchant Armor
+    Mage   : n/a
+    Ranger : Level 33, Mana 45, %Fail 90, Exp  50
+    Rogue  : Level 31, Mana 50, %Fail 95, Exp  90
+  Makes 1d3+level/20-1 attempts to improve the armour class bonus of a
+  piece of armour.  Each attempt might fail, based on the current
+  armour class bonus, as detailed in OBJ-LONG.SPO.
+
+(d) Enchant Weapon
+    Mage   : n/a
+    Ranger : Level 34, Mana 50, %Fail 90, Exp  60
+    Rogue  : Level 35, Mana 55, %Fail 90, Exp  90
+  Makes 1d4+level/20-1 attempts to improve the to-hit bonus and
+  1d4+level/20-1 attempts to improve the to-dam bonus of a weapon.
+  Each attempt might fail, based on the current to-hit or to-dam
+  bonus, as detailed in OBJ-LONG.SPO.
+
+(e) Greater Recharging
+    Mage   : Level 30, Mana 30, %Fail 95, Exp 100
+    Ranger : Level 35, Mana 50, %Fail 95, Exp 115
+    Rogue  : Level 35, Mana 40, %Fail 95, Exp 100
+  Adds charges to a stack of wands or staves.  Failure occurs 1 time
+  in (150+level-level of wand or staff-10*(# of charges))/15, and
+  destroys all wands or staves in the stack.  If successful, the stack
+  gains 2+1d((50+level)/(2+level of wand or staff)+1) charges.
+
+(f) Elemental Brand
+    Mage   : Level 32, Mana 60, %Fail 95, Exp 120
+    Ranger : Level 31, Mana 60, %Fail 95, Exp 180
+    Rogue  : Level 37, Mana 60, %Fail 80, Exp 120
+  One stack of ammunition is branded with fire, cold, or poison
+  (selected at random).  In addition, the game makes 1d3+4 attempts to
+  improve the to-hit bonus and 1d3+4 attempts to improve the to-dam
+  bonus of this stack.  Each of these attempts might fail, based on
+  the current to-hit or to-dam bonus and the size of the stack, as
+  detailed in OBJ-LONG.SPO.
+  The spell has no effect if the ammunition is already branded, has a
+  slay, is broken, or is cursed.
+
+
+Book 9: Kelek's Grimoire of Power
+
+(a) Earthquake
+    Mage   : Level 20, Mana 18, %Fail 60, Exp  20
+    Ranger : Level 30, Mana 28, %Fail 60, Exp  16
+    Rogue  : n/a
+  Causes a 10-square radius earthquake around you.  All spaces in the
+  radius are darkened; all spaces (except the epicenter) have a 15%
+  chance to be damaged.  If a damaged space is occupied by a monster
+  that can't bore through rock or pass through walls, the monster
+  takes 4d8 points of damage and moves to a non-damaged, nonoccupied
+  space adjacent to the damaged space.  If there is no space
+  available, or if the monster can't move, the monster is removed.
+  Each damaged non-floor space is replaced by floor.  Each damaged
+  floor space is replaced by a random type of wall and all objects on
+  it are removed, unless one of them is an artifact (in that case, the
+  damaged floor space is unaffected and all objects are retained).
+  This spell has no effect when used in the town.
+
+(b) Bedlam
+    Mage   : Level 25, Mana 15, %Fail 60, Exp  24
+    Ranger : Level 32, Mana 30, %Fail 70, Exp  12
+    Rogue  : Level 29, Mana 20, %Fail 70, Exp  20
+  Shoots a radius-4 confusion ball with power equal to your character
+  level at its center.  Uniques or monsters that resist confusion are
+  not affected.  Other monsters get a chance to save, based on monster
+  level versus the power of the confusion ball: monster levels < 12
+  always fail to save, monster levels > power always save and all
+  other monster levels save if 1d(power-10) < monster level - 10.
+  If a monsters fails to save, it will be confused for 1+3d(power/2)
+  turns, or for half that amount of additional turns if the monster is
+  already confused.
+
+(c) Rend Soul
+    Mage   : Level 25, Mana 30, %Fail 80, Exp  30
+    Ranger : n/a
+    Rogue  : n/a
+  Shoots a bolt that inflicts 11d(level) points of nether damage, with
+  a chance of getting a beam that inflicts the same damage on each
+  monster caught in it equal to (level/4)% for a mage, or (level/8)%
+  for a ranger.
+
+(d) Banishment
+    Mage   : Level 30, Mana 45, %Fail 95, Exp  25
+    Ranger : n/a
+    Rogue  : n/a
+  Removes all monsters represented by a chosen symbol from the level.
+  Uniques are not affected.  You take 1d4 points of damage for every
+  monster removed.
+
+(e) Word of Destruction
+    Mage   : Level 33, Mana 21, %Fail 80, Exp  35
+    Ranger : Level 37, Mana 30, %Fail 95, Exp  30
+    Rogue  : n/a
+  All spaces in a 15-square radius around you are darkened and all
+  monsters in the area of effect are removed.  Each space (except the
+  epicenter) in the area of effect that is not a stair, a permanent
+  wall, of currently holding an artifact, is destroyed, removing all
+  objects from it and replacing it by either a random type of wall or
+  by floor.  You will also be blinded for 10+1d10 turns, unless you
+  have resistance to blindness or light.
+  This spell has no effect when used in the town.
+
+(f) Mass Banishment
+    Mage   : Level 35, Mana 75, %Fail 90, Exp 100
+    Ranger : n/a
+    Rogue  : n/a
+  Removes all monsters within 20 squares of you.  Uniques are not
+  affected.  You take 1d3 points of damage for every monster removed.
+
+(g) Chaos Strike
+    Mage   : Level 38, Mana 35, %Fail 90, Exp  40
+    Ranger : n/a
+    Rogue  : n/a
+  Shoots a bolt that inflicts 13d(level) points of chaos damage, with
+  a chance of getting a chaos beam that inflicts the same damage on
+  each monster caught in it equal to level% for a mage, or (level/2)%
+  for a ranger.
+
+(h) Mana Storm
+    Mage   : Level 42, Mana 30, %Fail 95, Exp 20
+    Ranger : n/a
+    Rogue  : n/a
+  Shoots a radius-3 ball that inflicts 300+level*2 points of mana
+  damage at its center.
+
+
+HOLY BOOKS OF PRAYER
+--------------------
+
+This section of the spoiler describes the effects of every holy
+prayer.  A brief summary of all holy prayers with only level, mana and
+fail% may be found in BOOKS.SPO.
+
+Many prayers will produce some kind of ball.  For all ball effects,
+damage is reduced by range.  The amount of damage at the center is
+listed in the descriptions.  This damage is reduced by 50% at range 1,
+by 66% at range 2, and by 75% at range 3 (for large balls only).
+
+How monster resistances or sensitivities reduce or increase the damage
+of various prayer effects will be described in the spoiler file
+MON-DAM.SPO.
+
+
+Book 1: Beginners Handbook
+
+(a) Detect Evil
+    Priest : Level  1, Mana  1, %Fail 10, Exp   4
+    Paladin: Level  1, Mana  1, %Fail 30, Exp   4
+  Detects all evil monsters on the current screen, for one turn only.
+  (The area of effect depends on your screen size).
+
+(b) Cure Light Wounds
+    Priest : Level  1, Mana  2, %Fail 15, Exp   4
+    Paladin: Level  2, Mana  2, %Fail 35, Exp   4
+  Cures 2d10 points of damage and heals 10 points worth of cuts.
+
+(c) Bless
+    Priest : Level  1, Mana  2, %Fail 20, Exp   4
+    Paladin: Level  3, Mana  3, %Fail 35, Exp   4
+  Blesses you, giving a bonus of +5 to AC and +10 to-hit, for 12+1d12
+  turns.
+
+(d) Remove Fear
+    Priest : Level  1, Mana  2, %Fail 25, Exp   4
+    Paladin: Level  5, Mana  3, %Fail 35, Exp   4
+  Removes fear.
+
+(e) Call Light
+    Priest : Level  3, Mana  2, %Fail 25, Exp   1
+    Paladin: Level  5, Mana  4, %Fail 35, Exp   4
+  Lights up an area with a radius of level/10+1 squares around you and
+  inflicts 2d(level/2) points of damage on each light-sensitive
+  monster within the radius of the spell.  If you are in a room, it
+  lights up the entire room as well.
+
+(f) Find Traps
+    Priest : Level  3, Mana  3, %Fail 27, Exp   2
+    Paladin: Level  7, Mana  5, %Fail 40, Exp   3
+  Detects all traps on the current screen.
+  (The area of effect depends on your screen size).
+
+(g) Detect Doors/Stairs
+    Priest : Level  3, Mana  3, %Fail 27, Exp   2
+    Paladin: Level  7, Mana  5, %Fail 40, Exp   3
+  Detects all doors and stairs on the current screen.
+  (The area of effect depends on your screen size).
+
+(h) Slow Poison
+    Priest : Level  3, Mana  3, %Fail 28, Exp   4
+    Paladin: Level  9, Mana  7, %Fail 40, Exp   3
+  Halves the remaining duration of any current poisoning.
+
+
+Book 2: Words of Wisdom
+
+(a) Scare Monster
+    Priest : Level  5, Mana  4, %Fail 29, Exp   3
+    Paladin: Level  9, Mana  7, %Fail 40, Exp   3
+  Attempts to scare a single monster, causing it to flee in terror for
+  1+3d(level/2) turns, or the same amount of additional turns if the
+  monster already is scared.  Uniques and monsters that resist fear
+  are never affected.  Other monsters have the standard chance to
+  resist.
+
+(b) Portal
+    Priest : Level  5, Mana  4, %Fail 30, Exp   4
+    Paladin: Level  9, Mana  8, %Fail 40, Exp   3
+  Teleports you randomly up to level*3 squares away.
+
+(c) Cure Serious Wounds
+    Priest : Level  5, Mana  4, %Fail 32, Exp   4
+    Paladin: Level 11, Mana  9, %Fail 40, Exp   3
+  Cures 4d10 points of damage and heals half of all cut damage plus
+  another 20 points.
+
+(d) Chant
+    Priest : Level  5, Mana  5, %Fail 34, Exp   4
+    Paladin: Level 11, Mana 10, %Fail 45, Exp   3
+  Blesses you, giving a bonus of +5 to AC and +10 to-hit, for 24+1d24
+  turns.
+
+(e) Sanctuary
+    Priest : Level  7, Mana  5, %Fail 36, Exp   3
+    Paladin: Level 11, Mana 10, %Fail 45, Exp   3
+  Attempts to put to sleep each monster directly adjacent to you.
+  Uniques and monsters that resist sleep are not affected.  Other
+  monsters have the standard chance to resist.
+
+(f) Satisfy Hunger
+    Priest : Level  7, Mana  5, %Fail 38, Exp   4
+    Paladin: Level 13, Mana 10, %Fail 45, Exp   3
+  Magically renders you well-fed (but not satiated).  This will also
+  cure a bloated stomach.
+
+(g) Remove Curse
+    Priest : Level  7, Mana  6, %Fail 38, Exp   5
+    Paladin: Level 13, Mana 11, %Fail 45, Exp   4
+  Removes all ordinary curses from all equipped items.  Heavy or
+  permanent curses are not affected.
+
+(h) Resist Heat and Cold
+    Priest : Level  7, Mana  7, %Fail 38, Exp   5
+    Paladin: Level 15, Mana 13, %Fail 45, Exp   4
+  Gives you temporary resistance to cold and fire, for 10+1d10 turns
+  each.
+
+
+Book 3: Chants and Blessings
+
+(a) Neutralize Poison
+    Priest : Level  9, Mana  6, %Fail 38, Exp   4
+    Paladin: Level 15, Mana 15, %Fail 50, Exp   4
+  Neutralizes poison.
+
+(b) Orb of Draining
+    Priest : Level  9, Mana  7, %Fail 40, Exp   4
+    Paladin: Level 17, Mana 15, %Fail 50, Exp   4
+  Shoots a radius-2 or radius-3 ball that inflicts 3d6+level*1.5 (for
+  priests) or 3d6+level*1.25 (for paladins) points of holy damage at
+  its center.  Evil monsters take double damage.  All cursed items in
+  the area of effect are destroyed.  The bigger area of effect is
+  attained at character level 30.
+
+(c) Cure Critical Wounds
+    Priest : Level  9, Mana  7, %Fail 38, Exp   4
+    Paladin: Level 17, Mana 15, %Fail 50, Exp   4
+  Cures 6d10 points of damage and heals all cut damage.
+
+(d) Sense Invisible
+    Priest : Level 11, Mana  8, %Fail 42, Exp   4
+    Paladin: Level 19, Mana 15, %Fail 50, Exp   4
+  Enables you to see invisible monsters for 24+1d24 turns.
+
+(e) Protection from Evil
+    Priest : Level 11, Mana  8, %Fail 42, Exp   4
+    Paladin: Level 19, Mana 15, %Fail 50, Exp   4
+  Protects you from evil for 1d25+level*3 turns: all melee attacks by
+  evil monsters have a chance of 50 in (your character level + 1d100)
+  to be repelled, unless the monster's level is higher than your
+  character level.
+
+(f) Earthquake
+    Priest : Level 11, Mana  9, %Fail 55, Exp   5
+    Paladin: Level 21, Mana 17, %Fail 50, Exp   3
+  Causes a 10-square radius earthquake around you.  All spaces in the
+  radius are darkened; all spaces (except the epicenter) have a 15%
+  chance to be damaged.  If a damaged space is occupied by a monster
+  that can't bore through rock or pass through walls, the monster
+  takes 4d8 points of damage and moves to a non-damaged, nonoccupied
+  space adjacent to the damaged space.  If there is no space
+  available, or if the monster can't move, the monster is removed.
+  Each damaged non-floor space is replaced by floor.  Each damaged
+  floor space is replaced by a random type of wall and all objects on
+  it are removed, unless one of them is an artifact (in that case, the
+  damaged floor space is unaffected and all objects are retained).
+  This prayer has no effect when used in the town.
+
+(g) Sense Surroundings
+    Priest : Level 13, Mana 10, %Fail 45, Exp   4
+    Paladin: Level 23, Mana 17, %Fail 50, Exp   3
+  Maps out a portion of the level that is slightly larger than the
+  current screen.
+  (The area of effect depends on your screen size).
+
+(h) Cure Mortal Wounds
+    Priest : Level 13, Mana 11, %Fail 45, Exp   4
+    Paladin: Level 25, Mana 20, %Fail 50, Exp   3
+  Cures 8d10 points of damage, cures all stunning and heals all cut
+  damage.
+
+(i) Turn Undead
+    Priest : Level 15, Mana 12, %Fail 50, Exp   5
+    Paladin: Level 27, Mana 21, %Fail 50, Exp   3
+  Attempts to scare each undead monster within line of sight, causing
+  it to flee in terror for 1+3d(level/2) turns, or the same amount of
+  additional turns if the monster already is scared.  All undead
+  monsters have the standard chance to resist.
+
+
+Book 4: Exorcism and Dispelling
+
+(a) Prayer
+    Priest : Level 15, Mana 14, %Fail 50, Exp   5
+    Paladin: Level 29, Mana 22, %Fail 50, Exp   3
+  Blesses you, giving a bonus of +5 to AC and +10 to-hit, for 48+1d48
+  turns.
+
+(b) Dispel Undead
+    Priest : Level 17, Mana 14, %Fail 55, Exp   7
+    Paladin: Level 31, Mana 24, %Fail 60, Exp   3
+  Inflicts 1d(level*3) points of damage on each undead monster within
+  line of sight.
+
+(c) Heal
+    Priest : Level 21, Mana 16, %Fail 60, Exp   7
+    Paladin: Level 33, Mana 28, %Fail 60, Exp   3
+  Cures 300 points of damage, cures all stunning and heals all cut
+  damage.
+
+(d) Dispel Evil
+    Priest : Level 25, Mana 20, %Fail 70, Exp  12
+    Paladin: Level 35, Mana 32, %Fail 70, Exp   4
+  Inflicts 1d(level*3) points of damage on each evil monster within
+  line of sight.
+
+(e) Glyph of Warding
+    Priest : Level 33, Mana 55, %Fail 90, Exp  15
+    Paladin: n/a
+  Inscribes a glyph of warding beneath you.  Summoned monsters can't
+  appear on the glyph.  If a monster attempts to move onto the glyph
+  or melee you while you are standing on the glyph, they must first
+  succeed in breaking the glyph.  Their chance to do so is (monster
+  level) in 550.  The glyph will remain where it is, until a monster
+  succeeds in breaking it.
+
+(f) Holy Word
+    Priest : Level 39, Mana 32, %Fail 95, Exp  20
+    Paladin: n/a
+  Inflicts 1d(level*4) points of damage on each evil monster within
+  line of sight, cures 1000 points of damage, cures all stunning,
+  heals all cut damage, neutralizes poison, and removes fear.
+
+
+Book 5: Ethereal Openings
+
+(a) Blink
+    Priest : Level  3, Mana  3, %Fail 50, Exp   6
+    Paladin: Level  7, Mana  7, %Fail 50, Exp   2
+  Teleports you randomly up to 10 squares away.
+
+(b) Teleport Self
+    Priest : Level 10, Mana 10, %Fail 50, Exp   8
+    Paladin: Level 20, Mana 20, %Fail 50, Exp   4
+  Teleports you randomly up to level*8 squares away.
+
+(c) Teleport Other
+    Priest : Level 20, Mana 20, %Fail 80, Exp  16
+    Paladin: Level 25, Mana 25, %Fail 80, Exp  12
+  Produces a beam that teleports each monster caught in it up to 100
+  squares away.
+
+(d) Teleport Level
+    Priest : Level 30, Mana 40, %Fail 75, Exp 133
+    Paladin: Level 35, Mana 50, %Fail 75, Exp 115
+  Teleports you 1 level up or 1 level down (chosen at random).  The
+  direction will always be down from the town, and always up from
+  level 99 if Sauron is still alive or level 100 if Morgoth is still
+  alive.
+  This prayer has no effect when the option to restrict the use of
+  stairs and recall is set.
+
+(e) Word of Recall
+    Priest : Level 35, Mana 50, %Fail 75, Exp  11
+    Paladin: Level 40, Mana 60, %Fail 75, Exp  10
+  Teleports you from the dungeon to the town or from the town to the
+  deepest level you have visited in the dungeon.  If you are in the
+  dungeon but above the deepest level you have visited, you are given
+  the option to reset the recall depth.  If you do so, future recalls
+  will take you to your current level, or to the deepest level you
+  have visited after resetting recall depth.
+  The recall effect is not immediate; it is delayed by 14+1d20 turns.
+  During that delay, the spell can be canceled by invoking the spell
+  of recall again.
+  This prayer has no effect when the option to restrict the use of
+  stairs and recall is set, unless Morgoth is dead.
+
+(f) Alter Reality
+    Priest : Level 40, Mana 60, %Fail 75, Exp 250
+    Paladin: n/a
+  The current level will be discarded and a new dungeon level (on the
+  same dungeon depth) will be generated.  This has exactly the same
+  side effects as leaving and re-entering the level through a stair,
+  except that you won't start on a square with a stair.
+
+
+Book 6: Godly Insights
+
+(a) Detect Monsters
+    Priest : Level  3, Mana  3, %Fail 50, Exp   2
+    Paladin: Level  5, Mana  5, %Fail 50, Exp   1
+  Detects all non-invisible monsters on the current screen.
+  (The area of effect depends on your screen size).
+
+(b) Detection
+    Priest : Level 10, Mana 10, %Fail 80, Exp  20
+    Paladin: Level 15, Mana 15, %Fail 80, Exp  12
+  Detects all treasure, objects, doors, stairs, traps, and monsters on
+  the current screen.
+  (The area of effect depends on your screen size).
+
+(c) Perception
+    Priest : Level 20, Mana 20, %Fail 80, Exp  20
+    Paladin: Level 25, Mana 25, %Fail 80, Exp  16
+  Reveals all normal (magical but non-hidden) powers of one object.
+
+(d) Probing
+    Priest : Level 25, Mana 10, %Fail 80, Exp 150
+    Paladin: Level 30, Mana 15, %Fail 80, Exp 135
+  Probes each monster within line of sight, giving information on the
+  current hit points of the monster and many of its characteristics
+  and abilities (excluding its melee, spellcasting, and breath
+  attacks).
+
+(e) Clairvoyance
+    Priest : Level 35, Mana 50, %Fail 80, Exp 230
+    Paladin: n/a
+  Lights up, maps out, and detects all objects on the complete current
+  dungeon level.
+
+
+Book 7: Purifications and Healing
+
+(a) Cure Serious Wounds
+    Priest : Level 15, Mana  5, %Fail 50, Exp  25
+    Paladin: Level 17, Mana 15, %Fail 50, Exp  25
+  Cures 4d10 points of damage and heals all cut damage.
+
+(b) Cure Mortal Wounds
+    Priest : Level 17, Mana  7, %Fail 60, Exp  45
+    Paladin: Level 23, Mana 25, %Fail 60, Exp  35
+  Cures 8d10 points of damage, cures all stunning and heals all cut
+  damage.
+
+(c) Healing
+    Priest : Level 30, Mana 50, %Fail 80, Exp 130
+    Paladin: n/a
+  Cures 2000 points of damage, cures all stunning and heals all cut
+  damage.
+
+(d) Restoration
+    Priest : Level 35, Mana 70, %Fail 90, Exp 230
+    Paladin: Level 45, Mana 80, %Fail 90, Exp 250
+  Restores to maximum all stats that are currently below maximum.
+
+(e) Remembrance
+    Priest : Level 35, Mana 70, %Fail 90, Exp 250
+    Paladin: n/a
+  Restores experience points to maximum if it is currently below
+  maximum.
+
+
+Book 8: Holy Infusions
+
+(a) Unbarring Ways
+    Priest : Level  5, Mana  6, %Fail 50, Exp  40
+    Paladin: Level 10, Mana 16, %Fail 50, Exp  20
+  Destroys all traps and doors within a 1-square radius of you.
+
+(b) Recharging
+    Priest : Level 15, Mana 20, %Fail 80, Exp  25
+    Paladin: Level 25, Mana 30, %Fail 80, Exp  15
+  Adds charges to a stack of wands or staves.  Failure occurs 1 time
+  in (115-level of wand or staff-10*(# of charges))/15, and destroys
+  all wands or staves in the stack.  If successful, the stack gains
+  2+1d(15/(2+level of wand or staff)+1) charges.
+
+(c) Dispel Curse
+    Priest : Level 25, Mana 40, %Fail 80, Exp 160
+    Paladin: n/a
+  Removes all ordinary and heavy curses from all equipped objects.
+  Permanent curses are not affected.
+
+(d) Enchant Weapon
+    Priest : Level 35, Mana 50, %Fail 80, Exp 230
+    Paladin: Level 40, Mana 70, %Fail 80, Exp 200
+  Makes 1d4 attempts to improve the to-hit bonus and 1d4 attempts to
+  improve the to-dam bonus of a weapon.  Each attempt might fail,
+  based on the current to-hit or to-dam bonus, as detailed in
+  OBJ-LONG.SPO.
+
+(e) Enchant Armour
+    Priest : Level 37, Mana 60, %Fail 85, Exp 250
+    Paladin: Level 42, Mana 80, %Fail 85, Exp 250
+  Makes 1d3+1 attempts to improve the armour class bonus of a piece of
+  armour.  Each attempt might fail, based on the current armour class
+  bonus, as detailed in OBJ-LONG.SPO.
+
+(f) Elemental Brand
+    Priest : Level 45, Mana 95, %Fail 85, Exp 250
+    Paladin: Level 47, Mana 95, %Fail 85, Exp 250
+  The currently wielded melee weapon is branded with fire (25% chance)
+  or frost (75% chance).  In addition, the game makes 1d3+4 attempts
+  to improve the to-hit bonus and 1d3+4 attempts to improve the to-dam
+  bonus of this weapon.  Each of these attempts might fail, based on
+  the current to-hit or to-dam bonus, as detailed in OBJ-LONG.SPO.
+  The spell has no effect if the weapon is an artifact or ego item, is
+  already branded, has a slay, is broken, or is cursed.
+
+
+Book 9: Wrath of God
+
+(a) Dispel Undead
+    Priest : Level 15, Mana  7, %Fail 70, Exp  25
+    Paladin: Level 20, Mana 13, %Fail 70, Exp  20
+  Inflicts 1d(level*4) points of damage on each undead monster within
+  line of sight.
+
+(b) Dispel Evil
+    Priest : Level 20, Mana 10, %Fail 75, Exp  60
+    Paladin: n/a
+  Inflicts 1d(level*4) points of damage on each evil monster within
+  line of sight.
+
+(c) Banish Evil
+    Priest : Level 25, Mana 25, %Fail 80, Exp 250
+    Paladin: Level 30, Mana 35, %Fail 80, Exp 200
+  Teleports each evil monster within line of sight up to 100 squares
+  away.
+
+(d) Word of Destruction
+    Priest : Level 35, Mana 35, %Fail 80, Exp 115
+    Paladin: Level 40, Mana 40, %Fail 80, Exp 100
+  All spaces in a 15-square radius around you are darkened and all
+  monsters in the area of effect are removed.  Each space (except the
+  epicenter) in the area of effect that is not a stair, a permanent
+  wall, of currently holding an artifact, is destroyed, removing all
+  objects from it and replacing it by either a random type of wall or
+  by floor.  You will also be blinded for 10+1d10 turns, unless you
+  have resistance to blindness or light.
+  This prayer has no effect when used in the town.
+
+(e) Annihilation
+    Priest : Level 45, Mana 60, %Fail 75, Exp 250
+    Paladin: n/a
+  Inflicts 200 points of damage on a single monster that is not
+  undead, a demon, an elemental, a golem, or a vortex.

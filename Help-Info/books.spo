@@ -1,0 +1,248 @@
+BOOKS.SPO, version 3.0.5, for Angband 3.0.5 (all systems)
+Release Date     : June 3, 2005
+Author           : Hugo Kornelis (angband@hugo.isdit.com)
+
+
+Based on previous versions of BOOKS.SPO, authors and release date
+unknown.
+
+This spoiler lists the contents of all spellbooks.  It also gives a
+short breakdown of level required, mana used, and base chance of
+failure for each spell or prayer.
+
+A longer listing of all spells and prayers, with a description of all
+spell effects and a discussion of how intelligence, wisdom and level
+affect spells can be found in MAGIC.SPO.
+
+Please notify the author of any errors (however minor) that you find.
+Suggestions to improve the format of this spoiler are welcome
+(especially if they help make this spoiler easier to read).
+
+This spoiler was written for Angband 3.0.5.  If you want only the most
+accurate information for another version of Angband, you may wish to
+acquire another version of this spoiler.
+
+
+NOTES ON NOTATION
+-----------------
+
+In the tables that follow, the following column headings will be used:
+
+Lvl:   Minimum level required to be able to learn the spell or prayer.
+SP:    Spell Points (aka mana) required to cast the spell or prayer.
+%fail: Base chance of failure for the spell or prayer.
+
+
+Book 1: Magic for Beginners
+                                MAGE          RANGER         ROGUE
+   Spell                    Lvl SP %fail   Lvl SP %fail   Lvl SP %fail
+   -----------------------  ------------   ------------   ------------
+a) Magic Missile              1  1   22      3  1   30    XXXXXXXXXXXX
+b) Detect Monsters            1  1   23      3  2   35      5  1   50
+c) Phase Door                 1  2   24      3  2   35      7  2   55
+d) Light Area                 1  2   26      5  3   35      9  3   60
+e) Treasure Detection       XXXXXXXXXXXX   XXXXXXXXXXXX    10  3   60
+f) Cure Light Wounds          3  3   25      5  3   40     11  4   65
+g) Detect Objects           XXXXXXXXXXXX   XXXXXXXXXXXX    12  4   65
+h) Find Hidden Traps/Doors    3  3   25      5  4   45      8  3   50
+i) Stinking Cloud             3  3   27      7  5   40     21 12   50
+
+Book 2: Conjurings and Tricks
+                                MAGE          RANGER         ROGUE
+   Spell                    Lvl SP %fail   Lvl SP %fail   Lvl SP %fail
+   -----------------------  ------------   ------------   ------------
+a) Confuse Monster            5  4   30      7  6   40     15  6   75
+b) Lightning Bolt             5  4   30      9  7   40    XXXXXXXXXXXX
+c) Trap/Door Destruction      5  5   30      9  8   45     17  7   60
+d) Cure Poison                5  5   35     11  9   45     21  9   90
+e) Sleep Monster              7  5   30     11  8   40     19  8   85
+f) Teleport Self              7  6   35     13 10   45     22  9   50
+g) Spear of Light             7  6   30     13 11   55     23 10   95
+h) Frost Bolt                 7  6   40     15 12   50    XXXXXXXXXXXX
+i) Wonder                     7 10   50     15 18   80     20 10   70
+
+Book 3: Incantations and Illusions
+                                MAGE          RANGER         ROGUE
+   Spell                    Lvl SP %fail   Lvl SP %fail   Lvl SP %fail
+   -----------------------  ------------   ------------   ------------
+a) Satisfy Hunger             9  7   45     17 17   55     25 12   95
+b) Lesser Recharging          9  7   75     29 17   90     27 15   99
+c) Turn Stone to Mud          9  7   44     15 13   50     24 11   70
+d) Fire Bolt                 10  7   50     25 20   60    XXXXXXXXXXXX
+e) Polymorph Other           11  7   45     21 19   60    XXXXXXXXXXXX
+f) Identify                  11  7   25     23 25   90     18 18   60
+g) Detect Invisible          15  5   40     25 15   50     20 10   50
+h) Acid Bolt                 15  9   50     20 16   50    XXXXXXXXXXXX
+i) Slow Monster              17  9   50     25 21   65     28 20   70
+
+Book 4: Sorcery and Evocations
+                                MAGE          RANGER         ROGUE
+   Spell                    Lvl SP %fail   Lvl SP %fail   Lvl SP %fail
+   -----------------------  ------------   ------------   ------------
+a) Frost Ball                19 12   55     27 21   65    XXXXXXXXXXXX
+b) Teleport Other            23 12   60     31 25   70     31 25   70
+c) Haste Self                25 12   65     33 25   75     32 25   70
+d) Mass Sleep                25  7   50     23 20   60     24 15   80
+e) Fire Ball                 26 18   65     34 28   80    XXXXXXXXXXXX
+f) Detect Enchantment        30 10   70     35 20   70     27 10   50
+
+Book 5: Resistances of Scarabtarices
+                                MAGE          RANGER         ROGUE
+   Spell                    Lvl SP %fail   Lvl SP %fail   Lvl SP %fail
+   -----------------------  ------------   ------------   ------------
+a) Resist Cold               10  5   50      8 15   50     16 12   50
+b) Resist Fire               10  5   50      8 15   50     19 12   50
+c) Resist Poison             25 10   45     26 25   75     30 25   75
+d) Resistance                28 20   65     31 40   85     31 30   85
+e) Shield                    32 24   75     35 30   75     34 20   75
+
+Book 6: Raal's Tome of Destruction
+                                MAGE          RANGER         ROGUE
+   Spell                    Lvl SP %fail   Lvl SP %fail   Lvl SP %fail
+   -----------------------  ------------   ------------   ------------
+a) Shock Wave                16 10   40    XXXXXXXXXXXX    35 25   80
+b) Explosion                 20 20   50    XXXXXXXXXXXX   XXXXXXXXXXXX
+c) Cloudkill                 12  9   50     22 19   60     25 20   60
+d) Acid Ball                 20 15   70     30 24   70    XXXXXXXXXXXX
+e) Ice Storm                 27 22   75     35 35   70    XXXXXXXXXXXX
+f) Meteor Swarm              30 25   85     36 45   80    XXXXXXXXXXXX
+g) Rift                      35 30   60    XXXXXXXXXXXX   XXXXXXXXXXXX
+
+Book 7: Mordenkainen's Escapes
+                                MAGE          RANGER         ROGUE
+   Spell                    Lvl SP %fail   Lvl SP %fail   Lvl SP %fail
+   -----------------------  ------------   ------------   ------------
+a) Door Creation             13  9   40     20 17   20     17  7   30
+b) Stair Creation            24 20   50     32 32   50     25 12   40
+c) Teleport Level            28 17   65     34 27   60     25 20   60
+d) Word of Recall            30 25   75     35 35   75     36 40   80
+e) Rune of Protection        36 60   70     40 75   80    XXXXXXXXXXXX
+
+Book 8: Tenser's Transformations
+                                MAGE          RANGER         ROGUE
+   Spell                    Lvl SP %fail   Lvl SP %fail   Lvl SP %fail
+   -----------------------  ------------   ------------   ------------
+a) Heroism                  XXXXXXXXXXXX    18 15   50     26 15   50
+b) Berserker                XXXXXXXXXXXX    23 30   80     28 20   60
+c) Enchant Armor            XXXXXXXXXXXX    33 45   90     31 50   95
+d) Enchant Weapon           XXXXXXXXXXXX    34 50   90     35 55   90
+e) Greater Recharging        30 30   95     35 50   95     35 40   95
+f) Elemental Brand           32 60   95     31 60   95     37 60   80
+
+Book 9: Kelek's Grimoire of Power
+                                MAGE          RANGER         ROGUE
+   Spell                    Lvl SP %fail   Lvl SP %fail   Lvl SP %fail
+   -----------------------  ------------   ------------   ------------
+a) Earthquake                20 18   60     30 28   60    XXXXXXXXXXXX
+b) Bedlam                    25 15   60     32 30   70     29 20   70
+c) Rend Soul                 25 30   80    XXXXXXXXXXXX   XXXXXXXXXXXX
+d) Banishment                30 45   95    XXXXXXXXXXXX   XXXXXXXXXXXX
+e) Word of Destruction       33 21   80     37 30   95    XXXXXXXXXXXX
+f) Mass Banishment           35 75   90    XXXXXXXXXXXX   XXXXXXXXXXXX
+g) Chaos Strike              38 35   90    XXXXXXXXXXXX   XXXXXXXXXXXX
+h) Mana Storm                42 30   95    XXXXXXXXXXXX   XXXXXXXXXXXX
+
+
+
+Book 1: Beginners Handbook
+                               PRIEST        PALADIN
+   Prayer                   Lvl SP %fail   Lvl SP %fail
+   -----------------------  ------------   ------------
+a) Detect Evil                1  1   10      1  1   30
+b) Cure Light Wounds          1  2   15      2  2   35
+c) Bless                      1  2   20      3  3   35
+d) Remove Fear                1  2   25      5  3   35
+e) Call Light                 3  2   25      5  4   35
+f) Find Traps                 3  3   27      7  5   40
+g) Detect Doors/Stairs        3  3   27      7  5   40
+h) Slow Poison                3  3   28      9  7   40
+
+Book 2: Words of Wisdom
+                               PRIEST        PALADIN
+   Prayer                   Lvl SP %fail   Lvl SP %fail
+   -----------------------  ------------   ------------
+a) Scare Monster              5  4   29      9  7   40
+b) Portal                     5  4   30      9  8   40
+c) Cure Serious Wounds        5  4   32     11  9   40
+d) Chant                      5  5   34     11 10   45
+e) Sanctuary                  7  5   36     11 10   45
+f) Satisfy Hunger             7  5   38     13 10   45
+g) Remove Curse               7  6   38     13 11   45
+h) Resist Heat and Cold       7  7   38     15 13   45
+
+Book 3: Chants and Blessings
+                               PRIEST        PALADIN
+   Prayer                   Lvl SP %fail   Lvl SP %fail
+   -----------------------  ------------   ------------
+a) Neutralize Poison          9  6   38     15 15   50
+b) Orb of Draining            9  7   40     17 15   50
+c) Cure Critical Wounds       9  7   38     17 15   50
+d) Sense Invisible           11  8   42     19 15   50
+e) Protection from Evil      11  8   42     19 15   50
+f) Earthquake                11  9   55     21 17   50
+g) Sense Surroundings        13 10   45     23 17   50
+h) Cure Mortal Wounds        13 11   45     25 20   50
+i) Turn Undead               15 12   50     27 21   50
+
+Book 4: Exorcism and Dispelling
+                               PRIEST        PALADIN
+   Prayer                   Lvl SP %fail   Lvl SP %fail
+   -----------------------  ------------   ------------
+a) Prayer                    15 14   50     29 22   50
+b) Dispel Undead             17 14   55     31 24   60
+c) Heal                      21 16   60     33 28   60
+d) Dispel Evil               25 20   70     35 32   70
+e) Glyph of Warding          33 55   90    XXXXXXXXXXXX
+f) Holy Word                 39 32   95    XXXXXXXXXXXX
+
+Book 5: Ethereal Openings
+                               PRIEST        PALADIN
+   Prayer                   Lvl SP %fail   Lvl SP %fail
+   -----------------------  ------------   ------------
+a) Blink                      3  3   50      7  7   50
+b) Teleport Self             10 10   50     20 20   50
+c) Teleport Other            20 20   80     25 25   80
+d) Teleport Level            30 40   75     35 50   75
+e) Word of Recall            35 50   75     40 60   75
+f) Alter Reality             40 60   75    XXXXXXXXXXXX
+
+Book 6: Godly Insights
+                               PRIEST        PALADIN
+   Prayer                   Lvl SP %fail   Lvl SP %fail
+   -----------------------  ------------   ------------
+a) Detect Monsters            3  3   50      5  5   50
+b) Detection                 10 10   80     15 15   80
+c) Perception                20 20   80     25 25   80
+d) Probing                   25 10   80     30 15   80
+e) Clairvoyance              35 50   80    XXXXXXXXXXXX
+
+Book 7: Purifications and Healing
+                               PRIEST        PALADIN
+   Prayer                   Lvl SP %fail   Lvl SP %fail
+   -----------------------  ------------   ------------
+a) Cure Serious Wounds       15  5   50     17 15   50
+b) Cure Mortal Wounds        17  7   60     23 25   60
+c) Healing                   30 50   80    XXXXXXXXXXXX
+d) Restoration               35 70   90     45 80   90
+e) Remembrance               35 70   90    XXXXXXXXXXXX
+
+Book 8: Holy Infusions
+                               PRIEST        PALADIN
+   Prayer                   Lvl SP %fail   Lvl SP %fail
+   -----------------------  ------------   ------------
+a) Unbarring Ways             5  6   50     10 16   50
+b) Recharging                15 20   80     25 30   80
+c) Dispel Curse              25 40   80    XXXXXXXXXXXX
+d) Enchant Weapon            35 50   80     40 70   80
+e) Enchant Armour            37 60   85     42 80   85
+f) Elemental Brand           45 95   85     47 95   85
+
+Book 9: Wrath of God
+                               PRIEST        PALADIN
+   Prayer                   Lvl SP %fail   Lvl SP %fail
+   -----------------------  ------------   ------------
+a) Dispel Undead             15  7   70     20 13   70
+b) Dispel Evil               20 10   75    XXXXXXXXXXXX
+c) Banish Evil               25 25   80     30 35   80
+d) Word of Destruction       35 35   80     40 40   80
+e) Annihilation              45 60   75    XXXXXXXXXXXX

@@ -1,0 +1,10 @@
+This is the Debian GNU/Linux prepackaged version of the documentation
+for the rogue-like game angband.  Angband has been written by several
+generations of programmers over the years, and is derived from an
+earlier game called moria, and the documentation has been (often
+haphazardly) accumulated over time as well.
+
+This package was put together by Manoj Srivastava <srivasta@debian.org>, 
+from sources retrieved from directories Help-Help and Help-Info under
+<URL:ftp://export.andrew.cmu.edu/angband/> 
+

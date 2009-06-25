@@ -1,0 +1,160 @@
+angband-doc (3.0.3.5) unstable; urgency=low
+
+  * New bug fixing release
+  * [f7c596d]: [angband-doc]: Updated Standards version and git url
+  * [3228457]: [angband-doc]: Fix names of doc-base files
+    Bug fix: "doc-base control files misnamed", thanks to Matthew Vernon
+                                                          (Closes: #527953).
+
+ -- Manoj Srivastava <srivasta@debian.org>  Thu, 25 Jun 2009 09:25:54 -0500
+
+angband-doc (3.0.3.4) unstable; urgency=low
+
+  * Record the fact that this package has moved to a new git repository.
+  * Move to the new, make -j friendly targets in debian/rules.
+  * Bug fix: "Error in `/usr/share/doc-base/angband-doc';, line 21:
+    format html already defined", thanks to Trent W\. Buck
+                                                        (Closes: #446091).
+  * Bug fix: "Typo: /usr/share/share", thanks to Trent W\. Buck
+                                                        (Closes: #446089).
+
+ -- Manoj Srivastava <srivasta@debian.org>  Mon, 02 Jun 2008 14:54:01 -0500
+
+angband-doc (3.0.3.3) unstable; urgency=low
+
+  * Bug fix: "angband-doc: Uneccessary call to update-menus", thanks to
+    Stefan Huehner                                        (Closes: #356860).
+  * Refreshed some spoilers to more closely match the current version of
+    the game.
+
+ -- Manoj Srivastava <srivasta@debian.org>  Mon, 10 Apr 2006 18:48:40 -0500
+
+angband-doc (3.0.3.2) unstable; urgency=low
+
+  * Removed the old dwww/menu entry. Now we use the preferred doc-base
+    registration method.
+
+ -- Manoj Srivastava <srivasta@debian.org>  Wed, 23 Jun 2004 00:02:37 -0500
+
+angband-doc (3.0.3.1) unstable; urgency=low
+
+  * Moved over to the new build system, and arch
+  * Updated the documentation files
+  * Try harder to work around umask issues.
+
+ -- Manoj Srivastava <srivasta@debian.org>  Thu, 19 Feb 2004 14:51:58 -0600
+
+angband-doc (2.93.3) unstable; urgency=low
+
+  * Removed dependency on fileutils                          closes: Bug#175695
+  * Fix the menu entry                                       closes: Bug#179493
+
+ -- Manoj Srivastava <srivasta@acm.org>  Sun,  9 Feb 2003 13:13:45 -0600
+
+angband-doc (2.93.2) unstable; urgency=low
+
+  * use which instead of command -v
+  * No longer install /usr/doc symlink. Upgraded to the latest policy
+    version. 
+
+ -- Manoj Srivastava <srivasta@debian.org>  Mon, 11 Nov 2002 23:06:40 -0600
+
+angband-doc (2.93.1) unstable; urgency=low
+
+  * Updated the FAQ and added a strategy guide to the spoilers.
+  * Fixed the doc location to /usr/share/doc                 closes: Bug#127082
+  * Fixed lintian warnings, accomodated the move of angband dirs
+
+ -- Manoj Srivastava <srivasta@debian.org>  Fri, 25 Jan 2002 17:45:08 -0600
+
+angband-doc (2.83.7) frozen unstable; urgency=low
+
+  * Use absolute links when related links would not work, for the
+    /usr/doc/ symlink.
+  * Added a dependency on fileutiles >=4.0, since the package would fail
+    to install with older fileutils.
+
+ -- Manoj Srivastava <srivasta@debian.org>  Tue, 28 Mar 2000 03:50:26 -0600
+
+angband-doc (2.83.6) frozen unstable; urgency=low
+
+  * Fixed an upgrade bug when /usr/doc happens to be a symlink, and does
+    not point to /usr/share/doc. A couple of people were bitten by this.  
+    closes: Bug#58121, Bug#58123
+
+ -- Manoj Srivastava <srivasta@debian.org>  Mon, 28 Feb 2000 22:27:05 -0600
+
+angband-doc (2.83.5) frozen unstable; urgency=low
+
+  * Forgot to mark the last upgrade as marked for frozen as well. For the
+    release maintainer:
+  * The postinst was vulnerable to being affected by symlinks (if, for
+    some reason, the prerm failed). This has happended for latex2html; and
+    created a grave bug. 
+  * There was a bug in the postinst in a case statement, that caused
+    installation to fail for certain situations.
+  * Also fixed an lintian warning
+
+ -- Manoj Srivastava <srivasta@debian.org>  Wed,  9 Feb 2000 19:01:29 -0600
+
+angband-doc (2.83.4) unstable; urgency=low
+
+  * The postinst was vulnerable to being affected by symlinks (if, for
+    some reason, the prerm failed). This has happended for latex2html; and
+    created a grave bug. 
+  * There was a bug in the postinst in a case statement, that caused
+    installation to fail for certain situations.
+  * Also fixed an lintian warning
+
+ -- Manoj Srivastava <srivasta@debian.org>  Tue,  8 Feb 2000 20:07:20 -0600
+
+angband-doc (2.83.3) unstable; urgency=low
+
+  * Fixed typo in README. Discovered by Lintian.
+  * Added doc-base support.
+  * Updated package scripts to my new standard set
+  * Updated standards version (no changes required)
+
+ -- Manoj Srivastava <srivasta@debian.org>  Sat, 27 Feb 1999 12:51:20 -0600
+
+angband-doc (2.83.2) frozen unstable; urgency=low
+
+  * Changed the changelog  file to changelog (not .Debian)
+
+ -- Manoj Srivastava <srivasta@debian.org>  Tue,  7 Apr 1998 01:27:21 -0500
+
+angband-doc (2.83.1) unstable; urgency=low
+
+  * New upstream docs, corresponding to angband 2.83. Added guide.spo, and
+    new FAQ
+  * Fixed typos in the long description. Closes: Bug#18872
+
+ -- Manoj Srivastava <srivasta@debian.org>  Thu,  5 Mar 1998 18:11:27 -0600
+
+angband-doc (2.81.4) unstable; urgency=low
+
+  * Make sure the copyright file is not compressed. closes:Bug#14376
+
+ -- Manoj Srivastava <srivasta@debian.org>  Wed,  5 Nov 1997 11:21:54 -0600
+
+angband-doc (2.81.3) unstable; urgency=low
+
+  * Fixed a minor typo.
+
+ -- Manoj Srivastava <srivasta@debian.org>  Thu, 8 May 1997 01:18:34 -0500
+
+angband-doc (2.81.2) unstable; urgency=low
+
+  * Added menu entry for the HTML documentation.
+
+ -- Manoj Srivastava <srivasta@debian.org>  Wed, 7 May 1997 23:00:13 -0500
+
+angband-doc (2.81.1) unstable; urgency=low
+
+  * Initial Release.
+
+ -- Manoj Srivastava <srivasta@debian.org>  Tue, 6 May 1997 20:41:55 -0501
+
+Local variables:
+mode: debian-changelog
+End:

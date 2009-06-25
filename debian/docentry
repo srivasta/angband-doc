@@ -1,0 +1,23 @@
+Document: angband-doc
+Title: Documentation for Angband
+Author: Various
+Abstract: Angband is a single-player, text-based, dungeon 
+ simulation derived from the game Moria, which was in turn based on 
+ Rogue. This package contains additional documentation and spoilers 
+ for the game. 
+ Angband has been written by several generations of programmers over 
+ the years, and is derived from an earlier game called Moria, and the 
+ documentation has been (often haphazardly) accumulated over time as 
+ well.
+Section: Games/Adventure
+
+Format: HTML
+Index: /usr/share/doc/angband-doc/index.html
+Files: /usr/share/doc/angband-doc/news.html
+       /usr/share/doc/angband-doc/bugs.html
+       /usr/share/doc/angband-doc/mods.html
+       /usr/share/doc/angband-doc/auto.html
+       /usr/share/doc/angband-doc/email.html
+       /usr/share/doc/angband-doc/links.html
+       /usr/share/doc/angband-doc/files.html 
+

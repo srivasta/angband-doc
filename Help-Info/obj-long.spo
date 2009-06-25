@@ -1,0 +1,1888 @@
+OBJ-LONG.SPO, version 3.0.5, for Angband 3.0.5 (all systems)
+Release Date     : June 3, 2005
+Author           : Hugo Kornelis (angband@hugo.isdit.com)
+
+Based on OBJ-LONG.SPO, version 2.30, for Angband 2.7.9v6 (all systems)
+Release Date     : September 2, 1996
+Author           : Stephen S. Lee (lee9@fas.harvard.edu)
+with the help of : Leonard Dickens (leonard@alw.nih.gov)
+                   Craig Lewis (clewis@psl.nmsu.edu)
+
+
+This spoiler describes all major properties of all ordinary objects in
+Angband.  This is the verbose version of the object list; if all you
+wish is a list of prices and levels, you might be better off looking
+at the much shorter OBJ-DESC.SPO.  Artifacts are described in
+ARTIFACT.SPO, and ego-items are described in OBJ-GOOD.SPO.
+
+Please notify the author of any errors (however minor) that you find.
+Also, it is my intention to provide complete information rather than
+easy-to-understand information, so this spoiler is necessarily
+verbose.  Suggestions to improve the format of this spoiler are
+welcome (especially if they help make this spoiler easier to read).
+
+This spoiler was written for Angband 3.0.5.  If you want only the most
+accurate information for another version of Angband, you may wish to
+acquire another version of this spoiler.
+
+
+NOTES ON NOTATION
+-----------------
+
+The notation "XdY" indicates a number obtained by rolling an Y-sided
+die X times.  (Thus 4d6 indicates a number from 4 to 24).
+
+The notation MB(M) indicates an integer between 0 and M inclusive that
+is dependent on dungeon depth and has a normal distribution that is
+centered about M*(Object Generation Level/127), and a standard
+deviation of M/4 (subject to the range constraints).
+
+Here is a chart (stolen from object2.c) that shows the probabilities
+(in percent, to two decimal places) of the possible values of MB(10)
+by dungeon depth:
+
+Dungeon  <--------------------- Value of MB(10) --------------------->
+depth    0     1     2     3     4     5     6     7     8     9    10
+----------------------------------------------------------------------
+  0  66.37 13.01  9.73  5.47  2.89  1.31  0.72  0.26  0.12  0.09  0.03
+  8  46.85 24.66 12.13  8.13  4.20  2.30  1.05  0.36  0.19  0.08  0.05
+ 16  30.12 27.62 18.52 10.52  6.34  3.52  1.95  0.90  0.31  0.15  0.05
+ 24  22.44 15.62 30.14 12.92  8.55  5.30  2.39  1.63  0.62  0.28  0.11
+ 32  16.23 11.43 23.01 22.31 11.19  7.18  4.46  2.13  1.20  0.45  0.41
+ 40  10.76  8.91 12.80 29.51 16.00  9.69  5.90  3.43  1.47  0.88  0.65
+ 48   7.28  6.81 10.51 18.27 27.57 11.76  7.85  4.99  2.80  1.22  0.94
+ 56   4.41  4.73  8.52 11.96 24.94 19.78 11.06  7.18  3.68  1.96  1.78
+ 64   2.81  3.07  5.65  9.17 13.01 31.57 13.70  9.30  6.04  3.04  2.64
+ 72   1.87  1.99  3.68  7.15 10.56 20.24 25.78 12.17  7.52  4.42  4.62
+ 80   1.02  1.23  2.78  4.75  8.37 12.04 27.61 18.07 10.28  6.52  7.33
+ 88   0.70  0.57  1.56  3.12  6.34 10.06 15.76 30.46 12.58  8.47 10.38
+ 96   0.27  0.60  1.25  2.28  4.30  7.60 10.77 22.52 22.51 11.37 16.53
+104   0.22  0.42  0.77  1.36  2.62  5.33  8.93 13.05 29.54 15.23 22.53
+112   0.15  0.20  0.56  0.87  2.00  3.83  6.86 10.06 17.89 27.31 30.27
+120   0.03  0.11  0.31  0.46  1.31  2.48  4.60  7.78 11.67 25.53 45.72
+128   0.02  0.01  0.13  0.33  0.83  1.41  3.24  6.17  9.57 14.22 64.07
+
+
+OBJECT GENERATION
+-----------------
+
+Angband normally generates objects with a level between 0 and the
+maximum object generation level.  The maximum object generation level
+is usually equal to the current dungeon level (the town being level 0),
+but there are exceptions:
+* Objects found in a chest are generated with a maximum object
+  generation level equal to the "power" of the chest + 10.
+* Objects dropped by a monster that does not have a good or
+  exceptional treasure drop are generated with a maximum object
+  generation level equal to the avarage of the current dungeon level
+  and the level of the monster.
+* Objects dropped by a monster that do have a good or exceptional
+  treasure drop are generated with a maximum object generation level
+  equal to the avarage of the current dungeon level and the level of
+  the monster + 10.
+* Objects acquired by reading a Scroll of Acquirement or *Acquirement*
+  are generated with a maximum object generation level equal to the
+  current dungeon level + 10.
+
+For ordinary objects, there is a 1 in 1000 chance that the game will
+try to generate one of the special artifacts (i.e. the artifact rings,
+amulets, and lights).  If an object of good or exceptional quality is
+generated, this chance is boosted to 1 in 10.  See OBJ-GOOD.SPO for
+more details.
+
+If the maximum object generation level is not 0, there is a 5% chance
+that an object will be created "out of depth", that is, with a higher
+maximum level.  Again, the actual object created may be of any level
+from 0 to this higher maximum.
+
+The out-of-depth generation level is obtained by applying the
+following formula:
+ out-of-depth level = (max. object generation level * 128 / 1d128) + 1
+
+Hence, the out-of-depth level will always be at least 1 higher than
+the normal maximum object generation level while even at dungeon
+level 1, there is a (very small) chance to get an object with object
+level 100.
+
+Angband then creates a list of all objects that are not above the
+maximum object generation level (or the out-of-depth level if
+applicable).  Chests are omitted from this list when you are opening a
+chest.  If an item of good or exceptional quality is created (based on
+a monster's treasure drop or when reading a Scroll of Acquirement or
+*Acquirement*), the list is limited to weapons and armour without
+penalty (i.e. no broken dagger or rusty armour), arrows, bolts,
+spellbooks of level 40 and beyond, Ring of Speed, Amulet of Devotion,
+Amulet of the Magi, Amulet of Trickery, and Amulet of Weaponmastery.
+
+The rarity of different objects is reflected in the number of times
+each object is added to the list.  Objects with a rarity of 1 are
+added 100 times to the list, other objects are added only
+(100 / rarity) times.
+
+NOTE: Some objects have a rarity that is not a perfect divider of 100.
+      I suspect that this stems from changes to the object generation
+      code not being reflected in the object list.
+
+>From this lists, Angband picks one (40% of the time), two (50% of the
+time) or three (10% of the time) objects.  The object with the highest
+object level is then created. Ordinarily, the game will generate only
+a single object at a given location.  The exception to this rule is
+that spikes and ammunition are generated in groups of 6d7.
+
+For some of the objects below, two or more level/rarity pairs are
+given for an item.  In this case the object can be generated as an
+object of any of the given levels (thus making the object more
+common), although there is no functional difference between objects
+generated at different levels.
+
+NOTE: The level given in this spoiler file is the dungeon level where
+      the object is likely to be found, as explained above.  All
+      Angband objects also have an object level.  This is used to
+      determine how hard it is to use an object.  Almost all objects
+      have an object level equal to the (first) generation level, but
+      there are a few exceptions.  A full listing of objects with
+      their object level is in OBJ-DESC.SPO.
+
+
+OBJECT QUALITY
+--------------
+
+Angband generates objects of five different levels of quality: cursed,
+normal, good, great, and artifact.  All potions, scrolls, wands,
+staves, rods, food, chests, and junk are considered normal.  Rings and
+amulets may be cursed, normal, or artifacts; weapons and armour may be
+of any of the five levels of quality.
+
+When Angband generates a weapon or piece of armour, it is normal by
+default (having no magical bonuses or extra powers).  It may pass a
+roll to qualify as a good item; the deeper the dungeon level, the
+higher the likelihood.  (For more information on good items, see
+OBJ-GOOD.SPO).  An object failing the goodness roll then has a chance
+to be cursed based on another roll.
+
+
+OBJECT PRICING
+--------------
+
+The base price of an object is given for all items listed here.  For
+any item, each bonus point to-hit, to-dam, and to AC adds 100 gp to
+the value of an item (unless the item is ammunition, in which case
+only 5 gp per point is added).  Magical bonus points that confer
+bonuses to strength, intelligence, wisdom, dexterity, constitution,
+or charisma add value to an item at a rate of 200 gp per point per
+statistic.  (Therefore, an item that grants +3 to strength, dexterity,
+and constitution will have 1800 gp added to its value).
+Each plus to stealth or searching adds 100 gp, and each plus to
+infravision or tunneling (including the normal tunneling bonus for
+diggers) adds 50 gp, in a similar manner.
+
+Weaponry that has base damage above normal will have 100 gp (5 gp for
+ammo) times the difference in damage dice times the number of damage
+sides added to the value.  (i.e. a flail with base damage 4d6 instead
+of 2d6 would have an added value of 100*(4-2)*6=1200 gp).
+
+For weapons with extra attacks, a bonus of 2000 gp per extra attack
+is added to the value of the weapon.  For objects that grant speed,
+each plus to speed adds 30000 gp to the value of the item.
+
+Each charge of a wand or staff adds 5% to the value of the wand of
+staff.
+
+Good and great items may have price bonuses depending on the item (see
+OBJ-GOOD.SPO for these).  Each individual artifact has its own special
+price.
+
+If you sell an item that you have not identified, the object will
+usually sell for lower than its actual value.  Unidentified weapons
+and armour sell for an amount equal to that of a normal, non-magical
+piece of equipment of that sort.  If you know the type of a wand or
+staff, but not the number of charges, it is treated as if it had no
+charges.  Otherwise, unidentified objects have the following values:
+
+Type of Item    Price
+Mushroom            5
+Scroll             20
+Potion             20
+Ring               45
+Amulet             45
+Wand               50
+Staff              70
+Rod                90
+
+During actual trading, the base price is affected by your charisma,
+your race, the shopkeeper's race, and whether you are buying or
+selling.
+
+
+ENCHANTING WEAPONS AND ARMOUR
+-----------------------------
+
+Enchanting weaponry and armour is a relatively simple affair in a
+high-magic game such as Angband; there are scrolls, spells, and
+prayers that will do the enchanting for you.
+
+Enchanting will attempt to improve the to-hit or to-dam bonus of a
+weapon (any kind may be enchanted), or the magical AC bonus of a piece
+of armour.  Some forms of enchanting will try to raise the magical
+bonuses several times.  Also, the to-hit and to-dam bonuses on a
+weapon are considered independently.
+
+To determine the chance of a successful enchant, take the current
+magical bonus and find the base chance of success on the following
+table.
+
+Current     Base         Current     Base
+Bonus       Success      Bonus       Success
+-------------------      -------------------
++0 or less  100.0%       +8           30.0%
++1           99.0%       +9            5.0%
++2           95.0%       +10           1.0%
++3           90.0%       +11           0.8%
++4           80.0%       +12           0.5%
++5           70.0%       +13           0.3%
++6           60.0%       +14           0.1%
++7           50.0%       +15 or more   0.0%
+
+If the object being enchanted is an artifact, the chance for success
+is cut in half.
+
+Enchanting a stack of weapons or armour is more difficult.  For
+anything but ammunition, the chance for a successful enchantment is
+divided by a number equal to the number of objects in the stack.
+(Example: enchanting 10 +0,+0 long swords will succeed only 10% of the
+time).
+For ammunition, 1d(pieces of ammo) is rolled; if this number is 20 or
+less, and the base success percentage roll succeeds, the enchantment
+is successful.  (Example: a scroll of Enchant Weapon To-Dam used on a
+stack of 30 +6,+6 bolts will pass this first roll 20 in 30 times; then
+the 60% chance for succesfully enchanting from +6 has to be passed as
+well. These two rolls combined take the chance of succes to 40%).
+
+If an enchantment brings the magical bonus of an item to +0 or
+greater, it has a chance of breaking any curses present on the item.
+(Heavy curses may be broken in this way, but permanent curses may not
+be).  The chance of breaking the curse is 25% for each successful
+to-hit or to-dam enchantment of a weapon, and also 25% for each
+successful enchantment of armour.
+
+
+DURATION AND STACKING OF EFFECTS
+--------------------------------
+
+For equippable items, most effects are effective as long as the item
+is equipped (worn or wielded).  These effects are called permanent.
+
+For consumables, effects can be permanent (lasting from the moment the
+item is used until negated by some other effect), instantaneous, or
+temporary (lasting a limited number of turns).  The duration of a
+temporary effect is cumulative unless noted otherwise (i.e. eating a
+Mushroom of Blindness while already blind will increase the duration
+of your blindness by another 199+1d200 turns).
+
+Some equippable items can be activated.  The effect of an activation
+is either instantaneaous (e.g. the breath activition of a Dragon Scale
+Mail) or temporary (e.g. the fire resitance of a Ring of Flames).  All
+the notes about temporary effects of consumables apply to temporary
+effects of activations as well.
+
+Any bonus or penalty to your abilities from an equippable item will
+always be cumulative with bonuses and penalties from other equippable
+items and with temporary bonuses and penalties from consumables (i.e.
+wearing both a Ring of Speed (+5) and Boots of Speed (+2) will bring
+your speed to +7; quaffing a Potion of Slowness while wearing these
+items will reduce your speed to (+2+5-10)=-3 for the duration of the
+slowing effect).
+
+All other effects of equippable items are not cumulative.  Wearing two
+Rings of Resist Fire gives exactly the same amount of fire protection
+as wearing one Ring of Resist Fire; wearing a Ring of Sustain Strength
+is pointless if you are already wearing an Amulet of Sustenance.
+
+In the case of resistance to elemental attacks (acid, fire, cold, and
+lightning) or poison, a temporary resistance can be combined with a
+permanent resistance to increase the amount of protection.  A Ring of
+Resist Fire reduces fire damage to 33% of normal damage.  Quaffing a
+Potion of Resist Heat will also (temporarily) reduce fire damage to
+33% of normal damage.  But quaffing a Potion of Resist Heat while
+wearing a Ring of Resist Fire will combine these effects for a total
+reduction of any fire damage to only 11% of normal damage.
+
+
+STANDARD CHANCE TO RESIST
+-------------------------
+
+The more powerful monsters are less likely to be affected by many of
+the effects of wands, staves, and rods.  The standard chance to resist
+an effect is based on the monster's monster level and your character
+level:
+
+* Monster levels up to and including 11 have no chance to resist;
+* Monster levels from 12 up to and including your character level
+  resist if 1d(character level -10) < monster level - 10;
+* Monster levels > your character level always resist.
+
+In the object descriptions below, "standard chance to resist" is used
+to indicate that this chance applies to the particular effect.
+
+
+DESTRUCTION OF OBJECTS
+----------------------
+
+All objects (except artifacts) can be destructed by using the command
+to destroy an object ('k' in the original keyset; ^D in the roguelike
+keyset).  But objects can also be destroyed by the side-effects of
+certain attacks, or as a result of throwing or firing them.
+
+(a) Objects on the floor
+
+Each object on the floor (except artifacts) can be destroyed when it
+is caught in the area of effect of a beam or ball attack (breath or
+spell).
+
+* Acid, cold, fire, and lightning destroys each object that can be
+  harmed by that element, unless it also ignores that element.
+* Force, ice, shards, or sound destroys each object that would be
+  destroyed by cold.
+* Mana destroys all objects.
+* Meteor attack destroys each object that would be destroyed by cold
+  or by fire (or both).
+* Orb of Draining destroys all cursed objects.
+* Plasma destroys each object that would be destroyed by acid or by
+  fire (or both).
+
+The object listing below details which objects can be harmed by which
+of the elements (acid, cold, fire, and lightning).
+
+(b) Objects in your inventory
+
+If you are hit with an attack that is based on acid, cold, fire, or
+lightning, and you are not immune to that element, than each object in
+your inventory that can be harmed by that element has a chance to be
+destroyed, unless it ignores that element.  The chance of destruction
+is 1% if you are hit for less than 30 hit points, 2% for 30 through 59
+hit points, or 3% if the hit is for 60 hit points or more.  For a
+stack of objects, the chance to be destroyed is tested for each
+individual item in the stack.  Note that objects that you are wearing
+or wielding in your equipment are always safe!
+
+The object listing below details which objects can be harmed by which
+of the elements (acid, cold, fire, and lightning).
+
+(c) Thrown or fired objects
+
+If you throw an object or fire ammunition with your missile weapon,
+the object thrown or fired can be destroyed.  If the objects reaches
+the target or the maximum range without encountering any target, it
+won't be destroyed.  Otherwise, the chance of destruction is:
+
+100% for Food, Mushrooms, Potions, Flasks of Oil, Sticks, and Shards;
+50% for Scrolls, Torches, Lanters, Bones, Skulls, and Skeletons;
+35% for Arrows;
+25% for Shots, Bolts, Pebbles, Spikes, and Wands;
+and 10% for all other objects.
+
+
+EXPLANATION OF THE TABLES
+-------------------------
+
+In the tables below, all objects of Angband are listed with their
+properties.  The following column headings will be used:
+
+Base-AC:The base armour class you get when wearing a specific type of
+        armour.
+Charges:The number of charges a wand or staff is generated with.
+Dam:    Damage.  The amount of damage inflicted on a succesful hit
+        (with a melee weapon being wielded, ammunition being fired or
+        any object being thrown).  If all objects in a table inflict
+        the same amount of damage, that amount is stated in the
+        explanation above the table and omitted from the table.
+Dig:    Dig bonus.  The bonus applied to digging when using a digger.
+Items:  The number of items in a chest.
+Level:  Object level, as explained in "On the generation of objects".
+Nutr:   Nutritional value.  This amount is added to the food counter
+        when the object is eaten of quaffed.  This property is only
+        included in tables for food or potions.
+Price:  Base price of the object, as explained in "Object pricing".
+Power:  In the table for missile weapon, this indicates the shot power
+        which is applied as a multiplier on damage inflicted by shots
+        from a particular missile weapon.
+        In the table for chests, this indicates the maximum power a
+        chest may have, as explained in "On the generation of objects"
+        and in the explanation above the table for chests.
+Rarity: Object rarity, as explained in "On the generation of objects".
+Rechrg: Recharge time.  The number of turns a rod or DSM needs to
+        recharge before it can be zapped or activated again.
+Rng:    Range.  Indicates the maximum amount of squares that a shot
+        fired from a missile weapon will travel.
+To-Hit: The penalty to hit inflicted by wearing a specific type of
+        body armour.
+Type:   The type designation for a melee weapon.  See the explanation
+        above the table for melee weapons.
+Wght:   Weight, in pounds.  If all objects in a table weigh the same,
+        that weight is stated in the explanation above the table and
+        omitted from the table.
+
+
++--------------------------------------------------------------------+
+|                       THE OBJECTS OF ANGBAND                       |
++--------------------------------------------------------------------+
+
+ORDINARY FOOD
+-------------
+
+These food items do no damage when thrown and can't be harmed by acid,
+cold, fire, or lightning.
+
+                                   Nutr  Wght     Level  Rarity  Price
+Hard Biscuit                        500   0.2       N/A     N/A      1
+Pint of Fine Ale                    500   0.5       N/A     N/A      1
+Pint of Fine Wine                  1000   1.0       N/A     N/A      2
+Strip of Beef Jerky                1500   0.2       N/A     N/A      2
+Slime Mold                         3000   0.5         1       1      2
+Ration of Food                     5000   1.0    0/5/10   1/1/1      3
+Piece of Elvish Waybread           7500   0.3   5/10/20   1/1/1     10
+  Cures 4d8 points of damage and neutralizes poison.
+
+
+MUSHROOMS
+---------
+
+Mushrooms do no damage when thrown, except where otherwise indicated,
+and can't be harmed by acid, cold, fire, or lightning.
+
+Note that all effects and durations are cumulative, unless explicitly
+noted otherwise. E.g. eating a Mushroom of Blindness while already
+blind will extend the duration of the blindness with another 199+1d200
+turns.
+
+                                   Nutr  Wght     Level  Rarity  Price
+Mushroom of Blindness               500   0.1         5       1      0
+  Causes blindness that lasts for 199+1d200 turns, unless you have
+  resistance to blindness.
+Mushroom of Confusion               500   0.1         5       1      0
+  Induces confusion that lasts for 9+1d10 turns, unless you have
+  resistance to confusion.
+Mushroom of Paranoia                500   0.1         5       1      0
+  Induces fear that lasts for 9+1d10 turns, unless you have resistance
+  to fear.
+Mushroom of Poison                  500   0.1       5/5     1/1      0
+  Poisons you for 9+1d10 turns, unless you have resistance to poison.
+Mushroom of Hallucination           500   0.1        10       1      0
+  Causes you to hallucinate for 249+1d250 turns, unless you have
+  resistance to chaos.
+Mushroom of Sickness                500   0.1        10       1      0
+  Inflicts 6d6 points of damage, and also reduces constitution by 2.5
+  to 5 percent, unless you have sustain constitution.
+Mushroom of Weakness                500   0.1        10       1      0
+  Inflicts 6d6 points of damage, and also reduces strength by 2.5 to 5
+  percent, unless you have sustain strength.
+Mushroom of Naivety                 500   0.1        15       1      0
+  Inflicts 8d8 points of damage, and also reduces wisdom by 2.5 to 5
+  percent, unless you have sustain wisdom.
+Mushroom of Stupidity               500   0.1        15       1      0
+  Inflicts 8d8 points of damage, and also reduces intelligence by 2.5
+  to 5 percent, unless you have sustain intelligence.
+Mushroom of Paralysis               500   0.1        20       1      0
+  Induces paralysis that lasts for 9+1d10 turns, unless you have free
+  action.
+Mushroom of Cure Paranoia           500   0.1        10       1     25
+  Removes fear.
+Mushroom of Cure Blindness          500   0.1        10       1     50
+  Cures blindness.
+Mushroom of Cure Confusion          500   0.1        10       1     50
+  Cures confusion.
+Mushroom of Cure Poison             500   0.1        10       1     60
+  Neutralizes poison.
+Mushroom of Unhealth                500   0.1        15       1     50
+  Inflicts 10d10 points of damage, and also reduces constitution by
+  2.5 to 5 percent, unless you have sustain constitution.  Can be
+  thrown for 10d10 points of damage.
+Mushroom of Disease                 500   0.1        20       1     50
+  Inflicts 10d10 points of damage, and also reduces strength by 2.5 to
+  5 percent, unless you have sustain strength.  Can be thrown for
+  10d10 points of damage.
+Mushroom of Cure Serious Wounds     500   0.2        15       1     75
+  Cures 4d8 points of damage.
+Mushroom of Restore Constitution    500   0.1        20       1    350
+  Restores constitution to maximum if it is currently below maximum.
+Mushroom of Restore Strength        500   0.1        20       1    350
+  Restores strength to maximum if it is currently below maximum.
+Mushroom of Restoring               500   0.1  20/30/40   8/4/1   1000
+  Restores to maximum all stats that are currently below maximum.
+
+
+MELEE WEAPONS
+-------------
+
+The three types of melee weapons are designated thusly:
+  E = Edged Weapon
+  H = Hafted Weapon (may be equipped by priests without penalty)
+  P = Polearm or Axe
+
+All weapons may be thrown; this will do the same base damage as when
+wielding the weapon.  All melee weapons can be harmed by acid; hafted
+weapons, polearms and axes can also be harmed by fire.
+
+Broken daggers and broken swords normally have penalties of -2 to hit
+and -4 to damage.  All other weapons are normally +0 and +0.
+
+                               Type Dam  Wght     Level  Rarity  Price
+Broken Dagger                     E  1d1  0.5       0/5     2/2      1
+Broken Sword                      E  1d2  3.0       0/5     2/2      2
+Dagger                            E  1d4  1.2 0/5/10/20 1/1/1/1     10
+Main Gauche                       E  1d5  3.0         3       1     25
+Whip                              H  1d3  3.0         3       1     30
+Spear                             P  1d6  5.0         5       1     36
+Rapier                            E  1d6  4.0         5       1     42
+Small Sword                       E  1d6  7.5         5       1     48
+Sabre                             E  1d7  5.0         5       1     50
+Cutlass                           E  1d7 11.0         5       1     85
+Short Sword                       E  1d7  8.0         5       1     90
+Trident                           P  1d8  7.0         5       1    120
+Mace                              H  2d4 12.0         5       1    130
+Tulwar                            E  2d4 10.0         5       1    200
+Quarterstaff                      H  1d9 15.0        10       1    200
+Ball-and-Chain                    H  2d4 15.0        20       1    200
+War Hammer                        H  3d3 12.0         5       1    225
+Lance                             P  2d8 30.0        10       1    230
+Scimitar                          E  2d5 13.0        10       1    250
+Broad Sword                       E  2d5 15.0     10/15     1/1    255
+Long Sword                        E  2d5 13.0     10/20     1/1    300
+Broad Axe                         P  2d6 16.0        15       1    304
+Battle Axe                        P  2d8 17.0        15       1    334
+Awl-Pike                          P  1d8 16.0        10       1    340
+Bastard Sword                     E  3d4 14.0        15       1    350
+Flail                             H  2d6 15.0        10       1    353
+Pike                              P  2d5 16.0        15       1    358
+Glaive                            P  2d6 19.0        20       1    363
+Lucerne Hammer                    H  2d5 12.0        10       1    376
+Morning Star                      H  2d6 15.0        10       1    396
+Katana                            E  3d4 12.0        20       1    400
+Beaked Axe                        P  2d6 18.0        15       1    408
+Halberd                           P  3d5 19.0        25       1    430
+Great Axe                         P  4d4 23.0        40       1    500
+Lead-Filled Mace                  H  3d4 18.0        15       1    502
+Two-Handed Flail                  H  3d6 28.0        45       1    590
+Lochaber Axe                      P  3d8 25.0        45       1    750
+Two-Handed Sword                  E  3d6 20.0     30/40     1/1    775
+Scythe                            P  5d3 25.0        45       1    800
+Executioner's Sword               E  4d5 26.0        40       1    850
+Scythe of Slicing                 P  8d4 25.0        60       3   3500
+Blade of Chaos                    E  6d5 18.0        70       5   4000
+  Resist Chaos.
+Mace of Disruption                H  5d8 40.0        80       5   4300
+  Slay Undead.
+
+
+MISSILE WEAPONS
+---------------
+
+Missile weapons can be used to fire ammunition.  The ammunition type
+must match the missile weapon being wielded.  A sling fires pebbles
+and shots, a bow fires arrows and a crossbow fires bolts.  Missile
+weapons do no damage when thrown, and can be harmed by both acid and
+fire.
+
+When firing ammunition with a missile weapon, the to-hit and to-dam
+bonus of that weapon are added to your other bonuses and those of the
+missile.  The damage done is then multiplied by the power of the
+missile weapon, as shown in the table below.
+
+Example: You have a Ring of Damage (+4) and a Long Bow (x3) (+2,+2),
+and you are firing an Arrow (+1,+1).  The damage is (1d4 [arrow] +2
+[bow] +1 [arrow] +4 [ring]) x3 [bow].  Minimum damage is 24 hit
+points, maximum is 33.
+
+                              Power Rng  Wght     Level  Rarity  Price
+Sling                            x2  20   0.5      1/40     1/2      5
+Short Bow                        x2  20   3.0      3/50     1/2     50
+Long Bow                         x3  25   4.0     10/70     1/2    120
+Light Crossbow                   x3  25  11.0     15/60     1/2    140
+Heavy Crossbow                   x4  30  20.0     30/80     1/2    300
+
+
+AMMUNITION
+----------
+
+Ammunition is usually fired from a missile weapon, but it can also be
+thrown.  When thrown, the range is limited to 10 squares.  Thrown
+ammunition does the same amount of damage as fired ammunition, but
+bonuses from the missile weapon (including the power multiplier) do
+not apply.
+
+Shots and Pebbles are not harmed by acid, cold, fire, or lightning.
+Bolts can be harmed by acid.  Arrows can be harmed by both acid and
+fire.
+
+                                    Dam  Wght     Level  Rarity  Price
+Rounded Pebble                      1d2   0.4      0/10     1/2      1
+Iron Shot                           1d4   0.5      3/40     1/2      2
+Mithril Shot                        2d4   0.4     40/65     4/1     20
+  Ignore Acid; +5 to-hit and +5 to-dam.
+
+Arrow                               1d4   0.2   3/15/50   1/1/1      1
+Seeker Arrow                        4d4   0.2     55/80     2/2     20
+Mithril Arrow                       3d4   0.2     50/90     4/3     25
+  Ignore Acid, Fire.
+
+Bolt                                1d5   0.3   3/25/60   1/1/1      2
+Seeker Bolt                         4d5   0.3     65/90     2/2     25
+Mithril Bolt                        3d5   0.2     60/95     4/3     30
+  Ignore Acid, Fire.
+
+
+DIGGERS
+-------
+
+All diggers are capable of tunneling through rock.  The dig bonus
+listed is what a normal digger of its type has; magical diggers have
+appropriate bonuses or penalties.
+
+Diggers can also be used as a normal melee weapon or they can be
+thrown for the same damage.  They can't be harmed by acid, cold, fire,
+or lightning.
+
+                                Dig Dam  Wght     Level  Rarity  Price
+Shovel                           +1 1d2   6.0         5       2     10
+Pick                             +1 1d3  15.0        10       2     50
+Gnomish Shovel                   +2 1d2   6.0        20       3    100
+Dwarven Shovel                   +3 1d3  12.0        40       4    200
+Orcish Pick                      +2 1d3  18.0        30       3    300
+Dwarven Pick                     +3 1d4  20.0        50       4    600
+Mattock                          +3 1d8  25.0        50       2    700
+
+
+ARMOUR
+------
+
+You can wear up to six pieces of armour on different body parts (slots
+in the equipment list): slot g: on body (body armour or a robe), slot
+h: about body (a cloak), slot i: on arm (a shield), slot j: on head (a
+cap, helmet or crown), slot k: on hands (gloves, gauntlets or cesti)
+and slot l: on feet (boots).  Each of these types of armour has its
+own list.  Dragon Scale Mail is a special type of body armour; it is
+dealt with in a separate section following this one.
+Some of the heavier suits of body armour restrict movement, causing a
+penalty to-hit.  This penalty is listed in the table below.
+
+Most normal armour does not possess any bonus to armour class.  If a
+piece of armour does have a base bonus or penalty to armour class, it
+is listed after the base-AC of the armour.
+
+All types of armour can be harmed by acid.  In addition, all non-metal
+body armour, cloaks, gloves, gauntles, cesti, and boots can also be
+harmed by fire.
+
+G) ON BODY          To-Hit Base-AC  Dam  Wght     Level  Rarity  Price
+Filthy Rag               0   1,-1     0   2.0         0       1      1
+Robe                     0   2        0   2.0      1/50     1/1      4
+Soft Leather Armour      0   4        0   8.0         3       1     18
+Soft Studded Leather     0   5      1d1   9.0         3       1     35
+Hard Leather Armour     -1   6      1d1  10.0         5       1    150
+Hard Studded Leather    -1   7      1d2  11.0        10       1    200
+Leather Scale Mail      -1  11      1d1  14.0        15       1    450
+Metal Scale Mail        -2  13      1d4  25.0        25       1    550
+Rusty Chain Mail        -5  14,-8   1d4  20.0        25       1    550
+Chain Mail              -2  14      1d4  22.0        25       1    750
+Double Chain Mail       -2  16      1d4  25.0        30       1    850
+Augmented Chain Mail    -2  16      1d4  27.0        30       1    900
+Bar Chain Mail          -2  18      1d4  28.0        35       1    950
+Metal Brigandine Armour -3  19      1d4  29.0        35       1   1100
+Partial Plate Armour    -3  22      1d6  26.0        45       1   1200
+Metal Lamellar Armour   -3  23      1d6  34.0        45       1   1250
+Full Plate Armour       -3  25      2d4  38.0        45       1   1350
+Ribbed Plate Armour     -3  28      2d4  38.0        50       1   1500
+Mithril Chain Mail      -1  28      1d4  15.0        55       3   7000
+  Ignore Acid.
+Mithril Plate Mail      -3  35      2d4  30.0        60       3  15000
+  Ignore Acid.
+Adamantite Plate Mail   -4  40      2d4  42.0        75       4  20000
+  Ignore Acid.
+
+H) ABOUT BODY              Base-AC Dam   Wght     Level  Rarity  Price
+Cloak                         1      0    1.0      1/20     1/1      3
+Shadow Cloak                  6,+4   0    0.5        60       2   4000
+
+I) ON ARM                  Base-AC  Dam  Wght     Level  Rarity  Price
+Small Leather Shield          2     1d1   5.0         3       1     30
+Small Metal Shield            3     1d2   6.5        10       1     50
+Large Leather Shield          4     1d2  10.0        15       1    120
+Large Metal Shield            5     1d3  12.0        30       1    200
+Shield of Deflection         10,+10 1d1  10.0        70       4  10000
+  Ignore Acid.
+
+J) ON HEAD                 Base-AC  Dam  Wght     Level  Rarity  Price
+Hard Leather Cap              2       0   1.5         3       1     12
+Metal Cap                     3     1d1   2.0        10       1     30
+Iron Helm                     5     1d3   7.5        20       1     75
+Steel Helm                    6     1d3   6.0        40       1    200
+Iron Crown                    0     1d1   2.0        45       1    500
+Golden Crown                  0     1d1   3.0        45       1   1000
+  Ignore Acid.
+Jewel Encrusted Crown         0     1d1   4.0        50       1   2000
+  Ignore Acid.
+
+K) ON HANDS                Base-AC  Dam  Wght     Level  Rarity  Price
+Set of Leather Gloves         1       0   0.5         1       1      3
+Set of Gauntlets              2     1d1   2.5        10       1     35
+Set of Cesti                  5     1d1   4.0        50       1    100
+
+L) ON FEET                 Base-AC  Dam  Wght     Level  Rarity  Price
+Pair of Soft Leather Boots    2     1d1   2.0         3       1      7
+Pair of Hard Leather Boots    3     1d1   4.0         5       1     12
+Pair of Metal Shod Boots      6     1d1   8.0        20       1     50
+
+
+Dragon Scale Mail (DSM)
+-----------------------
+
+All suits of DSM have a weight of 20.0 pounds, inflict 2d4 points of
+damage when thrown, and can be harmed by acid.
+
+All Dragon Scale Mail may be periodically activated for a breath
+attack corresponding to the type of DSM; all of these attacks have a
+radius of 2 and do the indicated amount of damage at the center of the
+blast.  This damage is reduced by 50% at range 1, by 66% at range 2,
+and by 75% at range 3 (for large balls only).  More details on these
+activations can be found in the spoiler file OBJ-GOOD.SPO.
+
+How monster resistances or sensitivities reduce or increase the damage
+of these breath attacks will be described in the spoiler file
+MON-DAM.SPO.
+
+                               To-Hit Base-AC     Level  Rarity  Price
+Black Dragon Scale Mail            -2  30,+10        50       8  40000
+  Resist Acid; Ignore Elements;
+  Activates for breathe acid (130) every 449+1d450 turns.
+Blue Dragon Scale Mail             -2  30,+10        50       8  40000
+  Resist Lightning; Ignore Elements;
+  Activates for breathe lightning (100) every 449+1d450 turns.
+Bronze Dragon Scale Mail           -2  30,+10        50       8  40000
+  Resist Confusion; Ignore Elements;
+  Activates for breathe confusion (120) every 449+1d450 turns.
+Gold Dragon Scale Mail             -2  30,+10        50       8  40000
+  Resist Sound; Ignore Elements;
+  Activates for breathe sound (130) every 449+1d450 turns.
+Red Dragon Scale Mail              -2  30,+10        50       8  40000
+  Resist Fire; Ignore Elements;
+  Activates for breathe fire (200) every 449+1d450 turns.
+White Dragon Scale Mail            -2  30,+10        50       8  40000
+  Resist Cold; Ignore Elements;
+  Activates for breathe frost (110) every 449+1d450 turns.
+Green Dragon Scale Mail            -2  30,+10        60       8  60000
+  Resist Poison; Ignore Elements;
+  Activates for breathe poison (150) every 449+1d450 turns.
+Pseudo-Dragon Scale Mail           -2  30,+10        65      16  60000
+  Resist Light, Dark; Ignore Elements;
+  Activates for breathe light/darkness (200) every 299+1d300 turns.
+Chaos Dragon Scale Mail            -2  30,+10        80      16  80000
+  Resist Chaos, Disenchantment; Ignore Elements;
+  Activates for breathe chaos/disenchant (220) every 299+1d300 turns.
+Law Dragon Scale Mail              -2  30,+10        80      16  80000
+  Resist Sound, Shards; Ignore Elements;
+  Activates for breathe sound/shards (230) every 299+1d300 turns.
+Balance Dragon Scale Mail          -2  30,+10        95      32 100000
+  Resist Sound, Shards, Chaos, Disenchantment; Ignore Elements;
+  Activates for breathe balance (250) every 299+1d300 turns.
+Multi-Hued Dragon Scale Mail       -2  30,+10        90      32 150000
+  Resist Elements, Poison; Ignore Elements;
+  Activates for breathe multi-hued (250) every 224+1d225 turns.
+Power Dragon Scale Mail            -3  40,+15       100      64 300000
+  Resist Elements, Poison, Light, Dark, Blindness, Confusion, Sound,
+         Shards, Nexus, Nether, Chaos, Disenchantment;
+  Ignore Elements;
+  Activates for breathe the elements (300) every 299+1d300 turns.
+
+
+RINGS
+-----
+
+All rings have a weight of 0.2 pounds, do no damage when thrown, and
+can be harmed by lightning.
+
+The following footnotes apply:
+
+ * The ring may be cursed (50% chance), in which case the object will
+   have its bonus changed to a penalty and be rendered worthless.
+ # The ring is *always* cursed.
+** The ring has the power implied by the ring's name.  All powers are
+   explained in OBJ-GOOD.SPO.  Rings that resist an element will also
+   ignore that element.
+
+                                                  Level  Rarity  Price
+Ring of Aggravate Monster ** #                        5       1      0
+Ring of Stupidity #                                   5       1      0
+  - (1+MB(5)) to Intelligence.
+Ring of Teleportation ** #                            5       1      0
+Ring of Weakness #                                    5       1      0
+  - (1+MB(5)) to Strength.
+Ring of Woe #                                        50       1      0
+  - (1+MB(5)) to Wisdom, Charisma; -(5+MB(10)) to AC;
+  Teleportation.
+Ring of Feather Falling **                            5       1    200
+Ring of Searching *                                   5       1    250
+  + or - (1+MB(5)) to Searching.
+Ring of Slow Digestion **                             5       1    250
+Ring of Resist Cold **                               10       1    250
+Ring of Resist Fire **                               10       1    250
+Ring of See Invisible **                             30       1    340
+Ring of Sustain Charisma **                          20       1    400
+Ring of Sustain Constitution **                      20       1    400
+Ring of Sustain Dexterity **                         20       1    400
+Ring of Sustain Intelligence **                      20       1    400
+Ring of Sustain Strength **                          20       1    400
+Ring of Sustain Wisdom **                            20       1    400
+Ring of Protection *                                 10       1    500
+  + or - (5+1d5+MB(10)) to AC.
+Ring of Accuracy *                                   20       1    500
+  + or - (5+1d3+MB(7)) to-hit.
+Ring of Damage *                                     20       1    500
+  + or - (5+1d3+MB(7)) to-dam.
+Ring of Constitution *                               30       1    500
+  + or - (1+MB(5)) to Constitution;
+  Sustain Constitution.
+Ring of Dexterity *                                  30       1    500
+  + or - (1+MB(5)) to Dexterity;
+  Sustain Dexterity.
+Ring of Intelligence *                               30       1    500
+  + or - (1+MB(5)) to Intelligence;
+  Sustain Intelligence.
+Ring of Strength *                                   30       1    500
+  + or - (1+MB(5)) to Strength;
+  Sustain Strength.
+Ring of Slaying *                                    40       1   1000
+  + or - (1d5+MB(5)) to-hit; + or - (1d5+MB(5)) to-dam.
+Ring of Free Action **                               20       1   1500
+Ring of Acid                                         50       2   3000
+  +5+1d5+MB(10) to AC;  Resist Acid; Ignore Acid;
+  Activates for acid resistance (20+d20 turns) and acid ball (70)
+  every 50+d50 turns.
+Ring of Flames                                       50       2   3000
+  +5+1d5+MB(10) to AC;  Resist Fire; Ignore Fire;
+  Activates for fire resistance (20+d20 turns) and fire ball (80)
+  every 50+d50 turns.
+Ring of Ice                                          50       2   3000
+  +5+1d5+MB(10) to AC;  Resist Cold; Ignore Cold;
+  Activates for cold resistance (20+d20 turns) and cold ball (75)
+  every 50+d50 turns.
+Ring of Lightning                                    50       2   5000
+  +5+1d5+MB(10) to AC;  Resist Lightning; Ignore Lightning;
+  Activates for electricity resistance (20+d20 turns) and electricity
+  ball (85) every 50+d50 turns.
+Ring of Resist Poison **                             40       2  16000
+Ring of Speed (see below to speed) *                 75       1 100000
+
+The speed bonus of a Ring of Speed is determined in a special way.
+The base speed bonus is 1d5+MB(5).  Then, there is a chance for an
+extra speed boost, as follows:
+      Chance   Speed            Chance     Speed
+      50%          0            0,78125%      +6
+      25%         +1            0,390625%     +7
+      12,5%       +2            0,1953125%    +8
+       6,25%      +3            0,09765625%   +9
+       3,125%     +4            0,048828125% +10
+       1,5625%    +5               (etcetera)
+There is no limit, so theoretically it is possible to get maxint, but
+don't count on it :-).
+
+
+AMULETS
+-------
+
+All amulets have a weight of 0.3 pounds, do no damage when thrown, and
+can't be harmed by acid, cold, fire, or lightning.
+
+The footnotes *, **, and # have the same meaning as the ones in the
+"Rings" section above.
+
+                                                  Level  Rarity  Price
+Amulet of Teleportation ** #                         10       1      0
+Amulet of DOOM #                                     50       1      0
+  - (1d5+MB(5)) to AC; - (1d5+MB(5)) to All Stats.
+Amulet of Adornment                                  10       1     20
+  (No special powers).
+Amulet of Infravision *                              10       2    200
+  + or - (+1+MB(5)) to Infravision.
+Amulet of Slow Digestion **                          15       1    200
+Amulet of Resist Acid **                             10       1    300
+Amulet of Resist Lightning **                        10       1    300
+Amulet of Charisma *                                 30       1    500
+  + or - (1+MB(5)) to Charisma;
+  Sustain Charisma.
+Amulet of Wisdom *                                   30       1    500
+  + or - (1+MB(5)) to Wisdom;
+  Sustain Wisdom.
+Amulet of Searching *                                15       1    600
+  + or - (1d5+MB(5)) to Searching.
+Amulet of Regeneration **                            30       3    600
+Amulet of Resistance                                 60       8  20000
+  Resist Elements; Ignore Elements.
+Amulet of Sustenance                                 60       6  20000
+  Sustain All Stats; Resist Life Draining; Slow Digestion;
+  Ignore Elements.
+Amulet of ESP                                        60       8  25000
+  +5+MB(5) to Searching;
+  Telepathy; Ignore Elements.
+Amulet of Devotion                                   70       8  30000
+  +1+MB(3) to Wisdom, Charisma;
+  Resist Fire, Light, Dark, Life Draining;
+  Sustain Wisdom, Charisma; Permanent Light.
+Amulet of the Magi                                   70       8  30000
+  +1d5+MB(5) to AC; +1+MB(3) to Intelligence, Searching;
+  Resist Confusion, Life Draining; Sustain Intelligence;
+  See Invisible; Ignore Elements.
+Amulet of Trickery                                   70       8  30000
+  +1+MB(3) to Dexterity, Stealth, Searching, Infravision, Speed;
+  Resist Poison, Nexus; Sustain Dexterity.
+Amulet of Weaponmastery                              70       8  30000
+  +1+MB(4) to-hit; +1+MB(4) to-dam; +1+MB(2) to Strength;
+  Resist Fear, Disenchantment, Life Draining;
+  Sustain Strength, Constitution.
+
+
+SCROLLS
+-------
+Scrolls may be read either from the inventory or the floor, and
+disappear when used.  To read a scroll, you must have light, and may
+not be blind or confused.
+
+All scrolls have a weight of 0.5 pounds, do no damage when thrown, and
+can be harmed by both acid and fire.
+
+                                                  Level  Rarity  Price
+Scroll of Darkness                                    1       1      0
+  Darkens an area with a radius of 3 squares around you and blinds you
+  for 3+1d5 turns, unless you have resistance to blindness.  If you
+  are in a room, it darkens the entire room as well.
+Scroll of Summon Monster                              1       1      0
+  Summons 1d3 monsters that are generated at the current dungeon
+  level.  If a monster normally appears in groups, a whole group will
+  appear.  If a monster normally has escorts, it will appear with
+  escorts.  Summoned monsters will appear on squares directly next to
+  you, or as close to you as possible, that are not occupied by
+  another monster, a wall, or a glyph of warding.
+Scroll of Aggravate Monster                           5       1      0
+  Awakens each sleeping monster within 40 squares of you, and hastes
+  each monster within line of sight unless it is already hasted.
+Scroll of Trap Creation                              10       1      0
+  It creates traps on all empty squares within a 1-square radius of
+  you.
+Scroll of Summon Undead                              15       1      0
+  Summons 1d3 non-unique undead monsters that are generated at the
+  current dungeon level.  If a monster normally appears in groups, a
+  whole group will appear.  If a monster normally has escorts, it will
+  appear with escorts.  Summoned monsters will appear on squares
+  directly next to you, or as close to you as possible, that are not
+  occupied by another monster, a wall, or a glyph of warding.
+Scroll of Curse Armor                                50       1      0
+  Curses the currently equipped body armour, removing all its special
+  powers (except a random power, if it has any), reducing its base AC
+  to 0, and changing its magical AC bonus to a -2d5 penalty.
+  Artifacts have a 1 in 2 chance to resist.
+Scroll of Curse Weapon                               50       1      0
+  Curses the currently wielded melee weapon, removing all its special
+  powers (except a random power, if it has any), and changing its
+  to-hit and to-dam bonuses to a -2d5 penalty each.  Artifacts have a
+  1 in 2 chance to resist.
+Scroll of Satisfy Hunger                              5       1     10
+  Magically renders you well-fed (but not satiated).  This will also
+  cure a bloated stomach.
+Scroll of Light                                  0/3/10   1/1/1     15
+  Lights up an area with a radius of 2 squares around you and inflicts
+  2d8 points of damage on each light-sensitive monster within the
+  radius of the spell.  If you are in a room, it lights up the entire
+  room as well.
+Scroll of Object Detection                            0       1     15
+  Detects all objects on the current screen.
+  (The area of effect depends on your screen size).
+Scroll of Treasure Detection                          0       1     15
+  Detects all treasure on the current screen.
+  (The area of effect depends on your screen size).
+Scroll of Blessing                                    1       1     15
+  Blesses you, giving a bonus of +5 to AC and +10 to-hit, for 6+1d12
+  turns.
+Scroll of Detect Invisible                            1       1     15
+  Detects all invisible monsters on the current screen, for one turn
+  only.
+  (The area of effect depends on your screen size).
+Scroll of Phase Door                                  1       1     15
+  Teleports you randomly up to 10 squares away.
+Scroll of Monster Confusion                           5       1     30
+  Enchants you with an aura of confusion that causes you hands to glow
+  red.  When you hit a monster in melee, the magical aura disappears
+  from your hands and an attempt is made to confuse the monster.  If
+  the monster resists confusion, it won't be affected.  Other monsters
+  have a (monster level) in 100 chance to resist the effect, and will
+  be confused for 10 + (1d(character level - 1) / 5) turns if they
+  fail to resist.
+Scroll of Door/Stair Location                   5/10/15   1/1/1     35
+  Detects all doors and stairs on the current screen.
+  (The area of effect depends on your screen size).
+Scroll of Trap Detection                           5/10     1/1     35
+  Detects all traps on the current screen.
+  (The area of effect depends on your screen size).
+Scroll of Magic Mapping                               5       1     40
+  Maps out a portion of the level that is slightly larger than the
+  current screen.
+  (The area of effect depends on your screen size).
+Scroll of Holy Chant                                 10       1     40
+  Blesses you, giving a bonus of +5 to AC and +10 to-hit, for 12+1d24
+  turns.
+Scroll of Teleportation                              10       1     40
+  Teleports you randomly up to 100 squares away.
+Scroll of Identify                            1/5/10/30 1/1/1/1     50
+  Reveals all normal (magical but non-hidden) powers of one object.
+Scroll of Trap/Door Destruction                      10       1     50
+  Destroys all traps and doors within a 1-square radius of you.
+Scroll of Teleport Level                             20       1     50
+  Teleports you 1 level up or 1 level down (chosen at random).  The
+  direction will always be down from the town, and always up from
+  level 99 if Sauron is still alive or level 100 if Morgoth is still
+  alive.
+  This scroll has no effect when the option to restrict the use of
+  stairs and recall is set.
+Scroll of Protection from Evil                       30       1     50
+  Protects you from evil for 1d25+level*3 turns: all melee attacks by
+  evil monsters have a chance of 50 in (your character level + 1d100)
+  to be repelled, unless the monster's level is higher than your
+  character level.
+Scroll of Holy Prayer                                25       1     80
+  Blesses you, giving a bonus of +5 to AC and +10 to-hit, for 24+1d48
+  turns.
+Scroll of Remove Curse                               10       1    100
+  Removes all ordinary curses from all equipped items.  Heavy or
+  permanent curses are not affected.
+Scroll of Enchant Armor                              15       1    125
+  Makes one attempt to improve the armour class bonus of a piece of
+  armour.  This attempt might fail, based on the current armour class
+  bonus, as detailed above.
+Scroll of Enchant Weapon To-Dam                      15       1    125
+  Makes one attempt to improve the to-dam bonus of a weapon.  This
+  attempt might fail, based on the current to-dam bonus, as detailed
+  above.
+Scroll of Enchant Weapon To-Hit                      15       1    125
+  Makes one attempt to improve the to-hit bonus of a weapon.  This
+  attempt might fail, based on the current to-hit bonus, as detailed
+  above.
+Scroll of Word of Recall                              5       1    150
+  Teleports you from the dungeon to the town or from the town to the
+  deepest level you have visited in the dungeon.  If you are in the
+  dungeon but above the deepest level you have visited, you are given
+  the option to reset the recall depth.  If you do so, future recalls
+  will take you to your current level, or to the deepest level you
+  have visited after resetting recall depth.
+  The recall effect is not immediate; it is delayed by 14+1d20 turns.
+  During that delay, the spell can be canceled by invoking the spell
+  of recall again.
+  This scroll has no effect when the option to restrict the use of
+  stairs and recall is set, unless Morgoth is dead.
+Scroll of Dispel Undead                              40       1    200
+  Inflicts 60 points of damage on each undead monster within line of
+  sight.
+Scroll of Recharging                                 40       1    200
+  Adds charges to a stack of wands or staves.  Failure occurs 1 time
+  in (160-level of wand or staff-10*(# of charges))/15, and destroys
+  all wands or staves in the stack.  If successful, the stack gains
+  2+1d(60/(2+level of wand or staff)+1) charges.
+Scroll of *Destruction*                              40       1    250
+  All spaces in a 15-square radius around you are darkened and all
+  monsters in the area of effect are removed.  Each space (except the
+  epicenter) in the area of effect that is not a stair, a permanent
+  wall, of currently holding an artifact, is destroyed, removing all
+  objects from it and replacing it by either a random type of wall or
+  by floor.  You will also be blinded for 10+1d10 turns, unless you
+  have resistance to blindness or light.
+  This scroll has no effect when used in the town.
+Scroll of *Enchant Armor*                         50/50     1/1    500
+  Makes 2 + 1d3 attempts to improve the armour class bonus of a piece
+  of armour.  Each attempt might fail, based on the current armour
+  class bonus, as detailed above.
+Scroll of *Enchant Weapon*                           50       1    500
+  Makes 1d3 attempts to improve the to-hit bonus and 1d3 attempts to
+  improve the to-dam bonus of a weapon.  Each attempt might fail,
+  based on the current to-hit or to-dam bonus, as detailed above.
+Scroll of Rune of Protection                      60/90     4/1    500
+  Inscribes a glyph of warding beneath you.  Summoned monsters can't
+  appear on the glyph.  If a monster attempts to move onto the glyph
+  or melee you while you are standing on the glyph, they must first
+  succeed in breaking the glyph.  Their chance to do so is (monster
+  level) in 550.  The glyph will remain where it is, until a monster
+  succeeds in breaking it.
+Scroll of Banishment                              40/80     4/2    750
+  Removes all monsters represented by a chosen symbol from the level.
+  Uniques are not affected.  You take 1d4 points of damage for every
+  monster removed.
+Scroll of *Identify*                           25/40/70   1/1/1   1000
+  Reveals all normal and hidden powers of one object, and also
+  permanently implants this knowledge into your mind, so that you will
+  never forget it even if hit by magical amnesia.
+Scroll of Mass Banishment                         50/95     4/4   1000
+  Removes all monsters within 20 squares of you.  Uniques are not
+  affected.  You take 1d3 points of damage for every monster removed.
+Scroll of *Remove Curse*                          50/95     2/1   8000
+  Removes all ordinary and heavy curses from all equipped objects.
+  Permanent curses are not affected.
+Scroll of Acquirement                                20       8 100000
+  Creates one good object on the floor near you.
+Scroll of *Acquirement*                              60      16 200000
+  Creates 1+1d2 good objects on the ground near you.
+
+
+POTIONS
+-------
+
+All potions have a weight of 0.4 pounds, and unless otherwise
+indicated inflict 1 point of damage when thrown.  They can be harmed
+by cold.
+
+                                         Nutr     Level  Rarity  Price
+Potion of Blindness                         0         0       1      0
+  Causes blindness that lasts for 99+1d100 turns, unless you have
+  resistance to blindness.
+Potion of Salt Water                        0         0       1      0
+  Induces vomiting, which results in severe hunger and 4 turns of
+  paralysis (even if you have free action), but also neutralizes
+  poison.
+Potion of Confusion                        50         0       1      0
+  Induces confusion that lasts for 14+1d20 turns, unless you have
+  resistance to confusion.
+Potion of Sleep                           100         0       1      0
+  Induces paralyzation for 3+1d4 turns, unless you have free action.
+Potion of Slowness                         50         1       1      0
+  Slows you down (-10 to speed) for 15+1d25 turns.
+Potion of Poison                            0         3       1      0
+  Poisons you for 9+1d15 turns, unless you have resistance to poison.
+Potion of Weakness                          0         3       1      0
+  Reduces strength by 2.5 to 5 percent, unless you have sustain
+  strength.
+Potion of Clumsiness                        0         5       1      0
+  Reduces dexterity by 2.5 to 5 percent, unless you have sustain
+  dexterity.
+Potion of Lose Memories                     0        10       1      0
+  Drains 25% of your experience points, unless you have resistance to
+  life draining.
+Potion of Sickliness                        0        10       1      0
+  Reduces constitution by 2.5 to 5 percent, unless you have sustain
+  constitution.
+Potion of Naivety                           0        20       1      0
+  Reduces wisdom by 2.5 to 5 percent, unless you have sustain wisdom.
+Potion of Stupidity                         0        20       1      0
+  Reduces intelligence by 2.5 to 5 percent, unless you have sustain
+  intelligence.
+Potion of Ugliness                          0        20       1      0
+  Reduces charisma by 2.5 to 5 percent, unless you have sustain
+  charisma.
+Potion of Ruination                         0        40       8      0
+  Inflicts 10d10 points of damage and decreases both current and
+  maximum value of all stats by 6 to 12.5 percent, even if you have
+  stat sustains.
+Potion of Death                             0        55       4      0
+  Inflicts 5000 points of damage.  Death can only be avoided if you
+  have magical invulnerability, which just happens not to be available
+  in the current version of Angband.
+Potion of Water                           200         0       1      1
+  Has no special effect.
+  (Note: These are always Clear Potions).
+Potion of Apple Juice                     250         0       1      1
+  Has no special effect.
+  (Note: These are always Light Brown Potions).
+Potion of Slime Mold Juice                400         0       1      2
+  Has no special effect.
+  (Note: These are always Icky Green Potions).
+Potion of Boldness                          0         1       1     10
+  Removes fear.
+Potion of Cure Light Wounds                50     0/1/3   1/1/1     15
+  Cures 2d8 points of damage, heals 10 points worth of cuts, and cures
+  blindness.
+Potion of Infravision                       0         3       1     20
+  Extends the radius of your infravision by 50 feet for 100+1d100
+  turns.
+Potion of Slow Poison                       0         1       1     25
+  Halves the remaining duration of any current poisoning.
+Potion of Resist Cold                       0         1       1     30
+  Grants you temporary resistance to cold for 10+1d10 turns.
+Potion of Resist Heat                       0         1       1     30
+  Grants you temporary resistance to fire for 10+1d10 turns.
+Potion of Heroism                           0         1       1     35
+  Cures 10 points of damage, removes fear and grants you heroism
+  (resistance to fear, and a bonus of +12 to-hit) for 25+1d25 turns.
+Potion of Cure Serious Wounds             100         3       1     40
+  Cures 4d8 points of damage, heals half of all cut damage plus
+  another 50 points, and cures blindness and confusion.
+Potion of Detect Invisible                  0         3       1     50
+  Enables you to see invisible monsters for 12+1d12 turns.
+Potion of Speed                             0      1/40     1/1     75
+  Hastes you (+10 to speed) for 15+1d25 turns, or 5 additional turns
+  if you already are temporarily hasted.
+Potion of Neutralize Poison                 0         5       1     75
+  Neutralizes poison.
+Potion of Berserk Strength                  0         3       1    100
+  Cures 30 points of damage, removes fear, and grants you berserk
+  strength (resistance to fear, a bonus of +12 to-hit, and a penalty
+  of -10 to AC) for 25+1d25 turns.
+Potion of Cure Critical Wounds            100         5       1    100
+  Cures 6d8 points of damage, cures all stunning, heals all cut
+  damage, neutralizes poison, and cures blindness and confusion.
+Potion of Healing                         200     15/60     1/1    300
+  Cures 300 points of damage, cures all stunning, heals all cut
+  damage, neutralizes poison, and cures blindness and confusion.
+Potion of Restore Charisma                  0        20       1    300
+  Restores charisma to maximum if it is currently below maximum.
+Potion of Restore Constitution              0        25       1    300
+  Restores constution to maximum if it is currently below maximum.
+Potion of Restore Dexterity                 0        25       1    300
+  Restores dexterity to maximum if it is currently below maximum.
+Potion of Restore Intelligence              0        25       1    300
+  Restores intelligence to maximum if it is currently below maximum.
+Potion of Restore Strength                  0        25       1    300
+  Restores strength to maximum if it is currently below maximum.
+Potion of Restore Wisdom                    0        25       1    300
+  Restores wisdom to maximum if it is currently below maximum.
+Potion of Restore Mana                      0     25/70     1/1    350
+  Restores mana points to maximum if it is currently below maximum.
+Potion of Restore Life Levels               0        40       1    400
+  Restores experience points to maximum if it is currently below
+  maximum.
+Potion of Enlightenment                     0        25       1    800
+  Lights up, maps out, and detects all objects on the complete current
+  dungeon level.
+Potion of Charisma                          0        20       1   1000
+  Increases maximum charisma (by 1 or 2 points if currently <18, or by
+  15-40% of the distance to 18/100 with a minimum of 1 if currently
+  >18), then sets current charisma to the new maximum.
+Potion of *Healing*                         0     40/80     2/2   1500
+  Cures 1200 points of damage, cures all stunning, heals all cut
+  damage, neutralizes poison, and cures blindness and confusion.
+Potion of Self Knowledge                    0        40       1   2000
+  Gives you knowledge of all special powers (whether intrinsic,
+  temporary, or provided by a magical item) you currently possess.
+Potion of Life                              0    60/100     4/4   5000
+  Restores experience and all stats to maximum, cures 5000 points of
+  damage, cures all stunning, heals all cut damage, neutralizes
+  poison, stops hallucination, and cures blindness and confusion.
+Potion of Constitution                      0        30       1   8000
+  Increases maximum constitution (by 1 or 2 points if currently <18,
+  or by 15-40% of the distance to 18/100 with a minimum of 1 if
+  currently >18), then sets current constitution to the new maximum.
+Potion of Dexterity                         0        30       1   8000
+  Increases maximum dexterity (by 1 or 2 points if currently <18, or
+  by 15-40% of the distance to 18/100 with a minimum of 1 if currently
+  >18), then sets current dexterity to the new maximum.
+Potion of Intelligence                      0        30       1   8000
+  Increases maximum intelligence (by 1 or 2 points if currently <18,
+  or by 15-40% of the distance to 18/100 with a minimum of 1 if
+  currently >18), then sets current intelligence to the new maximum.
+Potion of Strength                          0        30       1   8000
+  Increases maximum strength (by 1 or 2 points if currently <18, or by
+  15-40% of the distance to 18/100 with a minimum of 1 if currently
+  >18), then sets current strength to the new maximum.
+Potion of Wisdom                            0        30       1   8000
+  Increases maximum wisdom (by 1 or 2 points if currently <18, or by
+  15-40% of the distance to 18/100 with a minimum of 1 if currently
+  >18), then sets current wisdom to the new maximum.
+Potion of Detonations                       0        60       8  10000
+  Inflicts 50d20 points of damage from massive explosions, severe cuts
+  (+5000 to the cut counter), and stunning (+75 to the stun counter).
+  Can also be thrown for 25d25 points of damage.
+Potion of Experience                        0        65       1  25000
+  Grants either 100000 experience points, or half the current
+  experience point total plus 10, whichever is less.
+Potion of Augmentation                      0        40      16  60000
+  Increases the maximum value for all stats (by 1 or 2 points if
+  currently <18, or by 15-40% of the distance to 18/100 with a minimum
+  of 1 if currently >18), then sets the current value for all stats to
+  the new maximum.
+Potion of *Enlightenment*                   0        70       4  80000
+  Lights up, maps out, and detects all objects on the complete current
+  dungeon level; increases maximum intelligence and wisdom (by 1 or 2
+  points if currently <18, or by 15-40% of the distance to 18/100 with
+  a minimum of 1 if currently >18), then sets current intelligence and
+  wisdom to the new maximum; gives you knowledge of all special powers
+  (whether intrinsic, temporary, or provided by a magical item) you
+  currently possess; reveals all normal (magical but non-hidden)
+  powers of all items you are carrying; detects all treasure, doors,
+  stairs, and traps on the current screen.
+  (The area of effect for the detection depends on your screen size).
+
+
+WANDS
+-----
+
+All wands have a weight of 1.0 pounds, inflict 1 point of damage when
+thrown, and can be harmed by lightning.  The number of charges a wand
+is generated with is listed under "Charges".
+
+If two or more wands of the same type are in your inventory, on the
+same floor space, in the same shop, or in your home, they will combine
+into a stack.  The charges will be spread evenly over all wands in the
+stack (i.e. a wand with 2 charges and a wand with 6 charges combine to
+a stack of 2 wands with 8 charges; removing one wand from the stack
+will result in 2 wands with 4 charges each).  The stacking will not
+occur if the number of charges of either or both wands is unknown, if
+the wands have different discounts and the option to merge discounts
+when stacking is set, or if the wands have different inscriptions and
+the option to merge inscriptions when stacking is set.
+
+Some wands will shoot some kind of ball.  For all ball effects, damage
+is reduced by range.  The amount of damage at the center is listed in
+the descriptions.  This damage is reduced by 50% at range 1, by 66% at
+range 2, and by 75% at range 3 (for large balls only).
+
+How monster resistances or sensitivities reduce or increase the damage
+of various wand effects will be described in the spoiler file
+MON-DAM.SPO.
+
+                                      Charges     Level  Rarity  Price
+Wand of Haste Monster                  8+1d20         3       1      0
+  Hastes a single monster, increasing it's speed by +10 unless it's
+  speed is already +50 or better.  This effect is permanent, and
+  stacks with other hasting effects.
+Wand of Heal Monster                   8+1d20         3       1      0
+  Cures a single monster for 4d6 points of damage.
+Wand of Clone Monster                   3+1d5     15/50     1/1      0
+  Fully heals a single monster and hastes it (increasing it's speed by
+  +10 unless it's speed is already +50 or better; this effect is
+  permanent, and stacks with other hasting effects).  If the monster
+  is next to an empty space and not a unique, a new monster of the
+  same type will be created, at full health and normal speed.
+Wand of Trap/Door Destruction           6+1d8        10       1    100
+  Produces a beam that destroys all doors, disarms all traps, and
+  unlocks all chests caught in it.
+Wand of Light                          6+1d10         3       1    200
+  Produces a beam that lights up all squares caught in it and inflicts
+  6d8 points of damage on light-sensitive monsters on those squares.
+Wand of Magic Missile                  6+1d10         3       1    200
+  Fires a magic missile that inflicts 3d4 points of damage, with a 20%
+  chance of getting a magic beam that inflicts the same damage on each
+  monster caught in it.
+Wand of Wonder                         8+1d15         3       1    250
+  Ignore Fire, Cold, Acid, Lightning;
+  Has a random effect chosen from the various wand effects, except
+  Dragon's Flame, Dragon's Frost, Dragon's Breath, Annihilation.
+Wand of Stone to Mud                    3+1d4        10       1    300
+  Produces a beam that destroys the first section of wall it hits,
+  unless it is a permanent wall.  Each monster caught in the beam that
+  is susceptible to rock remover takes 20+1d30 points of damage.
+Wand of Teleport Other                  6+1d5        20       1    350
+  Produces a beam that teleports each monster caught in it up to 100
+  squares away.
+Wand of Stinking Cloud                  6+1d8         5       1    400
+  Shoots a radius-2 ball that inflicts 12 points of poison damage at
+  its center.
+Wand of Polymorph                       6+1d8        20       1    400
+  Attempts to polymorph a single monster.  Uniques are not affected.
+  Other monsters have the standard chance to resist.  If a monster
+  fails this chance, it still gets a (monster level) in 90 chance to
+  avoid the effect.  If the monster fails this second chance as well,
+  the game attempts to generate a new, single, non-unique monster
+  (with monster generation level equal to the average of monster level
+  and dungeon level + 5) that is no more than 20 monster levels away
+  from the original monster; the original monster then transforms into
+  the new monster, at full health.
+Wand of Confuse Monster                6+1d12         5       1    500
+  Attempts to confuse a single monster for 3d5+1 turns, or half that
+  amount of additional turns if the monster already is confused.
+  Uniques, monsters that resist confusion, monsters that breathe chaos
+  or confusion, and monsters of monster level 12 and up are not
+  affected.
+Wand of Sleep Monster                  8+1d15         5       1    500
+  Attempts to put to sleep a single monster.  Uniques and monsters
+  that resist sleep are not affected.  Other monsters have the
+  standard chance to resist.
+Wand of Slow Monster                   6+1d10         5       1    500
+  Attempts to slow down a single monster, decreasing it's speed by -10
+  unless it's speed is already -40 or worse.  This effect is
+  permanent, and stacks with other slowing effects.  Uniques are not
+  affected.  Other monsters have the standard chance to resist.
+Wand of Scare Monster                   3+1d5        10       4    500
+  Attempts to scare a single monster, causing it to flee in terror for
+  3d5+1 turns, or the same amount of additional turns if the monster
+  already is scared.  Uniques, monsters that resist fear, and monsters
+  of monster level 12 and up are not affected.
+Wand of Lightning Bolts                 6+1d8        15       1    600
+  Shoots a bolt that inflicts 6d6 points of lightning damage, with a
+  20% chance of getting a beam that inflicts the same damage on each
+  monster caught in it.
+Wand of Disarming                       4+1d5        20       1    700
+  Produces a beam that disarms all traps, unlocks all locked doors and
+  chests, and reveals all secret doors caught in it.
+Wand of Frost Bolts                     6+1d5        20       1    800
+  Shoots a bolt that inflicts 6d8 points of cold damage, with a 20%
+  chance of getting a beam that inflicts the same damage on each
+  monster caught in it.
+Wand of Acid Bolts                      6+1d8        30       1    950
+  Shoots a bolt that inflicts 10d8 points of acid damage, with a 20%
+  chance of getting a beam that inflicts the same damage on each
+  monster caught in it.
+Wand of Fire Bolts                      6+1d8        30       1   1000
+  Shoots a bolt that inflicts 12d8 points of fire damage, with a 20%
+  chance of getting a beam that inflicts the same damage on each
+  monster caught in it.
+Wand of Lightning Balls                 4+1d8        35       1   1200
+  Ignore Lightning;
+  Shoots a radius-2 ball that inflicts 64 points of lightning damage
+  at its center.
+Wand of Drain Life                      3+1d3        50       1   1200
+  Inflicts 150 points of damage on a single monster that is not
+  undead, a demon, an elemental, a golem, or a vortex.
+Wand of Cold Balls                      2+1d6        40       1   1500
+  Ignore Cold;
+  Shoots a radius-2 ball that inflicts 96 points of cold damage at its
+  center.
+Wand of Acid Balls                      2+1d5        50       1   1650
+  Ignore Acid;
+  Shoots a radius-2 ball that inflicts 120 points of acid damage at
+  its center.
+Wand of Fire Balls                      2+1d4        50       1   1800
+  Ignore Fire;
+  Shoots a radius-2 ball that inflicts 144 points of fire damage at
+  its center.
+Wand of Dragon's Flame                  1+1d3        50       4   2400
+  Ignore Fire, Cold, Acid, Lightning;
+  Shoots a radius-3 ball that inflicts 200 points of fire damage at
+  its center.
+Wand of Dragon's Frost                  1+1d3        50       4   2400
+  Ignore Fire, Cold, Acid, Lightning;
+  Shoots a radius-3 ball that inflicts 160 points of cold damage at
+  its center.
+Wand of Dragon's Breath                 1+1d3        60       4   2400
+  Ignore Fire, Cold, Acid, Lightning;
+  Shoots a radius-3 ball that inflicts 200, 160, 200, 180, or 120
+  points of fire, cold, acid, lightning, resp. poison damage at its
+  center (damage type chosen at random).
+Wand of Annihilation                    1+1d2        60       4   3000
+  Ignore Fire, Cold, Acid, Lightning;
+  Inflicts 250 points of damage on a single monster that is not
+  undead, a demon, an elemental, a golem, or a vortex.
+
+
+STAVES
+------
+
+All staves have a weight of 5.0 pounds, inflict 1d2 points of damage
+when thrown, and can be harmed by both acid and fire.  The number of
+charges a staff is generated with is listed under "Charges".
+
+If two or more staves of the same type are in your inventory, on the
+same floor space, in the same shop, or in your home, they will combine
+into a stack.  The charges will be spread evenly over all staves in
+the stack (i.e. a staff with 2 charges and a staff with 6 charges
+combine to a stack of 2 staves with 8 charges; removing one staff from
+the stack will result in 2 staves with 4 charges each).  The stacking
+will not occur if the number of charges of either or both staves is
+unknown, if the staves have different discounts and the option to
+merge discounts when stacking is set, or if the staves have different
+inscriptions and the option to merge inscriptions when stacking is
+set.
+
+                                      Charges     Level  Rarity  Price
+Staff of Darkness                       8+1d8      5/50     1/1      0
+  Darkens an area with a radius of 3 squares around you and blinds you
+  for 3+1d5 turns, unless you have resistance to blindness.  If you
+  are in a room, it darkens the entire room as well.
+Staff of Haste Monsters                 8+1d8        10       1      0
+  Hastes each monster within line of sight, increasing it's speed by
+  +10 unless it's speed is already +50 or better.  This effect is
+  permanent, and stacks with other hasting effects.
+Staff of Summoning                      1+1d3     10/50     1/1      0
+  Summons 1d4 monsters that are generated at the current dungeon
+  level.  If a monster normally appears in groups, a whole group will
+  appear.  If a monster normally has escorts, it will appear with
+  escorts.  Summoned monsters will appear on squares directly next to
+  you, or as close to you as possible, that are not occupied by
+  another monster, a wall, or a glyph of warding.
+Staff of Slowness                       8+1d8        40       1      0
+  Slows you down (-10 to speed) for 15+1d30 turns.
+Staff of Detect Invisible              8+1d15         5       1    200
+  Detects all invisible monsters on the current screen, for one turn
+  only.
+  (The area of effect depends on your screen size).
+Staff of Object Location               6+1d15         5       1    200
+  Detects all objects on the current screen.
+  (The area of effect depends on your screen size).
+Staff of Treasure Location             8+1d20         5       1    200
+  Detects all treasure on the current screen.
+  (The area of effect depends on your screen size).
+Staff of Light                         8+1d20         5       1    250
+  Lights up an area with a radius of 2 squares around you and inflicts
+  2d8 points of damage on each light-sensitive monster within the
+  radius of the spell.  If you are in a room, it lights up the entire
+  room as well.
+Staff of Cure Light Wounds              6+1d5         5       1    350
+  Cures 1d8 points of damage.
+Staff of Door/Stair Location            6+1d8        10       1    350
+  Detects all doors and stairs on the current screen.
+  (The area of effect depends on your screen size).
+Staff of Trap Location                  6+1d5        10       1    350
+  Detects all traps on the current screen.
+  (The area of effect depends on your screen size).
+Staff of Detect Evil                   8+1d15        20       1    350
+  Detects all evil monsters on the current screen, for one turn only.
+  (The area of effect depends on your screen size).
+Staff of Earthquakes                    3+1d5        40       1    350
+  Causes a 10-square radius earthquake around you.  All spaces in the
+  radius are darkened; all spaces (except the epicenter) have a 15%
+  chance to be damaged.  If a damaged space is occupied by a monster
+  that can't bore through rock or pass through walls, the monster
+  takes 4d8 points of damage and moves to a non-damaged, nonoccupied
+  space adjacent to the damaged space.  If there is no space
+  available, or if the monster can't move, the monster is removed.
+  Each damaged non-floor space is replaced by floor.  Each damaged
+  floor space is replaced by a random type of wall and all objects on
+  it are removed, unless one of them is an artifact (in that case, the
+  damaged floor space is unaffected and all objects are retained).
+  This staff has no effect when used in the town.
+Staff of Perception                    5+1d15        10       1    400
+  Reveals all normal (magical but non-hidden) powers of one object.
+Staff of Remove Curse                   4+1d3        40       1    500
+  Removes all ordinary curses from all equipped items.  Heavy or
+  permanent curses are not affected.
+Staff of Sleep Monsters                 6+1d5        10       1    700
+  Attempts to put to sleep each monster within line of sight.  Uniques
+  and monsters that resist sleep are not affected.  Other monsters
+  have the standard chance to resist.
+Staff of Enlightenment                  5+1d5        20       1    750
+  Maps out a portion of the level that is slightly larger than the
+  current screen.
+  (The area of effect depends on your screen size).
+Staff of Slow Monsters                  6+1d5        10       1    800
+  Attempts to slow down each monster within line of sight, decreasing
+  it's speed by -10 unless it's speed is already -40 or worse.  This
+  effect is permanent, and stacks with other slowing effects.  Uniques
+  are not affected. Other monsters have the standard chance to resist.
+Staff of Starlight                      6+1d5        20       1    800
+  Produces eight beams of light, in each of the cardinal directions,
+  that light up all squares caught in them and inflicts 6d8 points of
+  damage on light-sensitive monsters on those squares.
+Staff of Curing                         4+1d3        25       1   1000
+  Cures all stunning, heals all cut damage, neutralizes poison, and
+  cures blindness and confusion.
+Staff of Speed                          4+1d3        40       1   1000
+  Hastes you (+10 to speed) for 15+1d30 turns, or 5 additional turns
+  if you already are temporarily hasted.
+Staff of Dispel Evil                    4+1d3        50       1   1200
+  Inflicts 60 points of damage on each evil monster within line of
+  sight.
+Staff of Teleportation                  5+1d4        20       1   2000
+  Teleports you randomly up to 100 squares away.
+Staff of Probing                        2+1d6        30       1   2000
+  Probes each monster within line of sight, giving information on the
+  current hit points of the monster and many of its characteristics
+  and abilities (excluding its melee, spellcasting, and breath
+  attacks).
+Staff of *Destruction*                  1+1d3     50/70     1/1   2500
+  All spaces in a 15-square radius around you are darkened and all
+  monsters in the area of effect are removed.  Each space (except the
+  epicenter) in the area of effect that is not a stair, a permanent
+  wall, of currently holding an artifact, is destroyed, removing all
+  objects from it and replacing it by either a random type of wall or
+  by floor.  You will also be blinded for 10+1d10 turns, unless you
+  have resistance to blindness or light.
+  This staff has no effect when used in the town.
+Staff of Banishment                     1+1d2        70       4   3500
+  Removes all monsters represented by a chosen symbol from the level.
+  Uniques are not affected.  You take 1d4 points of damage for every
+  monster removed.
+Staff of Power                          1+1d3        70       2   4000
+  Inflicts 120 points of damage on each monster within line of sight.
+Staff of Holiness                       2+1d2        70       2   4500
+  Inflicts 120 points of damage on each evil monster within line of
+  sight, cures 50 points of damage, cures all stunning, heals all cut
+  damage, neutralizes poison, removes fear, and also protects you from
+  evil for a duration of 1d25 plus three times your character level
+  turns: all melee attacks by evil monsters have a chance of 50 in
+  (your character level + 1d100) to be repelled, unless the monster's
+  level is higher than your character level.
+Staff of the Magi                       2+1d2        70       2   4500
+  Restores both intelligence and mana points to maximum if either or
+  both are currently below maximum.
+Staff of Healing                        1+1d2        70       2   5000
+  Cures 300 points of damage, cures all stunning, and heals all cut
+  damage.
+
+
+RODS
+----
+
+All rods have a weight of 1.5 pounds, inflict 1 point of damage when
+thrown, and are harmed by lightning.  Rods in your inventory have only
+1/4th of the normal chance to be destroyed.  After a rod is zapped,
+the rod needs to recharge for the number of turns listed under the
+"Recharge" column before it can be zapped again.
+
+If two or more rods of the same type are in your inventory, on the
+same floor space, in the same shop, or in your home, they will combine
+into a stack.  The stacking will not occur if the rods have different
+discounts and the option to merge discounts when stacking is set, or
+if the rods have different inscriptions and the option to merge
+inscriptions when stacking is set.
+
+If some rods in a stack are recharging, then all energy added to the
+rods each turn is added to the most recharged rod. Example: one Rod of
+Trap Location (recharge time: 50 turns) from a stack is zapped and
+starts recharging. After 10 turns, a second rod from the same stack is
+zapped. The next 20 turns, the first rod will recharge at double
+speed, while the second rod won't recharge at all; after the first rod
+is fully recharged, it will take another 50 turns before the second
+rod is recharged as well.
+
+If some rods are taken from a stack, then the recharging rods will be
+taken first.  This applies to dropping from your inventory (you'll
+keep the charged rods and drop the ones that are charging), but also
+to picking up (you'll pick up the charging rods and leave the charged
+rods alone).
+
+Some rods will shoot some kind of ball.  For all ball effects, damage
+is reduced by range.  The amount of damage at the center is listed in
+the descriptions.  This damage is reduced by 50% at range 1, by 66% at
+range 2, and by 75% at range 3 (for large balls only).
+
+How monster resistances or sensitivities reduce or increase the damage
+of various rod effects will be described in the spoiler file 
+MON-DAM.SPO.
+
+                                       Rechrg     Level  Rarity  Price
+Rod of Trap Location                       50         5       1    100
+  Detects all traps on the current screen.
+  (The area of effect depends on your screen size).
+Rod of Light                                9        10       1    500
+  Produces a beam that lights up all squares caught in it and inflicts
+  6d8 points of damage on light-sensitive monsters on those squares.
+Rod of Door/Stair Location                 70        15       1   1000
+  Detects all doors and stairs on the current screen.
+  (The area of effect depends on your screen size).
+Rod of Illumination                        30        20       1   1000
+  Lights up an area with a radius of 2 squares around you and inflicts
+  2d8 points of damage on each light-sensitive monster within the
+  radius of the spell.  If you are in a room, it lights up the entire
+  room as well.
+Rod of Polymorph                           25        35       1   1200
+  Attempts to polymorph a single monster.  Uniques are not affected.
+  Other monsters have the standard chance to resist.  If a monster
+  fails this chance, it still gets a (monster level) in 90 chance to
+  avoid the effect.  If the monster fails this second chance as well,
+  the game attempts to generate a new, single, non-unique monster
+  (with monster generation level equal to the average of monster level
+  and dungeon level + 5) that is no more than 20 monster levels away
+  from the original monster; the original monster then transforms into
+  the new monster, at full health.
+Rod of Teleport Other                      25        45       2   1400
+  Produces a beam that teleports each monster caught in it up to 100
+  squares away.
+Rod of Sleep Monster                       18        30       1   1500
+  Attempts to put to sleep a single monster.  Uniques and monsters
+  that resist sleep are not affected.  Other monsters have the
+  standard chance to resist.
+Rod of Slow Monster                        20        30       1   1500
+  Attempts to slow down a single monster, decreasing it's speed by -10
+  unless it's speed is already -40 or worse.  This effect is
+  permanent, and stacks with other slowing effects.  Uniques are not
+  affected.  Other monsters have the standard chance to resist.
+Rod of Lightning Bolts                     11        20       1   2000
+  Fires a bolt that inflicts 6d6 points of lightning damage, with a
+  10% chance of getting a beam that inflicts the same damage on each
+  monster caught in it.
+Rod of Disarming                           30        35       1   2100
+  Produces a beam that disarms all traps, unlocks all locked doors and
+  chests, and reveals all secret doors caught in it.
+Rod of Frost Bolts                         13        25       1   2500
+  Fires a bolt that inflicts 10d8 points of cold damage, with a 10%
+  chance of getting a beam that inflicts the same damage on each
+  monster caught in it.
+Rod of Fire Bolts                          15        30       1   3000
+  Fires a bolt that inflicts 16d8 points of fire damage, with a 10%
+  chance of getting a beam that inflicts the same damage on each
+  monster caught in it.
+Rod of Acid Bolts                          12        40       1   3500
+  Fires a bolt that inflicts 12d8 points of acid damage, with a 10%
+  chance of getting a beam that inflicts the same damage on each
+  monster caught in it.
+Rod of Drain Life                          23        75       4   3600
+  Inflicts 150 points of damage on a single monster that is not
+  undead, a demon, an elemental, a golem, or a vortex.
+Rod of Recall                              60        30       4   4000
+  Ignore Lightning;
+  Teleports you from the dungeon to the town or from the town to the
+  deepest level you have visited in the dungeon.  If you are in the
+  dungeon but above the deepest level you have visited, you are given
+  the option to reset the recall depth.  If you do so, future recalls
+  will take you to your current level, or to the deepest level you
+  have visited after resetting recall depth.
+  The recall effect is not immediate; it is delayed by 14+1d20 turns.
+  During that delay, the spell can be canceled by invoking the spell
+  of recall again.
+  This rod has no effect when the option to restrict the use of stairs
+  and recall is set, unless Morgoth is dead.
+Rod of Probing                             50        40       4   4000
+  Probes each monster within line of sight, giving information on the
+  current hit points of the monster and many of its characteristics
+  and abilities (excluding its melee, spellcasting, and breath
+  attacks).
+Rod of Lightning Balls                     23        55       1   4000
+  Shoots a radius-2 ball that inflicts 64 points of lightning damage
+  at its center.
+Rod of Cold Balls                          25        60       1   4500
+  Shoots a radius-2 ball that inflicts 96 points of cold damage at its
+  center.
+Rod of Detection                           99        30       8   5000
+  Ignore Lightning;
+  Detects all treasure, objects, doors, stairs, traps, and monsters on
+  the current screen.
+  (The area of effect depends on your screen size).
+Rod of Fire Balls                          30        75       1   5000
+  Shoots a radius-2 ball that inflicts 144 points of fire damage at
+  its center.
+Rod of Acid Balls                          27        70       1   5500
+  Shoots a radius-2 ball that inflicts 120 points of acid damage at
+  its center.
+Rod of Enlightenment                       99        65       4  10000
+  Maps out a portion of the level that is slightly larger than the
+  current screen.
+  (The area of effect depends on your screen size).
+Rod of Perception                          10        50       8  13000
+  Ignore Lightning;
+  Reveals all normal (magical but non-hidden) powers of one object.
+Rod of Curing                             999        65       8  15000
+  Ignore Lightning;
+  Cures all stunning, heals all cut damage, neutralizes poison, and
+  cures blindness and confusion.
+Rod of Healing                            999        80       8  20000
+  Ignore Lightning;
+  Cures 500 points of damage, cures all stunning, and heals all cut
+  damage.
+Rod of Restoration                        999        80      16  25000
+  Ignore Lightning;
+  Restores experience points and all stats to maximum if any of them
+  are below maximum.
+Rod of Speed                               99        95      16  50000
+  Ignore Lightning;
+  Hastes you (+10 to speed) for 15+1d30 turns, or 5 additional turns
+  if you already are temporarily hasted.
+
+
+SPELLBOOKS
+----------
+
+All spellbooks have a weight of 3.0 pounds, inflict 1 point of damage
+when thrown, and can be harmed by fire.
+
+An overview of the spells in each of the books is available in another
+spoiler file, BOOKS.SPO.  A full description of the effect of each of
+the spells, as well as many other details about the magic system in
+Angband, can be found in MAGIC.SPO.
+
+MAGE SPELLBOOKS                                   Level  Rarity  Price
+Book of Magic Spells [Magic for Beginners]            5       1     25
+Book of Magic Spells [Conjurings and Tricks]         10       1    100
+Book of Magic Spells [Incantations and Illusions]    20       1    400
+Book of Magic Spells [Sorcery and Evocations]        30       1    800
+Book of Magic Spells [Resistances of Scarabtarices]  40       1  10000
+  Ignore Elements.
+Book of Magic Spells [Raal's Tome of Destruction]    50       1  60000
+  Ignore Elements.
+Book of Magic Spells [Mordenkainen's Escapes]        60       1  30000
+  Ignore Elements.
+Book of Magic Spells [Tenser's Transformations]      70       2  50000
+  Ignore Elements.
+Book of Magic Spells [Kelek's Grimoire of Power]     80       4  90000
+  Ignore Elements.
+
+PRIEST SPELLBOOKS                                 Level  Rarity  Price
+Holy Book of Prayers [Beginners Handbook]             5       1     25
+Holy Book of Prayers [Words of Wisdom]               10       1    100
+Holy Book of Prayers [Chants and Blessings]          20       1    300
+Holy Book of Prayers [Exorcism and Dispelling]       30       1    900
+Holy Book of Prayers [Ethereal Openings]             40       1   5000
+  Ignore Elements.
+Holy Book of Prayers [Godly Insights]                50       1  10000
+  Ignore Elements.
+Holy Book of Prayers [Purifications and Healing]     60       1  30000
+  Ignore Elements.
+Holy Book of Prayers [Holy Infusions]                80       2  50000
+  Ignore Elements.
+Holy Book of Prayers [Wrath of God]                 100       4 100000
+  Ignore Elements.
+
+
+CHESTS
+------
+
+Each chest has a "power", which is use to determine the maximum object
+generation level for objects found in the chest.  Chests may also be
+trapped, with the danger posed by the traps generally increasing with
+the chest's power.
+
+The number of items in a chest is given in the table below.  For large
+chests, all items in the chest will be objects.  For small chests, 75%
+of the items will be treasure and only 25% will be objects.
+
+The listed price applies to an empty chest, but will also be used when
+selling an unopened chest.
+
+Chests can be harmed by both acid and fire.  If a chest is destroyed,
+all objects in it are destroyed as well.
+
+                        Items Power Dam  Wght     Level  Rarity  Price
+Ruined chest                0   N/A   0  25.0        75       1      0
+Small wooden chest          2   1d5 2d3  25.0         5       1     20
+Large wooden chest          2  1d15 2d5  50.0        15       1     60
+Small iron chest            4  1d25 2d4  30.0        25       1    100
+Large iron chest            4  1d35 2d6 100.0        35       1    150
+Small steel chest           6  1d45 2d4  50.0        45       1    200
+Large steel chest           6  1d55 2d6 100.0        55       1    250
+
+
+MISCELLANEOUS OBJECTS
+---------------------
+
+These objects have no magical properties, but do have various
+functions as explained in the table.
+
+Iron Spikes and Brass Lanterns can not be harmed by acid, cold, fire,
+or lightning.  Wooden Torches can be harmed by fire.  Flasks of Oil
+can be harmed by cold.
+
+                                    Dam  Wght     Level  Rarity  Price
+Iron Spike                           1d1  1.0         1       1      1
+  Can be placed in doors to make them harder to open.  Multiple spikes
+  may be used on a single door.  Each of the first 7 spikes will
+  increase the door's resistance to bashing.  Placing more than 7
+  spikes in one door will not have any further effect.
+Wooden Torch                         1d1  3.0         1       1      2
+  Can be equipped as a light source with a radius of 1 square, or used
+  to fuel another torch, up to a maximum of 5000 turns of light.
+Flask of oil                         2d6  1.0         1       1      3
+  Can be used to fuel a brass lantern with 7500 turns of light, up to
+  a maximum of 15000 turns of light.  When thrown, it is considered
+  lit, which explains the relatively high damage (which occurs even if
+  the monster is resistant to fire).
+Brass Lantern                        1d1  5.0         3       1     35
+  Ignore Fire;
+  Can be equipped as a light source with a radius of 2 squares, or
+  used to fuel another brass lantern, up to a maximum of 15000 turns
+  of light.
+
+
+JUNK OBJECTS
+------------
+
+The junk objects have no use.  They were included in prior versions of
+Angband to add flavor to the game.  They are no longer generated in
+version 3.0.5 of Angband, but they still exist as valid object types
+in order to maintain savefile compatibility.
+
+All junk items can be harmed by acid.  In addition, empty bottles can
+be harmed by cold as well.
+
+                                    Dam  Wght     Level  Rarity  Price
+Broken Bone                         1d1   0.2       n/a     n/a      0
+Broken Skull                        1d1   0.1       n/a     n/a      0
+Broken Stick                        1d1   0.3       n/a     n/a      0
+Empty Bottle                        1d1   0.2       n/a     n/a      0
+Shard of Pottery                    1d1   0.5       n/a     n/a      0
+Canine Skeleton                     1d1   1.0       n/a     n/a      0
+Rodent Skeleton                     1d1   1.0       n/a     n/a      0
+Dwarf Skeleton                      1d2   5.0       n/a     n/a      0
+Elf Skeleton                        1d2   4.0       n/a     n/a      0
+Gnome Skeleton                      1d2   3.0       n/a     n/a      0
+Human Skeleton                      1d2   6.0       n/a     n/a      0

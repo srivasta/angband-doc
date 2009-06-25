@@ -1,0 +1,15 @@
+This package was debianized by Manoj Srivastava <srivasta@debian.org>
+It was downloaded from <URL:ftp://export.andrew.cmu.edu/angband/>
+
+ The documentation is freely available.
+
+ The debian specific changes are Copyright (c) 1996, 1997, 1998, 1999,
+ 2000, 2001, 2002, 2003, 2004, 2005, 2006 Manoj Srivastava, and
+ distributed under the terms of the Artistic License.
+
+ The Artistic License is available on Debian systems in the file
+ /usr/share/common-licenses/Artistic. (This is the licence that Perl
+ is available under)
+
+Manoj Srivastava <srivasta@debian.org>
+arch-tag: d4250e44-a0e0-4ee0-adb9-2bd74f6eeb27
