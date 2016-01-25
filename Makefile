@@ -1,6 +1,6 @@
 ############################ -*- Mode: Makefile -*- ###########################
-## Makefile --- 
-## Author           : Manoj Srivastava ( srivasta@glaurung.internal.golden-gryphon.com ) 
+## Makefile ---
+## Author           : Manoj Srivastava ( srivasta@glaurung.internal.golden-gryphon.com )
 ## Created On       : Thu Feb 19 11:47:01 2004
 ## Created On Node  : glaurung.internal.golden-gryphon.com
 ## Last Modified By : Manoj Srivastava
@@ -8,12 +8,12 @@
 ## Last Machine Used: glaurung.internal.golden-gryphon.com
 ## Update Count     : 7
 ## Status           : Unknown, Use with caution!
-## HISTORY          : 
-## Description      : 
-## 
+## HISTORY          :
+## Description      :
+##
 ###############################################################################
 
-prefix=
+prefix  = $(DESTDIR)
 package = angband-doc
 
 LIBLOC     = $(prefix)/var/games/angband/info
@@ -24,7 +24,7 @@ install_file   = install -p    -o root -g root -m 644
 install_program= install -p    -o root -g root -m 755
 make_directory = install -p -d -o root -g root -m 755
 
-all build: 
+all build:
 	@echo nothing to do for build
 
 install:
@@ -34,7 +34,7 @@ install:
 	find $(LIBLOC)    -type d -name .arch-ids -print0 | xargs -0r rm -rf
 	(cd Help-Page;    tar cf - *) | (cd $(DOCDIR); umask 000; tar xpf -)
 	find $(DOCDIR)    -type d -name .arch-ids -print0 | xargs -0r rm -rf
-	gzip -9fq         $(DOCDIR)/angfaq*.txt
+	gzip -n9fq        $(DOCDIR)/angfaq*.txt
 	chown -R root:root $(DOCDIR) $(LIBLOC);
 	chmod -R u+w,go=rX $(DOCDIR) $(LIBLOC);
 

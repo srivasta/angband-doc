@@ -1,16 +1,18 @@
 Source: angband-doc
-VCS-Git: git://git.debian.org/~srivasta/debian/angband-doc.git
-VCS-Browser: http://git.debian.org/?p=users/srivasta/debian/angband-doc.git;a=summary
+VCS-Git: https://anonscm.debian.org/git/users/srivasta/debian/angband-doc.git
+VCS-Browser: https://git.debian.org/?p=users/srivasta/debian/angband-doc.git;a=summary
 Section: doc
 Priority: optional
 Maintainer: Manoj Srivastava <srivasta@debian.org>
-Standards-Version: 3.8.2.0
-Homepage: ftp://clockwork.dementia.org/angband
+Standards-Version: 3.9.6
+Homepage: http://rephial.org
+Build-Depends-Indep: debhelper (>= 9)
 
 Package: angband-doc
 Architecture: all
 Suggests: angband
-Description: Documentation for the roguelike game Angband.
+Depends: ${misc:Depends}
+Description: Documentation for the roguelike game Angband
  Angband is a single-player, text-based, dungeon simulation derived
  from the game Moria, which was in turn based on Rogue. This package
  contains additional documentation and spoilers for the game.

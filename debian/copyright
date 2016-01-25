@@ -1,15 +1,18 @@
-This package was debianized by Manoj Srivastava <srivasta@debian.org>
-It was downloaded from <URL:ftp://export.andrew.cmu.edu/angband/>
+Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: angband-doc
+Upstream-Contact: Manoj Srivastava <srivasta@debian.org>
+Sources: http://rephial.org
+Comment: This package was debianized by Manoj Srivastava <srivasta@debian.org>
+  It was downloaded from <URL:http://rephial.org>
 
+Files: *
+Copyright:  1996-2006, 2016 Manoj Srivastava <srivasta@debian.org>
+License: Artistic
  The documentation is freely available.
-
- The debian specific changes are Copyright (c) 1996, 1997, 1998, 1999,
- 2000, 2001, 2002, 2003, 2004, 2005, 2006 Manoj Srivastava, and
- distributed under the terms of the Artistic License.
-
- The Artistic License is available on Debian systems in the file
- /usr/share/common-licenses/Artistic. (This is the licence that Perl
- is available under)
-
-Manoj Srivastava <srivasta@debian.org>
-arch-tag: d4250e44-a0e0-4ee0-adb9-2bd74f6eeb27
+ .
+ THIS PACKAGE IS PROVIDED "AS IS" AND WITHOUT ANY EXPRESS OR
+ IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
+ WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+ .
+ On Debian systems, the full text of the Artistic License can be found
+ in the file `/usr/share/common-licenses/Artistic'.

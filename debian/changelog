@@ -1,3 +1,15 @@
+angband-doc (3.0.3.6) unstable; urgency=low
+
+  * New bug fixing version
+  * Update the VCS fields in debian/control to use the HTTPS protocol
+  * Update the standards version to 3.9.6. No changes needed.
+  * Bug fix: "Wrong upstream Homepage URL", thanks to Matanya Moses
+    (Closes: #738768).
+  * Bug fix: "please make the build reproducible", thanks to Chris Lamb
+    Move the packaging over to dh instead. (Closes: #777729).
+
+ -- Manoj Srivastava <srivasta@debian.org>  Sun, 24 Jan 2016 23:50:25 -0800
+
 angband-doc (3.0.3.5) unstable; urgency=low
 
   * New bug fixing release
@@ -55,7 +67,7 @@ angband-doc (2.93.2) unstable; urgency=low
 
   * use which instead of command -v
   * No longer install /usr/doc symlink. Upgraded to the latest policy
-    version. 
+    version.
 
  -- Manoj Srivastava <srivasta@debian.org>  Mon, 11 Nov 2002 23:06:40 -0600
 
@@ -79,7 +91,7 @@ angband-doc (2.83.7) frozen unstable; urgency=low
 angband-doc (2.83.6) frozen unstable; urgency=low
 
   * Fixed an upgrade bug when /usr/doc happens to be a symlink, and does
-    not point to /usr/share/doc. A couple of people were bitten by this.  
+    not point to /usr/share/doc. A couple of people were bitten by this.
     closes: Bug#58121, Bug#58123
 
  -- Manoj Srivastava <srivasta@debian.org>  Mon, 28 Feb 2000 22:27:05 -0600
@@ -90,7 +102,7 @@ angband-doc (2.83.5) frozen unstable; urgency=low
     release maintainer:
   * The postinst was vulnerable to being affected by symlinks (if, for
     some reason, the prerm failed). This has happended for latex2html; and
-    created a grave bug. 
+    created a grave bug.
   * There was a bug in the postinst in a case statement, that caused
     installation to fail for certain situations.
   * Also fixed an lintian warning
@@ -101,7 +113,7 @@ angband-doc (2.83.4) unstable; urgency=low
 
   * The postinst was vulnerable to being affected by symlinks (if, for
     some reason, the prerm failed). This has happended for latex2html; and
-    created a grave bug. 
+    created a grave bug.
   * There was a bug in the postinst in a case statement, that caused
     installation to fail for certain situations.
   * Also fixed an lintian warning
